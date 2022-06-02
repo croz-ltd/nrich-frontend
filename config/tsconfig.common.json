@@ -1,0 +1,23 @@
+{
+  "exclude": [
+    "node_modules",
+    "dist",
+  ],
+  "compilerOptions": {
+    "target": "es2015",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmitOnError": true,
+    "baseUrl": ".",
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true
+  }
+}
