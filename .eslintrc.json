@@ -32,14 +32,17 @@
       }
     ],
     "react/function-component-definition": [
-      2,
+      "error",
       {
         "namedComponents": "arrow-function",
         "unnamedComponents": "arrow-function"
       }
-    ]
+    ],
+    "quotes": ["error", "double", { "avoidEscape": true }],
+    "@typescript-eslint/quotes": ["error", "double", { "avoidEscape": true }]
   },
   "ignorePatterns": [
-    "dist"
+    "dist",
+    "jest.config.js"
   ]
 }

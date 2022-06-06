@@ -1,12 +1,12 @@
-import chalk from 'chalk';
-import { OutputOptions, rollup, RollupOptions } from 'rollup';
-import { findAllPackages, findPackage } from './find-package';
-import { logError, logInfo, logSuccess } from './logger';
-import createRollupConfig from '../config/create-rollup-config';
-import { sequentially } from './util';
-import { orderPackages } from './order-package';
-import readPackage from './read-package';
-import { PackageWithPath } from './api/types';
+import chalk from "chalk";
+import { OutputOptions, rollup, RollupOptions } from "rollup";
+import { findAllPackages, findPackage } from "./find-package";
+import { logError, logInfo, logSuccess } from "./logger";
+import createRollupConfig from "../config/create-rollup-config";
+import { sequentially } from "./util";
+import { orderPackages } from "./order-package";
+import readPackage from "./read-package";
+import { PackageWithPath } from "./api/types";
 
 const bundle = async (config: RollupOptions) => {
   const build = await rollup(config);
@@ -34,7 +34,7 @@ const build = async (singlePackage: PackageWithPath) => {
     logSuccess(`Module ${chalk.cyan(packageName)} was built successfully`);
   } catch (err) {
     logError(`Failed to build module: ${chalk.cyan(packageName)}`);
-    process.stdout.write(`${err.toString('minimal')}\n`);
+    process.stdout.write(`${err.toString("minimal")}\n`);
     process.exit(1);
   }
 };

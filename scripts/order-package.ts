@@ -1,6 +1,6 @@
-import { Package, PackageWithPath } from './api/types';
-import scriptConfig from '../config/script-config';
-import { sequentially } from './util';
+import { Package, PackageWithPath } from "./api/types";
+import scriptConfig from "../config/script-config";
+import { sequentially } from "./util";
 
 /* eslint-disable no-param-reassign */
 const orderPackage = async (

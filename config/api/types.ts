@@ -1,4 +1,4 @@
-import { RollupOptions } from 'rollup';
+import { RollupOptions } from "rollup";
 
 export interface ScriptConfig {
   scope: string;
