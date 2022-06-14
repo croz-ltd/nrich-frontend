@@ -27,7 +27,7 @@ const variations: Variation[] = [
 
 const Notifications = () => {
   const onClick = (variation: Variation) => {
-    fetch(`/api/notification${variation.uri}`)
+    fetch(`/notification${variation.uri}`)
       .then((response) => response.json());
   };
 
