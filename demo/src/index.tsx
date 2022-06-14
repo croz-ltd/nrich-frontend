@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { fetchInterceptor, xhrInterceptor } from "@nrich/notification-core";
-import { NotificationsProvider } from "@nrich/notification-mui";
+import { Notifications } from "@nrich/notification-mui";
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
@@ -15,10 +15,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <Notifications />
     <BrowserRouter>
-      <NotificationsProvider>
-        <App />
-      </NotificationsProvider>
+      <App />
     </BrowserRouter>
   </React.StrictMode>,
 );
