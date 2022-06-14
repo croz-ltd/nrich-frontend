@@ -8,7 +8,7 @@ The overall project is built on top of the concept of [Yarn workspaces](https://
 
 When developing a new module, the workspaces are to be organized as in the example:
 
-* `libs/foo-core`, where `foo` is the name of the module matching the naming conventions of the complementary backned module
+* `libs/foo-core`, where `foo` is the name of the module matching the naming conventions of the complementary backend module
 * `libs/foo-bar`, where `foo` is the name of the module matching the naming conventions of the complementary backend module, and `bar`
 is the name of the UI component library
 
