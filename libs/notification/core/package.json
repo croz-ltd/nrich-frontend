@@ -1,0 +1,15 @@
+{
+  "name": "@nrich/notification-core",
+  "description": "Contains core utilities related to the nrich-notification module",
+  "version": "0.0.1",
+  "dependencies": {
+    "zustand": "^4.0.0-rc.1"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "typings": "dist/index.d.ts"
+}
