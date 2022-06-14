@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import {
   Alert, AlertColor, AlertTitle, Snackbar,
 } from "@mui/material";
@@ -16,7 +16,6 @@ export type NotificationOrigin = ["top" | "bottom", "left" | "right" | "center"]
 export interface NotificationsProviderProps {
   autoClose?: number;
   position?: NotificationPosition;
-  children: ReactNode
 }
 
 /**
@@ -24,11 +23,11 @@ export interface NotificationsProviderProps {
  *
  * @param position specifies the notification position on the page,
  * derived from a set of predefined positions available in MUI
- * @param autoClose the duration after which the notification closes itself
+ * @param autoClose the duration after which the notification closes expressed in milliseconds
  * (if left undefined, it doesn't close)
  * @param children the children components from the wrapped component
  */
-const NotificationsProvider = ({ position = "bottom-right", autoClose, children }: NotificationsProviderProps) => {
+const Notifications = ({ position = "bottom-right", autoClose }: NotificationsProviderProps) => {
   const positioning = position.split("-") as NotificationOrigin;
 
   const [notifications, remove] = useNotifications();
@@ -63,9 +62,8 @@ const NotificationsProvider = ({ position = "bottom-right", autoClose, children 
           </Snackbar>
         ))
       }
-      {children}
     </>
   );
 };
 
-export default NotificationsProvider;
+export default Notifications;
