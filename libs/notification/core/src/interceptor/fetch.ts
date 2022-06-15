@@ -16,7 +16,7 @@ export const fetchInterceptor = () => {
       result.then((response) => response.clone().json())
         .then((body) => {
           if (isNotificationResponse(body)) {
-            useStore.getState().push(body.notification);
+            useStore.getState().add(body.notification);
           }
         });
 

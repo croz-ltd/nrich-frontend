@@ -4,7 +4,7 @@ import { Notification } from "../api";
 
 export interface NotificationState {
   notifications: Notification[];
-  push: (notification: Notification) => void;
+  add: (notification: Notification) => void;
   remove: (notification: Notification) => void;
 }
 
@@ -16,10 +16,10 @@ export interface NotificationState {
  */
 export const useStore = create<NotificationState>((set) => ({
   notifications: [],
-  push: (notification) => set((state) => ({
+  add: (notification) => set((state) => ({
     notifications: [...state.notifications, { ...notification, timestamp: notification.timestamp || new Date() }],
   })),
   remove: (notification) => set((state) => ({
-    notifications: state.notifications.filter((n) => n !== notification),
+    notifications: state.notifications.filter((currentNotification) => currentNotification !== notification),
   })),
 }));

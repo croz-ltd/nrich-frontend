@@ -14,7 +14,7 @@ export const xhrInterceptor = () => {
       if (this.readyState === 4) {
         const body = JSON.parse(this.responseText);
         if (isNotificationResponse(body)) {
-          useStore.getState().push(body.notification);
+          useStore.getState().add(body.notification);
         }
       }
     }, false);
