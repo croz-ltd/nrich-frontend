@@ -1,7 +1,7 @@
 import { Notification } from "../api";
 import { useStore } from "../store/store";
 
-export type UseNotifications = () => [Notification[], (notification: Notification) => void];
+export type UseNotifications = () => { notifications: Notification[], add: (notification: Notification) => void, remove: (notification: Notification) => void };
 
 /**
  * A hook which simplifies the usage of the intercepted notification state.
@@ -11,7 +11,8 @@ export type UseNotifications = () => [Notification[], (notification: Notificatio
  */
 export const useNotifications: UseNotifications = () => {
   const notifications = useStore((state) => state.notifications);
+  const add = useStore((state) => state.add);
   const remove = useStore((state) => state.remove);
 
-  return [notifications, remove];
+  return { notifications, add, remove };
 };

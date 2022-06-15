@@ -28,8 +28,7 @@ describe("@nrich/notification-core/use-notifications", () => {
 
   it("Correctly resolves notification state", () => {
     const { result } = renderHook(() => useNotifications());
-
-    const notifications = result.current[0];
+    const { notifications } = result.current;
 
     expect(notifications).toHaveLength(2);
     expect(notifications[0]).toEqual({ ...mockNotifications[0], timestamp: expect.any(Date) });
@@ -38,15 +37,14 @@ describe("@nrich/notification-core/use-notifications", () => {
 
   it("Correctly deletes notification state", () => {
     const { result } = renderHook(() => useNotifications());
+    const { notifications, remove } = result.current;
 
-    const remove = result.current[1];
-
-    expect(result.current[0]).toHaveLength(2);
+    expect(notifications).toHaveLength(2);
 
     act(() => {
-      remove(result.current[0][0]);
+      remove(notifications[0]);
     });
 
-    expect(result.current[0]).toHaveLength(1);
+    expect(result.current.notifications).toHaveLength(1);
   });
 });

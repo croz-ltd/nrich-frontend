@@ -31,8 +31,7 @@ export interface NotificationsProviderProps {
  */
 const Notifications = ({ position = "bottom-right", autoClose }: NotificationsProviderProps) => {
   const positioning = position.split("-") as NotificationOrigin;
-
-  const [notifications, remove] = useNotifications();
+  const { notifications, remove } = useNotifications();
 
   return (
     <>
