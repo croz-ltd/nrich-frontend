@@ -40,6 +40,8 @@
     ],
     "quotes": ["error", "double", { "avoidEscape": true }],
     "@typescript-eslint/quotes": ["error", "double", { "avoidEscape": true }],
+    "@typescript-eslint/brace-style": ["error", "stroustrup"],
+    "max-len": ["error", 200],
     "import/order": [
       "error",
       {

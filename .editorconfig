@@ -7,5 +7,6 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+max_line_length = 200
 
 ij_typescript_spaces_within_imports = true
