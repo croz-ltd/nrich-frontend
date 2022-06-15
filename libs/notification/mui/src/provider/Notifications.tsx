@@ -16,8 +16,17 @@ export type NotificationPosition = | "top-left"
 export type NotificationOrigin = ["top" | "bottom", "left" | "right" | "center"];
 
 export interface NotificationsProviderProps {
+
+  /**
+   * Number of milliseconds before notification is closed.
+   */
   autoClose?: number;
+
+  /**
+   * Position of notification.
+   */
   position?: NotificationPosition;
+
 }
 
 /**

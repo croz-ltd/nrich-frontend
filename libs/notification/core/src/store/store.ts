@@ -3,9 +3,24 @@ import create from "zustand";
 import { Notification } from "../api";
 
 export interface NotificationState {
+
+  /**
+   * Array of current state notifications.
+   */
   notifications: Notification[];
+
+  /**
+   * Adds notification to state.
+   * @param notification notification to add
+   */
   add: (notification: Notification) => void;
+
+  /**
+   * Removes notification from state.
+   * @param notification
+   */
   remove: (notification: Notification) => void;
+
 }
 
 /**
