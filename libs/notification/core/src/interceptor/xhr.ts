@@ -1,4 +1,4 @@
-import { isNotification } from "../api/type-guards";
+import { isNotificationResponse } from "../api/type-guards";
 import { useStore } from "../store/store";
 
 /**
@@ -13,7 +13,7 @@ export const xhrInterceptor = () => {
     this.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         const body = JSON.parse(this.responseText);
-        if (isNotification(body)) {
+        if (isNotificationResponse(body)) {
           useStore.getState().push(body.notification);
         }
       }

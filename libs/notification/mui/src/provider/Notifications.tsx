@@ -39,7 +39,7 @@ const Notifications = ({ position = "bottom-right", autoClose }: NotificationsPr
       {
         notifications.map((notification) => (
           <Snackbar
-            key={notification.date}
+            key={notification.timestamp?.toUTCString()}
             open
             autoHideDuration={autoClose}
             onClose={() => remove(notification)}

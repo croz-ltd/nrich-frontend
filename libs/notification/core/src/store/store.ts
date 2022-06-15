@@ -1,14 +1,10 @@
 import create from "zustand";
 
-import { NotificationResponse } from "../api/notification/types";
-
-export type Notification = NotificationResponse & {
-  date: number;
-};
+import { Notification } from "../api";
 
 export interface NotificationState {
   notifications: Notification[];
-  push: (notification: NotificationResponse) => void;
+  push: (notification: Notification) => void;
   remove: (notification: Notification) => void;
 }
 
@@ -21,7 +17,7 @@ export interface NotificationState {
 export const useStore = create<NotificationState>((set) => ({
   notifications: [],
   push: (notification) => set((state) => ({
-    notifications: [...state.notifications, { ...notification, date: Date.now() }],
+    notifications: [...state.notifications, { ...notification, timestamp: notification.timestamp || new Date() }],
   })),
   remove: (notification) => set((state) => ({
     notifications: state.notifications.filter((n) => n !== notification),

@@ -1,11 +1,11 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
 
-import { NotificationResponse } from "../api/notification/types";
+import { Notification } from "../api";
 import { useStore } from "../store/store";
 import { useNotifications } from "./use-notifications";
 
-const mockNotifications: NotificationResponse[] = [
+const mockNotifications: Notification[] = [
   {
     title: "Action with manual resolving",
     content: "Action with manual resolving was successful.",
@@ -32,8 +32,8 @@ describe("@nrich/notification-core/use-notifications", () => {
     const notifications = result.current[0];
 
     expect(notifications).toHaveLength(2);
-    expect(notifications[0]).toEqual({ ...mockNotifications[0], date: expect.any(Number) });
-    expect(notifications[1]).toEqual({ ...mockNotifications[1], date: expect.any(Number) });
+    expect(notifications[0]).toEqual({ ...mockNotifications[0], timestamp: expect.any(Date) });
+    expect(notifications[1]).toEqual({ ...mockNotifications[1], timestamp: expect.any(Date) });
   });
 
   it("Correctly deletes notification state", () => {

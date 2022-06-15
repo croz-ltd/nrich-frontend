@@ -1,4 +1,4 @@
-import { isNotification } from "../api/type-guards";
+import { isNotificationResponse } from "../api/type-guards";
 import { useStore } from "../store/store";
 
 /**
@@ -15,7 +15,7 @@ export const fetchInterceptor = () => {
 
       result.then((response) => response.clone().json())
         .then((body) => {
-          if (isNotification(body)) {
+          if (isNotificationResponse(body)) {
             useStore.getState().push(body.notification);
           }
         });

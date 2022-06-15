@@ -1,4 +1,5 @@
-import { Notification, useStore } from "../store/store";
+import { Notification } from "../api";
+import { useStore } from "../store/store";
 
 export type UseNotifications = () => [Notification[], (notification: Notification) => void];
 

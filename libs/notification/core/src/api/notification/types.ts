@@ -1,6 +1,6 @@
 export type NotificationSeverity = "INFO" | "WARNING" | "ERROR";
 
-export interface NotificationResponse {
+export interface Notification {
 
   /**
    * Title of the notification.
@@ -29,17 +29,19 @@ export interface NotificationResponse {
    * For example current supported options in mui implementation are position and autoClose.
    */
   uxNotificationOptions?: Record<string, unknown>;
-}
-
-export interface NotificationDataResponse<T> {
 
   /**
-   * Response data
+   * Timestamp of notification.
    */
-  data: T,
+  // TODO remove optional when merged on server
+  timestamp?: Date
+}
+
+export interface NotificationResponse {
 
   /**
    * Notification
    */
-  notification: NotificationResponse
+  notification: Notification
+
 }
