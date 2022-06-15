@@ -4,14 +4,9 @@ import {
   Alert, AlertColor, AlertTitle, Snackbar,
 } from "@mui/material";
 
-import { useNotifications } from "@nrich/notification-core";
+import { Notification, useNotifications } from "@nrich/notification-core";
 
-export type NotificationPosition = | "top-left"
-| "top-right"
-| "top-center"
-| "bottom-left"
-| "bottom-right"
-| "bottom-center";
+export type NotificationPosition = "top-left" | "top-right" | "top-center" | "bottom-left" | "bottom-right" | "bottom-center";
 
 export type NotificationOrigin = ["top" | "bottom", "left" | "right" | "center"];
 
@@ -29,6 +24,27 @@ export interface NotificationsProviderProps {
 
 }
 
+const resolveNotificationOrigin = (notification: Notification, defaultPosition: NotificationPosition): NotificationOrigin => {
+  const separator = "-";
+  const position = notification.uxNotificationOptions?.position;
+
+  let notificationOrigin;
+  if (typeof position === "string" && position.includes(separator)) {
+    notificationOrigin = position as NotificationPosition;
+  }
+  else {
+    notificationOrigin = defaultPosition;
+  }
+
+  return notificationOrigin.split(separator) as NotificationOrigin;
+};
+
+const resolveNotificationDuration = (notification: Notification, defaultDuration: number): number => {
+  const autoClose = notification.uxNotificationOptions?.autoClose;
+
+  return (typeof autoClose === "number" && autoClose) || defaultDuration;
+};
+
 /**
  * A provider component used to wrap the container in which the notifications are displayed.
  *
@@ -39,38 +55,42 @@ export interface NotificationsProviderProps {
  * @param children the children components from the wrapped component
  */
 const Notifications = ({ position = "bottom-right", autoClose }: NotificationsProviderProps) => {
-  const positioning = position.split("-") as NotificationOrigin;
   const { notifications, remove } = useNotifications();
 
   return (
     <>
       {
-        notifications.map((notification) => (
-          <Snackbar
-            key={notification.timestamp?.toUTCString()}
-            open
-            autoHideDuration={autoClose}
-            onClose={() => remove(notification)}
-            anchorOrigin={{
-              vertical: positioning[0],
-              horizontal: positioning[1],
-            }}
-          >
+        notifications.map((notification) => {
+          const positioning = resolveNotificationOrigin(notification, position);
+          const autoHideDuration = resolveNotificationDuration(notification, autoClose);
 
-            <Alert
+          return (
+            <Snackbar
+              key={notification.timestamp?.toUTCString()}
+              open
+              autoHideDuration={autoHideDuration}
               onClose={() => remove(notification)}
-              severity={notification.severity.toLowerCase() as AlertColor}
+              anchorOrigin={{
+                vertical: positioning[0],
+                horizontal: positioning[1],
+              }}
             >
-              <AlertTitle><strong>{notification.title}</strong></AlertTitle>
-              {notification.content}
-              {notification.messageList?.length > 0 && (
-                <ul>
-                  {notification.messageList.map((message) => <li>{message}</li>)}
-                </ul>
-              )}
-            </Alert>
-          </Snackbar>
-        ))
+
+              <Alert
+                onClose={() => remove(notification)}
+                severity={notification.severity.toLowerCase() as AlertColor}
+              >
+                <AlertTitle><strong>{notification.title}</strong></AlertTitle>
+                {notification.content}
+                {notification.messageList?.length > 0 && (
+                  <ul>
+                    {notification.messageList.map((message) => <li key={message}>{message}</li>)}
+                  </ul>
+                )}
+              </Alert>
+            </Snackbar>
+          );
+        })
       }
     </>
   );
