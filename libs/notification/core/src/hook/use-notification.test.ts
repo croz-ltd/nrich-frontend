@@ -1,8 +1,9 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
-import { useNotifications } from "./use-notifications";
-import { useStore } from "../store/store";
+
 import { NotificationResponse } from "../api/notification/types";
+import { useStore } from "../store/store";
+import { useNotifications } from "./use-notifications";
 
 const mockNotifications: NotificationResponse[] = [
   {

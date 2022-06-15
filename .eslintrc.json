@@ -39,7 +39,33 @@
       }
     ],
     "quotes": ["error", "double", { "avoidEscape": true }],
-    "@typescript-eslint/quotes": ["error", "double", { "avoidEscape": true }]
+    "@typescript-eslint/quotes": ["error", "double", { "avoidEscape": true }],
+    "import/order": [
+      "error",
+      {
+        "alphabetize": { "order": "asc" },
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "react.*",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "@nrich/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@mui/**",
+            "group": "external",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react.*", "@nrich/**", "@mui/**"],
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "index"]
+      }
+    ]
   },
   "ignorePatterns": [
     "dist",

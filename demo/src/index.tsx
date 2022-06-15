@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+
 import { fetchInterceptor, xhrInterceptor } from "@nrich/notification-core";
 import { Notifications } from "@nrich/notification-mui";
-import { BrowserRouter } from "react-router-dom";
-import reportWebVitals from "./reportWebVitals";
+
 import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+import "./index.css";
 
 fetchInterceptor();
 xhrInterceptor();

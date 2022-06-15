@@ -1,7 +1,9 @@
 import React from "react";
+
 import {
   Alert, AlertColor, AlertTitle, Snackbar,
 } from "@mui/material";
+
 import { useNotifications } from "@nrich/notification-core";
 
 export type NotificationPosition = | "top-left"

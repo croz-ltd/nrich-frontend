@@ -1,4 +1,5 @@
 import create from "zustand";
+
 import { NotificationResponse } from "../api/notification/types";
 
 export type Notification = NotificationResponse & {
