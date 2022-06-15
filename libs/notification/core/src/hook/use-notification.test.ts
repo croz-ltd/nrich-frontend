@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
 
 import { Notification } from "../api";
-import { useStore } from "../store/store";
+import { useNotificationStore } from "../store/notification-store";
 import { useNotifications } from "./use-notifications";
 
 const mockNotifications: Notification[] = [
@@ -23,7 +23,7 @@ const mockNotifications: Notification[] = [
 
 describe("@nrich/notification-core/use-notifications", () => {
   beforeAll(() => {
-    mockNotifications.forEach((notification) => useStore.getState().add(notification));
+    mockNotifications.forEach((notification) => useNotificationStore.getState().add(notification));
   });
 
   it("Correctly resolves notification state", () => {

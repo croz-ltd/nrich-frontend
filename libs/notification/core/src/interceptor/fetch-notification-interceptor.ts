@@ -1,5 +1,5 @@
-import { isNotificationResponse } from "../api/type-guards";
-import { useStore } from "../store/store";
+import { isNotificationResponse } from "../api/notification-type-guards";
+import { useNotificationStore } from "../store/notification-store";
 
 /**
  * Fetch API interceptor which clones the response and checks
@@ -7,7 +7,7 @@ import { useStore } from "../store/store";
  *
  * @returns A function which can be called to register the interceptor.
  */
-export const fetchInterceptor = () => {
+export const fetchNotificationInterceptor = () => {
   window.fetch = new Proxy(window.fetch, {
     apply(fetch, that, request) {
       // @ts-ignore
@@ -16,7 +16,7 @@ export const fetchInterceptor = () => {
       result.then((response) => response.clone().json())
         .then((body) => {
           if (isNotificationResponse(body)) {
-            useStore.getState().add(body.notification);
+            useNotificationStore.getState().add(body.notification);
           }
         });
 

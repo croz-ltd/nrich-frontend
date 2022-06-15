@@ -1,5 +1,5 @@
-import { isNotificationResponse } from "../api/type-guards";
-import { useStore } from "../store/store";
+import { isNotificationResponse } from "../api/notification-type-guards";
+import { useNotificationStore } from "../store/notification-store";
 
 /**
  * XHR interceptor which listens for the response to be acquired
@@ -7,14 +7,14 @@ import { useStore } from "../store/store";
  *
  * @returns A function which can be called to register the interceptor.
  */
-export const xhrInterceptor = () => {
+export const xhrNotificationInterceptor = () => {
   const old = XMLHttpRequest.prototype.open;
   XMLHttpRequest.prototype.open = function (...args) {
     this.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         const body = JSON.parse(this.responseText);
         if (isNotificationResponse(body)) {
-          useStore.getState().add(body.notification);
+          useNotificationStore.getState().add(body.notification);
         }
       }
     }, false);

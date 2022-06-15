@@ -29,7 +29,7 @@ export interface NotificationState {
  *
  * @returns A hook for managing notification state usable in a React environment.
  */
-export const useStore = create<NotificationState>((set) => ({
+export const useNotificationStore = create<NotificationState>((set) => ({
   notifications: [],
   add: (notification) => set((state) => ({
     notifications: [...state.notifications, { ...notification, timestamp: notification.timestamp || new Date() }],

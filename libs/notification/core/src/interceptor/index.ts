@@ -1,2 +1,2 @@
-export { fetchInterceptor } from "./fetch";
-export { xhrInterceptor } from "./xhr";
+export { fetchNotificationInterceptor } from "./fetch-notification-interceptor";
+export { xhrNotificationInterceptor } from "./xhr-notification-interceptor";
