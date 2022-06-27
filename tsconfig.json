@@ -2,6 +2,7 @@
   "include": [
     "demo",
     "libs/**/src",
+    "libs/**/test",
     "scripts",
     "config"
   ],
