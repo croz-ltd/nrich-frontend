@@ -1,9 +1,7 @@
 module.exports = {
-  projects: [
-    "<rootDir>/demo",
-    "<rootDir>/libs/notification/core",
-    "<rootDir>/libs/notification/mui",
-  ],
+  testEnvironment: "jest-environment-jsdom",
+  testMatch: ["**/__tests__/**/*.ts?(x)", "**/?(*.)+(spec|test).ts?(x)"],
+  preset: "ts-jest",
   collectCoverage: true,
   coveragePathIgnorePatterns: ["/dist/", "/test/", "/node_modules/"],
   coverageReporters: ["json", "html"],
