@@ -1,14 +1,27 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
+import { Link, Route, Routes } from "react-router-dom";
+
 import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+
+import Notifications from "./pages/Notifications";
 
 const drawerWidth = 240;
+const routes = [
+  {
+    path: "notifications",
+    title: "Notifications",
+  },
+];
 
 const App = () => (
   <Box sx={{ display: "flex" }}>
@@ -30,12 +43,23 @@ const App = () => (
     >
       <Toolbar />
       <Box sx={{ overflow: "auto" }}>
-        <List />
+        <List>
+          {routes.map((menuItem) => (
+            <ListItem key={menuItem.path} disablePadding>
+              <ListItemButton component={Link} to={menuItem.path}>
+                <ListItemText primary={menuItem.title} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
         <Divider />
       </Box>
     </Drawer>
     <Box component="main" sx={{ flexGrow: 1, m: 2 }}>
       <Toolbar />
+      <Routes>
+        <Route path="notifications" element={<Notifications />} />
+      </Routes>
     </Box>
   </Box>
 );

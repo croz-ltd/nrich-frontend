@@ -4,6 +4,13 @@ React application to showcase features of [nrich](https://github.com/croz-ltd/nr
 
 The overall project is built on top of the concept of [Yarn workspaces](https://yarnpkg.com/features/workspaces).
 
+### Workspace/module overview
+
+The following workspaces/modules are available:
+* `demo` - a demo application using the below mentioned workspaces to showcase different integration features
+* `libs/notification-core` - contains the core utilities for handling common state operations for the nrich notification module
+* `libs/notification-mui` - contains the UI implementation of notifications for the MUI component library
+
 ### Development of new modules
 
 When developing a new module, the workspaces are to be organized as in the example:
