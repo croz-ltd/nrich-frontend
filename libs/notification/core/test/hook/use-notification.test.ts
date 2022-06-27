@@ -1,9 +1,8 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { act } from "react-dom/test-utils";
 
-import { Notification } from "../api";
-import { useNotificationStore } from "../store/notification-store";
-import { useNotifications } from "./use-notifications";
+import { act } from "@testing-library/react";
+import { Notification, useNotifications } from "../../src";
+import { useNotificationStore } from "../../src/store/notification-store";
 
 const mockNotifications: Notification[] = [
   {
@@ -21,30 +20,37 @@ const mockNotifications: Notification[] = [
   },
 ];
 
-describe("@nrich/notification-core/use-notifications", () => {
+describe("@nrich/notification-core/use-notification", () => {
   beforeAll(() => {
     mockNotifications.forEach((notification) => useNotificationStore.getState().add(notification));
   });
 
-  it("Correctly resolves notification state", () => {
+  it("should resolve notification state", () => {
+    // when
     const { result } = renderHook(() => useNotifications());
     const { notifications } = result.current;
 
+    // then
     expect(notifications).toHaveLength(2);
-    expect(notifications[0]).toEqual({ ...mockNotifications[0], timestamp: expect.any(Date) });
-    expect(notifications[1]).toEqual({ ...mockNotifications[1], timestamp: expect.any(Date) });
+    expect(notifications[0]).toEqual({ ...notifications[0], timestamp: expect.any(Date) });
+    expect(notifications[1]).toEqual({ ...notifications[1], timestamp: expect.any(Date) });
   });
 
-  it("Correctly deletes notification state", () => {
+  it("should delete notification state", () => {
+    // when
     const { result } = renderHook(() => useNotifications());
     const { notifications, remove } = result.current;
 
+    // then
     expect(notifications).toHaveLength(2);
 
+    // and when
     act(() => {
       remove(notifications[0]);
+      remove(notifications[1]);
     });
 
-    expect(result.current.notifications).toHaveLength(1);
+    // then
+    expect(result.current.notifications).toHaveLength(0);
   });
 });
