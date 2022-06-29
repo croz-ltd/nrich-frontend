@@ -1,6 +1,6 @@
 import { FormConfigurationValidationConverter } from "../../src/converter/FormConfigurationValidationConverter";
 import {
-  createComplexValidationList, createNestedValidationList, createSimpleValidationList, invalidValidationConfiguration,
+  createComplexValidationList, createCustomValidationList, createNestedValidationList, createSimpleValidationList, invalidValidationConfiguration,
 } from "../testutil/form-configuration-generating-util";
 
 describe("@nrich/form-configuration-core/FormConfigurationValidationConverter", () => {
@@ -83,5 +83,19 @@ describe("@nrich/form-configuration-core/FormConfigurationValidationConverter", 
     // then
     expect(result).toBeDefined();
     expect(() => result.validateSync(validationData)).toThrowError(expectedMessage);
+  });
+
+  it("should support custom constraints", () => {
+    // given
+    const converter = new FormConfigurationValidationConverter();
+    const customValidationList = createCustomValidationList();
+
+    // when
+    const result = converter.convertFormConfigurationToYupSchema(customValidationList);
+
+    // then
+    expect(result).toBeDefined();
+    expect(() => result.validateSync({ title: "other" })).toThrowError("Not in list: mr, mrs, miss");
+    expect(result.isValidSync({ title: "mr" })).toBe(true);
   });
 });

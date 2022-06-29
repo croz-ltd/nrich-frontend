@@ -24,6 +24,10 @@ export class FormConfigurationValidationConverter {
       convert: (configuration, validator) => validator[configuration.name.toLowerCase()](configuration.argumentMap.value, configuration.errorMessage),
     },
     {
+      supports: (configuration) => ["InList"].includes(configuration.name),
+      convert: (configuration, validator) => validator.test("inList", configuration.errorMessage, (value) => (configuration.argumentMap.value as string[]).includes(value)),
+    },
+    {
       supports: () => true,
       convert: (configuration, validator) => validator[configuration.name.toLowerCase()](configuration.errorMessage),
     },

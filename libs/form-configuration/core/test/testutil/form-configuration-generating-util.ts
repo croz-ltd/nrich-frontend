@@ -127,3 +127,20 @@ export const createNestedValidationList = () => [
     ],
   },
 ];
+
+export const createCustomValidationList = () => [
+  {
+    path: "title",
+    propertyType: "java.lang.String",
+    javascriptType: "string",
+    validatorList: [
+      {
+        name: "InList",
+        argumentMap: {
+          value: ["mr", "mrs", "miss"],
+        },
+        errorMessage: "Not in list: mr, mrs, miss",
+      },
+    ],
+  },
+];
