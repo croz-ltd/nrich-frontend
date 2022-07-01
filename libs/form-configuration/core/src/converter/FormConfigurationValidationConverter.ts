@@ -68,9 +68,7 @@ export class FormConfigurationValidationConverter {
       }
 
       const validator = property.validatorList.reduce((previousValidator, validatorConfiguration) => this.applyConverter(validatorConfiguration, previousValidator), yupValidation());
-
       const [propertyName, restOfPathList] = FormConfigurationValidationConverter.convertPath(property.path);
-      const currentPropertySchema = yup.object().shape({ [propertyName]: validator });
 
       if (restOfPathList.length > 0) {
         const currentPathSchema = [...restOfPathList].reverse()
@@ -79,6 +77,8 @@ export class FormConfigurationValidationConverter {
         schema = schema.concat(yup.object().shape(currentPathSchema));
       }
       else {
+        const currentPropertySchema = yup.object().shape({ [propertyName]: validator });
+
         schema = schema.concat(currentPropertySchema);
       }
     });
