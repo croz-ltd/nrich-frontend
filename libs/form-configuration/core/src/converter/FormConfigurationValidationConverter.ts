@@ -2,6 +2,12 @@ import * as yup from "yup";
 
 import { ConstrainedPropertyClientValidatorConfiguration, ConstrainedPropertyConfiguration, ValidatorConverter } from "../api";
 
+/**
+ * Converter responsible for conversion between ConstrainedPropertyConfiguration array (that contains validations specified and received from the backend)
+ * and Yup's ObjectSchema that can be applied on the frontend. The list of supported conversions is in given in {@link FormConfigurationValidationConverter.DEFAULT_CONVERTER_LIST} but
+ * users can also provide their own by using {@link ValidatorConverter} interface and supplying them in the constructor.
+ * The last validator converter will match any backend constraint and try to map it directly to Yup.
+ */
 export class FormConfigurationValidationConverter {
   private static PATH_SEPARATOR = ".";
 
@@ -33,12 +39,20 @@ export class FormConfigurationValidationConverter {
     },
   ];
 
+  /**
+   * Additional converters that can be registered for unsupported conversion or to change one of the existing conversions (they take precedence to builtin converters).
+   * @private
+   */
   private readonly additionalConverters: ValidatorConverter[];
 
   constructor(additionalConverters: ValidatorConverter[] = []) {
     this.additionalConverters = additionalConverters;
   }
 
+  /**
+   * Converts {@link ConstrainedPropertyConfiguration} array to Yup's schema using builtin and provided converters.
+   * @param constrainedPropertyConfigurationList array of {@link ConstrainedPropertyConfiguration} to convert
+   */
   convertFormConfigurationToYupSchema(constrainedPropertyConfigurationList: ConstrainedPropertyConfiguration[]): yup.ObjectSchema<any> {
     return this.convertFormConfigurationToYupSchemaInternal(constrainedPropertyConfigurationList);
   }
