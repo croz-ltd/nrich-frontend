@@ -75,7 +75,7 @@ export interface ValidatorConverter {
 export interface FormConfigurationConfiguration {
 
   /**
-   * Url where to fetch configuration from.
+   * Url where to fetch configuration from. It represents the part of the path till /fetch-all.
    */
   url: string;
 

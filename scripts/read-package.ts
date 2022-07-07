@@ -1,4 +1,5 @@
 import fs from "fs-extra";
+
 import { Package, PackageWithPath } from "./api/types";
 
 const readPackage = async (packagePaths: string[]) => {

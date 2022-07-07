@@ -13,6 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
+import FormConfiguration from "./pages/FormConfiguration";
 import Notifications from "./pages/Notifications";
 
 const drawerWidth = 240;
@@ -20,6 +21,10 @@ const routes = [
   {
     path: "notifications",
     title: "Notifications",
+  },
+  {
+    path: "form-configuration",
+    title: "Form Configuration",
   },
 ];
 
@@ -59,6 +64,7 @@ const App = () => (
       <Toolbar />
       <Routes>
         <Route path="notifications" element={<Notifications />} />
+        <Route path="form-configuration" element={<FormConfiguration />} />
       </Routes>
     </Box>
   </Box>

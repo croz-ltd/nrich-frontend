@@ -11,7 +11,7 @@ describe("@nrich/notification-core/notification-store", () => {
       content: "content",
       messageList: [],
       severity: "ERROR",
-      timestamp: new Date()
+      timestamp: new Date(),
     } as Notification;
 
     // when
