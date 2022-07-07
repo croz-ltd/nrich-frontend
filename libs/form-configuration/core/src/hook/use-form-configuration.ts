@@ -27,7 +27,7 @@ export const useFormConfiguration: UseFormConfiguration = () => {
   };
 };
 
-export const useYupValidation = (formId: string) => {
+export const useYupFormConfiguration = (formId: string) => {
   const { formConfigurations } = useFormConfiguration();
   // load the additional validator converters
   const { validatorConverters } = useValidatorConverter();
