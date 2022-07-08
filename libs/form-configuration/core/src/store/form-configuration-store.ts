@@ -10,6 +10,11 @@ export interface FormConfigurationState {
   formConfigurations: FormConfiguration[];
 
   /**
+   * Flag that indicates weather form configuration is fetched from API.
+   */
+  formConfigurationLoaded: boolean;
+
+  /**
    * Sets form configurations to state.
    * Use on initial call to find-all endpoint.
    * @param formConfigurations formConfigurations to set
@@ -27,21 +32,31 @@ export interface FormConfigurationState {
    * @param formConfiguration formConfiguration to add
    */
   remove: (formConfiguration: FormConfiguration) => void;
+
+  /**
+   * Sets form configuration loaded to state.
+   * @param isLoaded loaded flag to set
+   */
+  setFormConfigurationLoaded: (formConfigurationLoaded: boolean) => void;
 }
 
 /**
  * Creation of the API for managing internal form configuration state.
- * Used internally in the {@link useFormConfigurations} hook.
+ * Used internally in the {@link useFormConfiguration} hook.
  *
  * @returns A hook for managing form configuration state usable in a React environment.
  */
 export const useFormConfigurationStore = create<FormConfigurationState>((set) => ({
   formConfigurations: [],
-  set: ((formConfigurations) => set({ formConfigurations })),
+  formConfigurationLoaded: false,
+  set: ((formConfigurations) => set((state) => ({
+    ...state, formConfigurations,
+  }))),
   add: (formConfiguration) => set((state) => ({
     formConfigurations: [...state.formConfigurations, { ...formConfiguration }],
   })),
   remove: (formConfiguration) => set((state) => ({
     formConfigurations: state.formConfigurations.filter((currentFormConfiguration) => currentFormConfiguration !== formConfiguration),
   })),
+  setFormConfigurationLoaded: (formConfigurationLoaded) => set((state) => ({ ...state, formConfigurationLoaded })),
 }));

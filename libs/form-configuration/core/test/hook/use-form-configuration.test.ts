@@ -14,10 +14,11 @@ describe("@nrich/form-configuration-core/use-form-configuration", () => {
   it("should resolve form configuration state", () => {
     // when
     const { result } = renderHook(() => useFormConfiguration());
-    const { formConfigurations } = result.current;
+    const { formConfigurations, formConfigurationLoaded } = result.current;
 
     // then
     expect(formConfigurations).toHaveLength(2);
+    expect(formConfigurationLoaded).toBeFalsy();
   });
 
   it("should add form configuration to store", () => {
@@ -52,6 +53,23 @@ describe("@nrich/form-configuration-core/use-form-configuration", () => {
 
     // then
     expect(result.current.formConfigurations).toHaveLength(1);
+  });
+
+  it("should set form configuration loaded flag to store", () => {
+    // when
+    const { result } = renderHook(() => useFormConfiguration());
+    const { formConfigurationLoaded, setFormConfigurationLoaded } = result.current;
+
+    // then
+    expect(formConfigurationLoaded).toBeFalsy();
+
+    // adn when
+    act(() => {
+      setFormConfigurationLoaded(true);
+    });
+
+    // then
+    expect(result.current.formConfigurationLoaded).toBeTruthy();
   });
 
   it("should return yup object for given formId", () => {

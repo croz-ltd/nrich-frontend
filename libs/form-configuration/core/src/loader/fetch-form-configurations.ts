@@ -12,6 +12,7 @@ export const fetchFormConfigurations = async ({ url, requestOptionsResolver, add
   // set the response to the form configuration store
   if (response.ok) {
     useFormConfigurationStore.getState().set(body);
+    useFormConfigurationStore.getState().setFormConfigurationLoaded(true);
   }
   // set additional validator converters in validator converter store to be used on converting configurations
   if (additionalValidatorConverters) {

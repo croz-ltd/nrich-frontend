@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { FormConfiguration } from "../api";
 import { FormConfigurationValidationConverter } from "../converter/FormConfigurationValidationConverter";
 import { useFormConfigurationStore } from "../store/form-configuration-store";
@@ -5,9 +7,11 @@ import { useValidatorConverter } from "./use-validator-converter";
 
 export type UseFormConfiguration = () => {
   formConfigurations: FormConfiguration[],
+  formConfigurationLoaded: boolean;
   set: (formConfigurations: FormConfiguration[]) => void,
   add: (formConfiguration: FormConfiguration) => void,
   remove: (formConfiguration: FormConfiguration) => void
+  setFormConfigurationLoaded: (formConfigurationLoaded: boolean) => void;
 };
 
 /**
@@ -18,12 +22,14 @@ export type UseFormConfiguration = () => {
  */
 export const useFormConfiguration: UseFormConfiguration = () => {
   const formConfigurations = useFormConfigurationStore((state) => state.formConfigurations);
+  const formConfigurationLoaded = useFormConfigurationStore((state) => state.formConfigurationLoaded);
   const set = useFormConfigurationStore((state) => state.set);
   const add = useFormConfigurationStore((state) => state.add);
   const remove = useFormConfigurationStore((state) => state.remove);
+  const setFormConfigurationLoaded = useFormConfigurationStore((state) => state.setFormConfigurationLoaded);
 
   return {
-    formConfigurations, set, add, remove,
+    formConfigurations, formConfigurationLoaded, set, add, remove, setFormConfigurationLoaded,
   };
 };
 
@@ -39,9 +45,10 @@ export const useYupFormConfiguration = (formId: string) => {
     throw Error(`No form configuration found for given formId: ${formId}`);
   }
 
-  if (searchedFormConfiguration) {
-    return formConfigurationValidationConverter.convertFormConfigurationToYupSchema(searchedFormConfiguration.constrainedPropertyConfigurationList);
-  }
-
-  return undefined;
+  return useMemo(() => {
+    if (searchedFormConfiguration) {
+      return formConfigurationValidationConverter.convertFormConfigurationToYupSchema(searchedFormConfiguration.constrainedPropertyConfigurationList);
+    }
+    return undefined;
+  }, [formId]);
 };

@@ -1,0 +1,64 @@
+import {
+  Button, Grid, MenuItem, Select,
+} from "@material-ui/core";
+import { Form, Formik } from "formik";
+import React, { useState } from "react";
+
+import { useFormConfiguration, useYupFormConfiguration } from "@nrich/form-configuration-core";
+
+import { createInitialValues, generateForm, LooseObject } from "../util/formUtils";
+
+export const FormConfigurationInner = () => {
+  const [formValues, setFormValues] = useState<LooseObject>();
+
+  const { formConfigurations } = useFormConfiguration();
+
+  const [select, setSelect] = useState(formConfigurations[0]?.formId);
+
+  const validationSchema = useYupFormConfiguration(select);
+
+  return (
+    <>
+      <Select value={select} onChange={(e) => setSelect(e.target.value as string)}>
+        {formConfigurations.map((fc) => (<MenuItem value={fc.formId} key={fc.formId}>{fc.formId}</MenuItem>))}
+      </Select>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={8} lg={3}>
+          <Formik
+            initialValues={createInitialValues(formConfigurations.find((item) => item.formId === select)?.constrainedPropertyConfigurationList)}
+            validationSchema={validationSchema}
+            onSubmit={(values) => {
+              setFormValues(values);
+            }}
+            enableReinitialize
+          >
+            <Form>
+              {generateForm(formConfigurations.find((item) => item.formId === select)?.constrainedPropertyConfigurationList)}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                size="large"
+                style={{ marginTop: "15px" }}
+              >
+                Submit
+              </Button>
+            </Form>
+          </Formik>
+        </Grid>
+      </Grid>
+      {formValues && (
+      <>
+        Form values:
+        {Object.entries(formValues).map(([key, value]) => <div>{`${key}: ${value}`}</div>)}
+      </>
+      )}
+    </>
+  );
+};
