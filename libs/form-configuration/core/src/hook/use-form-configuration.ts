@@ -31,7 +31,6 @@ export const useFormConfiguration: UseFormConfiguration = () => {
 
 export const useYupFormConfiguration = (formId: string) => {
   const { formYupConfigurations } = useFormConfiguration();
-  // load the additional validator converters
 
   const searchedFormConfiguration = formYupConfigurations.find((formYupConfiguration) => formYupConfiguration.formId === formId);
 

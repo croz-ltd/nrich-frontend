@@ -1,1 +1,1 @@
-export { default as FormConfigurationWrapper } from "./FormConfigurationWrapper";
+export { default as FormConfigurationProvider } from "./FormConfigurationProvider";

@@ -28,7 +28,7 @@ describe("@nrich/form-configuration-core/use-form-configuration", () => {
     // then
     expect(formYupConfigurations).toHaveLength(2);
 
-    // adn when
+    // and when
     act(() => {
       add(mockFormYupConfiguration);
     });
@@ -45,7 +45,7 @@ describe("@nrich/form-configuration-core/use-form-configuration", () => {
     // then
     expect(formYupConfigurations).toHaveLength(2);
 
-    // adn when
+    // and when
     act(() => {
       remove(formYupConfigurations[0]);
     });
@@ -62,7 +62,7 @@ describe("@nrich/form-configuration-core/use-form-configuration", () => {
     // then
     expect(formConfigurationLoaded).toBeFalsy();
 
-    // adn when
+    // and when
     act(() => {
       setFormConfigurationLoaded(true);
     });
@@ -77,6 +77,6 @@ describe("@nrich/form-configuration-core/use-form-configuration", () => {
     const { result } = renderHook(() => useYupFormConfiguration(formId));
 
     // then
-    expect(result.current.yupSchema).toMatchObject(mockFormYupConfigurations[0].yupSchema);
+    expect(result.current).toMatchObject(mockFormYupConfigurations[0].yupSchema);
   });
 });

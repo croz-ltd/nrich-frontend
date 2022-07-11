@@ -1,13 +1,13 @@
 import React from "react";
 
-import { FormConfigurationWrapper } from "@nrich/form-configuration-core";
+import { FormConfigurationProvider } from "@nrich/form-configuration-core";
 
 import { FormConfigurationInner } from "../components/FormConfigurationInner";
 
 const FormConfiguration = () => (
-  <FormConfigurationWrapper loader="Loading..." url="/nrich/form/configuration">
+  <FormConfigurationProvider loader="Loading..." url="/nrich/form/configuration">
     <FormConfigurationInner />
-  </FormConfigurationWrapper>
+  </FormConfigurationProvider>
 );
 
 export default FormConfiguration;

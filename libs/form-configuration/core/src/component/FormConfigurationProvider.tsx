@@ -22,7 +22,7 @@ export type Props = {
  * @param children content to show conditionally
  * @param loader custom loader to show until content loads
  */
-const FormConfigurationWrapper = ({ children, loader, ...fetchProps }: Props) => {
+const FormConfigurationProvider = ({ children, loader, ...fetchProps }: Props) => {
   useEffect(() => {
     fetchFormConfigurations({ ...fetchProps });
   }, []);
@@ -32,4 +32,4 @@ const FormConfigurationWrapper = ({ children, loader, ...fetchProps }: Props) =>
   return <div>{formConfigurationLoaded ? children : loader ?? null}</div>;
 };
 
-export default FormConfigurationWrapper;
+export default FormConfigurationProvider;

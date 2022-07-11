@@ -3,17 +3,17 @@ import { renderHook } from "@testing-library/react-hooks";
 import React from "react";
 import { act } from "react-dom/test-utils";
 
-import { FormConfigurationWrapper } from "../../src";
+import { FormConfigurationProvider } from "../../src";
 import { useFormConfigurationStore } from "../../src/store/form-configuration-store";
 
-describe("@nrich/form-configuration-core/FormConfigurationWrapper", () => {
+describe("@nrich/form-configuration-core/FormConfigurationProvider", () => {
   it("should not render children if loader is not defined and fetch is not executed", () => {
     // given
     useFormConfigurationStore.getState().setFormConfigurationLoaded(false);
 
     // when
     const children = "Should not be rendered";
-    const { queryByText } = render(<FormConfigurationWrapper url="">{children}</FormConfigurationWrapper>);
+    const { queryByText } = render(<FormConfigurationProvider url="">{children}</FormConfigurationProvider>);
 
     // then
     expect(queryByText(children)).not.toBeInTheDocument();
@@ -26,7 +26,7 @@ describe("@nrich/form-configuration-core/FormConfigurationWrapper", () => {
     // when
     const children = "Should not be rendered";
     const loader = "Loading...";
-    const { queryByText, getByText } = render(<FormConfigurationWrapper loader={loader} url="">{children}</FormConfigurationWrapper>);
+    const { queryByText, getByText } = render(<FormConfigurationProvider loader={loader} url="">{children}</FormConfigurationProvider>);
 
     // then
     expect(queryByText(children)).not.toBeInTheDocument();
@@ -41,7 +41,7 @@ describe("@nrich/form-configuration-core/FormConfigurationWrapper", () => {
     // when
     const children = "Should not be rendered";
     const loader = "Loading...";
-    render(<FormConfigurationWrapper loader={loader} url="">{children}</FormConfigurationWrapper>);
+    render(<FormConfigurationProvider loader={loader} url="">{children}</FormConfigurationProvider>);
 
     // then
     expect(screen.queryByText(children)).not.toBeInTheDocument();
