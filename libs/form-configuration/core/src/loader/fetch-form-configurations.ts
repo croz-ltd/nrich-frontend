@@ -1,22 +1,30 @@
-import { FormConfiguration, FormConfigurationConfiguration } from "../api";
+import { FormConfiguration, FormConfigurationConfiguration, FormYupConfiguration } from "../api";
+import { FormConfigurationValidationConverter } from "../converter/FormConfigurationValidationConverter";
 import { useFormConfigurationStore } from "../store/form-configuration-store";
-import { useValidatorConverterStore } from "../store/validator-converter-store";
 
 export const fetchFormConfigurations = async ({ url, requestOptionsResolver, additionalValidatorConverters }: FormConfigurationConfiguration): Promise<FormConfiguration[]> => {
+  const formConfigurationValidationConverter = new FormConfigurationValidationConverter(additionalValidatorConverters);
+  const additionalOptions = requestOptionsResolver?.() || {};
+
   const response = await fetch(`${url}/fetch-all`, {
     method: "POST",
-    headers: { ...requestOptionsResolver },
+    ...additionalOptions,
   });
-  const body = await response.json();
+  const body = await response.json() as FormConfiguration[];
+
+  const formYupConfigurations: FormYupConfiguration[] = [];
 
   // set the response to the form configuration store
   if (response.ok) {
-    useFormConfigurationStore.getState().set(body);
+    body.forEach((item) => {
+      formYupConfigurations.push({
+        formId: item.formId,
+        yupSchema: formConfigurationValidationConverter.convertFormConfigurationToYupSchema(item.constrainedPropertyConfigurationList),
+        constrainedPropertyConfigurationList: item.constrainedPropertyConfigurationList,
+      });
+    });
+    useFormConfigurationStore.getState().set(formYupConfigurations);
     useFormConfigurationStore.getState().setFormConfigurationLoaded(true);
-  }
-  // set additional validator converters in validator converter store to be used on converting configurations
-  if (additionalValidatorConverters) {
-    useValidatorConverterStore.getState().set(additionalValidatorConverters);
   }
 
   return body;

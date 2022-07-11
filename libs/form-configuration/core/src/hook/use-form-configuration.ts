@@ -1,16 +1,12 @@
-import { useMemo } from "react";
-
-import { FormConfiguration } from "../api";
-import { FormConfigurationValidationConverter } from "../converter/FormConfigurationValidationConverter";
+import { FormYupConfiguration } from "../api";
 import { useFormConfigurationStore } from "../store/form-configuration-store";
-import { useValidatorConverter } from "./use-validator-converter";
 
 export type UseFormConfiguration = () => {
-  formConfigurations: FormConfiguration[],
+  formYupConfigurations: FormYupConfiguration[],
   formConfigurationLoaded: boolean;
-  set: (formConfigurations: FormConfiguration[]) => void,
-  add: (formConfiguration: FormConfiguration) => void,
-  remove: (formConfiguration: FormConfiguration) => void
+  set: (formConfigurations: FormYupConfiguration[]) => void,
+  add: (formConfiguration: FormYupConfiguration) => void,
+  remove: (formConfiguration: FormYupConfiguration) => void
   setFormConfigurationLoaded: (formConfigurationLoaded: boolean) => void;
 };
 
@@ -21,7 +17,7 @@ export type UseFormConfiguration = () => {
  * @returns An array of options to access and set the form configuration state and remove or add a single form configuration.
  */
 export const useFormConfiguration: UseFormConfiguration = () => {
-  const formConfigurations = useFormConfigurationStore((state) => state.formConfigurations);
+  const formYupConfigurations = useFormConfigurationStore((state) => state.formYupConfigurations);
   const formConfigurationLoaded = useFormConfigurationStore((state) => state.formConfigurationLoaded);
   const set = useFormConfigurationStore((state) => state.set);
   const add = useFormConfigurationStore((state) => state.add);
@@ -29,26 +25,20 @@ export const useFormConfiguration: UseFormConfiguration = () => {
   const setFormConfigurationLoaded = useFormConfigurationStore((state) => state.setFormConfigurationLoaded);
 
   return {
-    formConfigurations, formConfigurationLoaded, set, add, remove, setFormConfigurationLoaded,
+    formYupConfigurations, formConfigurationLoaded, set, add, remove, setFormConfigurationLoaded,
   };
 };
 
 export const useYupFormConfiguration = (formId: string) => {
-  const { formConfigurations } = useFormConfiguration();
+  const { formYupConfigurations } = useFormConfiguration();
   // load the additional validator converters
-  const { validatorConverters } = useValidatorConverter();
-  const formConfigurationValidationConverter = new FormConfigurationValidationConverter(validatorConverters);
 
-  const searchedFormConfiguration = formConfigurations.find((formConfiguration) => formConfiguration.formId === formId);
+  const searchedFormConfiguration = formYupConfigurations.find((formYupConfiguration) => formYupConfiguration.formId === formId);
 
-  if (!searchedFormConfiguration && formConfigurations.length !== 0) {
+  if (!searchedFormConfiguration) {
     throw Error(`No form configuration found for given formId: ${formId}`);
   }
-
-  return useMemo(() => {
-    if (searchedFormConfiguration) {
-      return formConfigurationValidationConverter.convertFormConfigurationToYupSchema(searchedFormConfiguration.constrainedPropertyConfigurationList);
-    }
-    return undefined;
-  }, [formId]);
+  else {
+    return searchedFormConfiguration.yupSchema;
+  }
 };

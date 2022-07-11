@@ -1,20 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import { fetchFormConfigurations, FormConfigurationWrapper } from "@nrich/form-configuration-core";
+import { FormConfigurationWrapper } from "@nrich/form-configuration-core";
 
 import { FormConfigurationInner } from "../components/FormConfigurationInner";
 
-const FormConfiguration = () => {
-  useEffect(() => {
-    fetchFormConfigurations({ url: "/nrich/form/configuration" });
-  }, []);
-
-  return (
-    <FormConfigurationWrapper loader="Loading...">
-      <FormConfigurationInner />
-    </FormConfigurationWrapper>
-
-  );
-};
+const FormConfiguration = () => (
+  <FormConfigurationWrapper loader="Loading..." url="/nrich/form/configuration">
+    <FormConfigurationInner />
+  </FormConfigurationWrapper>
+);
 
 export default FormConfiguration;

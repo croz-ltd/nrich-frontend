@@ -13,7 +13,7 @@ describe("@nrich/form-configuration-core/FormConfigurationWrapper", () => {
 
     // when
     const children = "Should not be rendered";
-    const { queryByText } = render(<FormConfigurationWrapper>{children}</FormConfigurationWrapper>);
+    const { queryByText } = render(<FormConfigurationWrapper url="">{children}</FormConfigurationWrapper>);
 
     // then
     expect(queryByText(children)).not.toBeInTheDocument();
@@ -26,21 +26,7 @@ describe("@nrich/form-configuration-core/FormConfigurationWrapper", () => {
     // when
     const children = "Should not be rendered";
     const loader = "Loading...";
-    const { queryByText, getByText } = render(<FormConfigurationWrapper loader={loader}>{children}</FormConfigurationWrapper>);
-
-    // then
-    expect(queryByText(children)).not.toBeInTheDocument();
-    expect(getByText(loader)).toBeInTheDocument();
-  });
-
-  it("should render loader if loader is defined and fetch is not executed", () => {
-    // given
-    useFormConfigurationStore.getState().setFormConfigurationLoaded(false);
-
-    // when
-    const children = "Children";
-    const loader = "Loading...";
-    const { queryByText, getByText } = render(<FormConfigurationWrapper loader={loader}>{children}</FormConfigurationWrapper>);
+    const { queryByText, getByText } = render(<FormConfigurationWrapper loader={loader} url="">{children}</FormConfigurationWrapper>);
 
     // then
     expect(queryByText(children)).not.toBeInTheDocument();
@@ -55,7 +41,7 @@ describe("@nrich/form-configuration-core/FormConfigurationWrapper", () => {
     // when
     const children = "Should not be rendered";
     const loader = "Loading...";
-    render(<FormConfigurationWrapper loader={loader}>{children}</FormConfigurationWrapper>);
+    render(<FormConfigurationWrapper loader={loader} url="">{children}</FormConfigurationWrapper>);
 
     // then
     expect(screen.queryByText(children)).not.toBeInTheDocument();

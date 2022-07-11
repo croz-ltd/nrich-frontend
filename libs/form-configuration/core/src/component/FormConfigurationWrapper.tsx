@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
+import { FormConfigurationConfiguration } from "../api";
 import { useFormConfiguration } from "../hook";
+import { fetchFormConfigurations } from "../loader/fetch-form-configurations";
 
-export interface Props {
+export type Props = {
 
   /**
    * Content to show conditionally
@@ -13,14 +15,18 @@ export interface Props {
    * Custom loader to show until content loads
    */
   loader?: React.ReactNode;
-}
+} & FormConfigurationConfiguration;
 
 /**
  * Should be used to wrap the whole app that includes forms, so it doesn't render them without loading form configuration from API first.
  * @param children content to show conditionally
  * @param loader custom loader to show until content loads
  */
-const FormConfigurationWrapper = ({ children, loader }: Props) => {
+const FormConfigurationWrapper = ({ children, loader, ...fetchProps }: Props) => {
+  useEffect(() => {
+    fetchFormConfigurations({ ...fetchProps });
+  }, []);
+
   const { formConfigurationLoaded } = useFormConfiguration();
 
   return <div>{formConfigurationLoaded ? children : loader ?? null}</div>;

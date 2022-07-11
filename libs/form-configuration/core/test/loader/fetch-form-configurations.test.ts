@@ -1,6 +1,5 @@
-import { fetchFormConfigurations } from "../../src";
+import { fetchFormConfigurations } from "../../src/loader/fetch-form-configurations";
 import { useFormConfigurationStore } from "../../src/store/form-configuration-store";
-import { useValidatorConverterStore } from "../../src/store/validator-converter-store";
 import { mockFormConfigurations, mockValidatorConverters } from "../testutil/form-configuration-generating-util";
 import { setupFormConfigurationServer } from "../testutil/setup-form-configuration-server";
 
@@ -24,16 +23,11 @@ describe("@nrich/form-configuration-core/fetch-form-configurations", () => {
 
     // and when
     const formConfigurationState = useFormConfigurationStore.getState();
-    const validationConverterState = useValidatorConverterStore.getState();
 
     // then
-    expect(formConfigurationState.formConfigurations).toHaveLength(2);
-    expect(formConfigurationState.formConfigurations[0]).toMatchObject(mockFormConfigurations[0]);
-    expect(formConfigurationState.formConfigurations[1]).toMatchObject(mockFormConfigurations[1]);
-
-    expect(validationConverterState.validatorConverters).toHaveLength(2);
-    expect(validationConverterState.validatorConverters[0]).toMatchObject(mockValidatorConverters[0]);
-    expect(validationConverterState.validatorConverters[1]).toMatchObject(mockValidatorConverters[1]);
+    expect(formConfigurationState.formYupConfigurations).toHaveLength(2);
+    expect(formConfigurationState.formYupConfigurations[0]).toBeTruthy();
+    expect(formConfigurationState.formYupConfigurations[1]).toBeTruthy();
 
     // cleanup
     formConfigurationState.set([]);

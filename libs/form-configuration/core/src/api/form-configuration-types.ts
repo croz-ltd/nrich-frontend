@@ -1,9 +1,30 @@
+import * as yup from "yup";
+
 export interface FormConfiguration {
 
   /**
    * Registered form id for this form configuration.
    */
   formId: string;
+
+  /**
+   * List of {@link ConstrainedPropertyConfiguration} instances holding property configuration for each property defined in the class that form id was mapped to.
+   */
+  constrainedPropertyConfigurationList: ConstrainedPropertyConfiguration[];
+
+}
+
+export interface FormYupConfiguration {
+
+  /**
+   * Registered form id for this form configuration.
+   */
+  formId: string;
+
+  /**
+   * List of yup ObjectSchema instances holding property configuration for each property defined in the class that form id was mapped to.
+   */
+  yupSchema: yup.ObjectSchema<any>;
 
   /**
    * List of {@link ConstrainedPropertyConfiguration} instances holding property configuration for each property defined in the class that form id was mapped to.

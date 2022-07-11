@@ -1,13 +1,13 @@
 import { useFormConfigurationStore } from "../../src/store/form-configuration-store";
-import { mockFormConfiguration, mockFormConfigurations } from "../testutil/form-configuration-generating-util";
+import { mockFormYupConfiguration, mockFormYupConfigurations } from "../testutil/form-configuration-generating-util";
 
 describe("@nrich/form-configuration-core/form-configuration-store", () => {
   it("should set, add and remove form configurations from store", () => {
     // given
     let currentState = useFormConfigurationStore.getState();
 
-    const formConfiguration = mockFormConfiguration;
-    const formConfigurationList = mockFormConfigurations;
+    const formConfiguration = mockFormYupConfiguration;
+    const formConfigurationList = mockFormYupConfigurations;
 
     // when
     currentState.set(formConfigurationList);
@@ -15,9 +15,9 @@ describe("@nrich/form-configuration-core/form-configuration-store", () => {
     currentState = useFormConfigurationStore.getState();
 
     // then
-    expect(currentState.formConfigurations).toHaveLength(2);
-    expect(currentState.formConfigurations[0]).toMatchObject(formConfigurationList[0]);
-    expect(currentState.formConfigurations[1]).toMatchObject(formConfigurationList[1]);
+    expect(currentState.formYupConfigurations).toHaveLength(2);
+    expect(currentState.formYupConfigurations[0]).toMatchObject(formConfigurationList[0]);
+    expect(currentState.formYupConfigurations[1]).toMatchObject(formConfigurationList[1]);
 
     // and when
     currentState.add(formConfiguration);
@@ -25,17 +25,17 @@ describe("@nrich/form-configuration-core/form-configuration-store", () => {
     currentState = useFormConfigurationStore.getState();
 
     // then
-    expect(currentState.formConfigurations).toHaveLength(3);
-    expect(currentState.formConfigurations[2]).toMatchObject(formConfiguration);
+    expect(currentState.formYupConfigurations).toHaveLength(3);
+    expect(currentState.formYupConfigurations[2]).toMatchObject(formConfiguration);
 
     // and when
-    currentState.remove(currentState.formConfigurations[2]);
+    currentState.remove(currentState.formYupConfigurations[2]);
 
     currentState = useFormConfigurationStore.getState();
 
     // then
-    expect(currentState.formConfigurations).toHaveLength(2);
-    expect(currentState.formConfigurations[0]).toMatchObject(formConfigurationList[0]);
-    expect(currentState.formConfigurations[1]).toMatchObject(formConfigurationList[1]);
+    expect(currentState.formYupConfigurations).toHaveLength(2);
+    expect(currentState.formYupConfigurations[0]).toMatchObject(formConfigurationList[0]);
+    expect(currentState.formYupConfigurations[1]).toMatchObject(formConfigurationList[1]);
   });
 });

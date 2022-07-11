@@ -1,8 +1,9 @@
-import {
-  Button, Grid, MenuItem, Select,
-} from "@material-ui/core";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
+
+import {
+  Button, Grid, MenuItem, Select,
+} from "@mui/material";
 
 import { useFormConfiguration, useYupFormConfiguration } from "@nrich/form-configuration-core";
 
@@ -11,16 +12,16 @@ import { createInitialValues, generateForm, LooseObject } from "../util/formUtil
 export const FormConfigurationInner = () => {
   const [formValues, setFormValues] = useState<LooseObject>();
 
-  const { formConfigurations } = useFormConfiguration();
+  const { formYupConfigurations } = useFormConfiguration();
 
-  const [select, setSelect] = useState(formConfigurations[0]?.formId);
+  const [select, setSelect] = useState(formYupConfigurations[0]?.formId);
 
   const validationSchema = useYupFormConfiguration(select);
 
   return (
     <>
       <Select value={select} onChange={(e) => setSelect(e.target.value as string)}>
-        {formConfigurations.map((fc) => (<MenuItem value={fc.formId} key={fc.formId}>{fc.formId}</MenuItem>))}
+        {formYupConfigurations.map((fc) => (<MenuItem value={fc.formId} key={fc.formId}>{fc.formId}</MenuItem>))}
       </Select>
       <Grid
         container
@@ -30,7 +31,7 @@ export const FormConfigurationInner = () => {
       >
         <Grid item xs={8} lg={3}>
           <Formik
-            initialValues={createInitialValues(formConfigurations.find((item) => item.formId === select)?.constrainedPropertyConfigurationList)}
+            initialValues={createInitialValues(formYupConfigurations.find((item) => item.formId === select)?.constrainedPropertyConfigurationList)}
             validationSchema={validationSchema}
             onSubmit={(values) => {
               setFormValues(values);
@@ -38,7 +39,7 @@ export const FormConfigurationInner = () => {
             enableReinitialize
           >
             <Form>
-              {generateForm(formConfigurations.find((item) => item.formId === select)?.constrainedPropertyConfigurationList)}
+              {generateForm(formYupConfigurations.find((item) => item.formId === select)?.constrainedPropertyConfigurationList)}
               <Button
                 type="submit"
                 fullWidth

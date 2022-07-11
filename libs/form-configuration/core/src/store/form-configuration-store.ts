@@ -1,13 +1,13 @@
 import create from "zustand";
 
-import { FormConfiguration } from "../api";
+import { FormYupConfiguration } from "../api";
 
 export interface FormConfigurationState {
 
   /**
    * Array of current state form configurations.
    */
-  formConfigurations: FormConfiguration[];
+  formYupConfigurations: FormYupConfiguration[];
 
   /**
    * Flag that indicates weather form configuration is fetched from API.
@@ -19,19 +19,19 @@ export interface FormConfigurationState {
    * Use on initial call to find-all endpoint.
    * @param formConfigurations formConfigurations to set
    */
-  set: (formConfigurations: FormConfiguration[]) => void;
+  set: (formYupConfigurations: FormYupConfiguration[]) => void;
 
   /**
    * Adds form configuration to state.
    * @param formConfiguration formConfiguration to add
    */
-  add: (formConfiguration: FormConfiguration) => void;
+  add: (formYupConfiguration: FormYupConfiguration) => void;
 
   /**
    * Removes form configuration to state.
    * @param formConfiguration formConfiguration to add
    */
-  remove: (formConfiguration: FormConfiguration) => void;
+  remove: (formYupConfiguration: FormYupConfiguration) => void;
 
   /**
    * Sets form configuration loaded to state.
@@ -47,16 +47,16 @@ export interface FormConfigurationState {
  * @returns A hook for managing form configuration state usable in a React environment.
  */
 export const useFormConfigurationStore = create<FormConfigurationState>((set) => ({
-  formConfigurations: [],
+  formYupConfigurations: [],
   formConfigurationLoaded: false,
-  set: ((formConfigurations) => set((state) => ({
-    ...state, formConfigurations,
+  set: ((formYupConfigurations) => set((state) => ({
+    ...state, formYupConfigurations,
   }))),
-  add: (formConfiguration) => set((state) => ({
-    formConfigurations: [...state.formConfigurations, { ...formConfiguration }],
+  add: (formYupConfiguration) => set((state) => ({
+    formYupConfigurations: [...state.formYupConfigurations, { ...formYupConfiguration }],
   })),
-  remove: (formConfiguration) => set((state) => ({
-    formConfigurations: state.formConfigurations.filter((currentFormConfiguration) => currentFormConfiguration !== formConfiguration),
+  remove: (formYupConfiguration) => set((state) => ({
+    formYupConfigurations: state.formYupConfigurations.filter((currentFormConfiguration) => currentFormConfiguration !== formYupConfiguration),
   })),
   setFormConfigurationLoaded: (formConfigurationLoaded) => set((state) => ({ ...state, formConfigurationLoaded })),
 }));

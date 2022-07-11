@@ -1,6 +1,7 @@
-import { TextField } from "@material-ui/core";
 import { FieldAttributes, useField } from "formik";
 import React, { FC } from "react";
+
+import { TextField } from "@mui/material";
 
 export const InputTextField: FC<FieldAttributes<any>> = ({
   label,
