@@ -7,20 +7,39 @@ export interface LooseObject {
   [key: string]: string | number | undefined;
 }
 
+function getFields(yupSchema?: yup.ObjectSchema<any>) {
+  const arr: string[] = [];
+  Object.entries(yupSchema?.fields).forEach(([key, value]) => {
+    // @ts-ignore
+    if (value.type === "object") {
+      // @ts-ignore
+      Object.keys(value?.fields).forEach((innerKey) => {
+        arr.push(`${key}.${innerKey}`);
+      });
+    }
+    else {
+      arr.push(key);
+    }
+  });
+  return arr;
+}
+
 export function createInitialValues(
   yupSchema?: yup.ObjectSchema<any>,
 ) {
   const init: LooseObject = {};
-  Object.keys(yupSchema?.fields).forEach((item) => {
+  const fields = getFields(yupSchema);
+  fields.forEach((item) => {
     init[item] = "";
   });
   return init;
 }
 
 export function generateForm(yupSchema?: yup.ObjectSchema<any>) {
+  const fields = getFields(yupSchema);
   return (
     <div>
-      {Object.keys(yupSchema?.fields).map((item) => (
+      {fields.map((item) => (
         <InputTextField
           key={item}
           name={item}
