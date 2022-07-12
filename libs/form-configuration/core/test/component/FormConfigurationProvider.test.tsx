@@ -10,9 +10,9 @@ describe("@nrich/form-configuration-core/FormConfigurationProvider", () => {
   it("should not render children if loader is not defined and fetch is not executed", () => {
     // given
     useFormConfigurationStore.getState().setFormConfigurationLoaded(false);
+    const children = "Should not be rendered";
 
     // when
-    const children = "Should not be rendered";
     const { queryByText } = render(<FormConfigurationProvider url="">{children}</FormConfigurationProvider>);
 
     // then
@@ -22,10 +22,10 @@ describe("@nrich/form-configuration-core/FormConfigurationProvider", () => {
   it("should render loader if loader is defined and fetch is not executed", () => {
     // given
     useFormConfigurationStore.getState().setFormConfigurationLoaded(false);
-
-    // when
     const children = "Should not be rendered";
     const loader = "Loading...";
+
+    // when
     const { queryByText, getByText } = render(<FormConfigurationProvider loader={loader} url="">{children}</FormConfigurationProvider>);
 
     // then
@@ -33,14 +33,15 @@ describe("@nrich/form-configuration-core/FormConfigurationProvider", () => {
     expect(getByText(loader)).toBeInTheDocument();
   });
 
-  it("should render children when fetch is executed", () => { // given
+  it("should render children when fetch is executed", () => {
+    // given
     useFormConfigurationStore.getState().setFormConfigurationLoaded(false);
     const { result } = renderHook(() => useFormConfigurationStore());
     const { setFormConfigurationLoaded } = result.current;
-
-    // when
     const children = "Should not be rendered";
     const loader = "Loading...";
+
+    // when
     render(<FormConfigurationProvider loader={loader} url="">{children}</FormConfigurationProvider>);
 
     // then

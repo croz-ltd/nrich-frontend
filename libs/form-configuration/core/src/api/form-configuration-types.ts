@@ -26,11 +26,6 @@ export interface FormYupConfiguration {
    */
   yupSchema: yup.ObjectSchema<any>;
 
-  /**
-   * List of {@link ConstrainedPropertyConfiguration} instances holding property configuration for each property defined in the class that form id was mapped to.
-   */
-  constrainedPropertyConfigurationList: ConstrainedPropertyConfiguration[];
-
 }
 
 export interface ConstrainedPropertyConfiguration {

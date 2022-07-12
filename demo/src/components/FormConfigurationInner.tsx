@@ -7,7 +7,9 @@ import {
 
 import { useFormConfiguration, useYupFormConfiguration } from "@nrich/form-configuration-core";
 
-import { createInitialValues, generateForm, LooseObject } from "../util/formUtils";
+import {
+  createInitialValues, generateForm, LooseObject,
+} from "../util/formUtils";
 
 export const FormConfigurationInner = () => {
   const [formValues, setFormValues] = useState<LooseObject>();
@@ -31,7 +33,7 @@ export const FormConfigurationInner = () => {
       >
         <Grid item xs={8} lg={3}>
           <Formik
-            initialValues={createInitialValues(formYupConfigurations.find((item) => item.formId === select)?.constrainedPropertyConfigurationList)}
+            initialValues={createInitialValues(formYupConfigurations.find((item) => item.formId === select)?.yupSchema)}
             validationSchema={validationSchema}
             onSubmit={(values) => {
               setFormValues(values);
@@ -39,7 +41,7 @@ export const FormConfigurationInner = () => {
             enableReinitialize
           >
             <Form>
-              {generateForm(formYupConfigurations.find((item) => item.formId === select)?.constrainedPropertyConfigurationList)}
+              {generateForm(formYupConfigurations.find((item) => item.formId === select)?.yupSchema)}
               <Button
                 type="submit"
                 fullWidth

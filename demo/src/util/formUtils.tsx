@@ -1,6 +1,5 @@
 import React from "react";
-
-import { ConstrainedPropertyConfiguration } from "@nrich/form-configuration-core";
+import * as yup from "yup";
 
 import { InputTextField } from "../components/InputTextField";
 
@@ -9,24 +8,24 @@ export interface LooseObject {
 }
 
 export function createInitialValues(
-  constrainedPropertyConfigurationList?: ConstrainedPropertyConfiguration[],
+  yupSchema?: yup.ObjectSchema<any>,
 ) {
   const init: LooseObject = {};
-  constrainedPropertyConfigurationList?.forEach((item) => {
-    init[item.path] = "";
+  Object.keys(yupSchema?.fields).forEach((item) => {
+    init[item] = "";
   });
   return init;
 }
 
-export function generateForm(constrainedPropertyConfigurationList?: ConstrainedPropertyConfiguration[]) {
+export function generateForm(yupSchema?: yup.ObjectSchema<any>) {
   return (
     <div>
-      {constrainedPropertyConfigurationList?.map((item) => (
+      {Object.keys(yupSchema?.fields).map((item) => (
         <InputTextField
-          key={item.path}
-          name={item.path}
-          id={item.path}
-          label={item.path.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1")}
+          key={item}
+          name={item}
+          id={item}
+          label={item.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1")}
         />
       ))}
     </div>

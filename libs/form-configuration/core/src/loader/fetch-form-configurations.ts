@@ -20,7 +20,6 @@ export const fetchFormConfigurations = async ({ url, requestOptionsResolver, add
       formYupConfigurations.push({
         formId: item.formId,
         yupSchema: formConfigurationValidationConverter.convertFormConfigurationToYupSchema(item.constrainedPropertyConfigurationList),
-        constrainedPropertyConfigurationList: item.constrainedPropertyConfigurationList,
       });
     });
     useFormConfigurationStore.getState().set(formYupConfigurations);
