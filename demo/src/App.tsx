@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 
 import FormConfiguration from "./pages/FormConfiguration";
 import Notifications from "./pages/Notifications";
+import Search from "./pages/Search";
 
 const drawerWidth = 240;
 const routes = [
@@ -25,6 +26,10 @@ const routes = [
   {
     path: "form-configuration",
     title: "Form Configuration",
+  },
+  {
+    path: "search",
+    title: "Search",
   },
 ];
 
@@ -65,6 +70,7 @@ const App = () => (
       <Routes>
         <Route path="notifications" element={<Notifications />} />
         <Route path="form-configuration" element={<FormConfiguration />} />
+        <Route path="search" element={<Search />} />
       </Routes>
     </Box>
   </Box>
