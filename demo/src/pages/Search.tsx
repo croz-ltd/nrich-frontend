@@ -8,6 +8,7 @@ interface Car {
   manufacturedTime: Date,
   price: number,
   numberOfKilometers: number,
+  // both models because of the difference in requests for regular and string search on backend
   carType: { make: string, model: string } | undefined,
   carTypeMake: string,
   carTypeModel: string,
@@ -64,17 +65,18 @@ const Search = () => {
     carTypeModel: "",
   });
   const [search, setSearch] = React.useState("");
-  const [formResults, setFormResults] = React.useState<Car[]>([]);
   const [searchResults, setSearchResults] = React.useState<Car[]>([]);
+  const [stringSearchResults, setStringSearchResults] = React.useState<Car[]>([]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTabIndex(newValue);
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => setForm({ ...form, [e.target.name]: e.target.value });
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => setForm({ ...form, [event.target.name]: event.target.value });
 
-  const onSubmitFormSearch = (e: FormEvent) => {
-    e.preventDefault();
+  const onSubmitFormSearch = (event: FormEvent) => {
+    event.preventDefault();
+
     const formData = {
       ...form,
       manufacturedTimeFrom: form.manufacturedTimeFrom && form.manufacturedTimeFrom.length > 0 ? new Date(form.manufacturedTimeFrom).toISOString() : null,
@@ -82,20 +84,23 @@ const Search = () => {
       pageNumber: 0,
       pageSize: 20,
     };
+
     fetch("search/search-car", createPostOptions(formData))
       .then((response) => response.json())
-      .then((data) => setFormResults(mapResponseData(data)));
+      .then((data) => setSearchResults(mapResponseData(data)));
   };
 
-  const onSubmitSearch = (e: FormEvent) => {
-    e.preventDefault();
+  const onSubmitSearch = (event: FormEvent) => {
+    event.preventDefault();
+
     const formData = {
       searchTerm: search,
       propertyToSearchList: ["registrationNumber", "manufacturedTime", "price", "numberOfKilometers", "carType.make", "carType.model"],
     };
+
     fetch("search/string-search-car", createPostOptions(formData))
       .then((response) => response.json())
-      .then((data) => setSearchResults(mapResponseData(data)));
+      .then((data) => setStringSearchResults(mapResponseData(data)));
   };
 
   return (
@@ -119,16 +124,16 @@ const Search = () => {
             <TextField label="Car model" type="text" sx={{ mr: 1 }} name="carTypeModel" value={form.carTypeModel} onChange={onChange} />
             <Button type="submit" color="primary">Search</Button>
           </Box>
-          <SearchResults rows={formResults} />
+          <SearchResults rows={searchResults} />
         </div>
       )}
       {selectedTabIndex === 1 && (
         <div>
           <Box component="form" noValidate autoComplete="off" width="100%" sx={{ m: "20px 0", display: "flex", justifyContent: "space-between" }} onSubmit={onSubmitSearch}>
-            <TextField label="Search" type="text" fullWidth value={search} sx={{ mr: 1 }} onChange={(e) => setSearch(e.target.value)} />
+            <TextField label="Search" type="text" fullWidth value={search} sx={{ mr: 1 }} onChange={(event) => setSearch(event.target.value)} />
             <Button type="submit" color="primary">Search</Button>
           </Box>
-          <SearchResults rows={searchResults} />
+          <SearchResults rows={stringSearchResults} />
         </div>
       )}
     </div>
