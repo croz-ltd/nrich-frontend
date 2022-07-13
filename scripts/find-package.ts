@@ -1,4 +1,5 @@
 import fg from "fast-glob";
+
 import scriptConfig from "../config/script-config";
 import { logError } from "./logger";
 

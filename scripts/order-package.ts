@@ -1,5 +1,5 @@
-import { Package, PackageWithPath } from "./api/types";
 import scriptConfig from "../config/script-config";
+import { Package, PackageWithPath } from "./api/types";
 import { sequentially } from "./util";
 
 /* eslint-disable no-param-reassign */

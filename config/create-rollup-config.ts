@@ -1,11 +1,13 @@
 import path from "path";
+
 import fs from "fs-extra";
+import del from "rollup-plugin-delete";
 import dts from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
-import del from "rollup-plugin-delete";
-import scriptConfig from "./script-config";
+
 import { Package } from "../scripts/api/types";
 import { CreateRollupConfig, RollupConfig } from "./api/types";
+import scriptConfig from "./script-config";
 
 const createRollupConfig: CreateRollupConfig = async (config: RollupConfig) => {
   const file = await fs.readFile(config.packagePath);
