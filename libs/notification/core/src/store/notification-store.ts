@@ -49,7 +49,7 @@ export interface NotificationState {
 export const useNotificationStore = create<NotificationState>((set) => ({
   notifications: [],
   add: (notification) => set((state) => ({
-    notifications: [...state.notifications, { ...notification, timestamp: notification.timestamp || new Date() }],
+    notifications: [...state.notifications, { ...notification, timestamp: new Date(notification.timestamp) || new Date() }],
   })),
   remove: (notification) => set((state) => ({
     notifications: state.notifications.filter((currentNotification) => currentNotification !== notification),
