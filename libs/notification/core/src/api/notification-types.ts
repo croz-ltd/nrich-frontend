@@ -50,8 +50,7 @@ export interface Notification {
   /**
    * Timestamp of notification.
    */
-  // TODO remove optional when merged on server
-  timestamp?: Date
+  timestamp: Date
 }
 
 export interface NotificationResponse {

@@ -1,5 +1,6 @@
-import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
+import yargs from "yargs/yargs";
+
 import { buildAllPackages, buildPackage } from "../build-package";
 
 const { argv }: { argv: any } = yargs(hideBin(process.argv))
