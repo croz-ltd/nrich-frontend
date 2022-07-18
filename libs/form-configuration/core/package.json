@@ -1,16 +1,17 @@
 {
   "name": "@nrich/form-configuration-core",
   "description": "Contains core utilities related to the nrich-form-configuration module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "zustand": "^4.0.0-rc.1",
     "yup": "^0.32.11"
   },
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.esm.js",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "typings": "dist/index.d.ts"
+  "typings": "dist/index.d.ts",
+  "files": ["dist"]
 }

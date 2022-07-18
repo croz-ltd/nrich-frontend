@@ -37,12 +37,22 @@ const createRollupConfig: CreateRollupConfig = async (config: RollupConfig) => {
         {
           file: path.resolve(basePackagePath, scriptConfig.outputDirectory, "index.js"),
           format: "cjs",
-
           sourcemap: true,
         },
         {
           file: path.resolve(basePackagePath, scriptConfig.outputDirectory, "index.mjs"),
           format: "es",
+          sourcemap: true,
+        },
+        {
+          file: path.resolve(basePackagePath, scriptConfig.outputDirectory, "index.esm.js"),
+          format: "esm",
+          sourcemap: true,
+        },
+        {
+          file: path.resolve(basePackagePath, scriptConfig.outputDirectory, "index.umd.js"),
+          format: "umd",
+          name: "index",
           sourcemap: true,
         },
       ],
