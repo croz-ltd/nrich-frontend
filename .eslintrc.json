@@ -67,7 +67,8 @@
         "pathGroupsExcludedImportTypes": ["react.*", "@nrich/**", "@mui/**"],
         "groups": ["builtin", "external", "internal", ["parent", "sibling"], "index"]
       }
-    ]
+    ],
+    "linebreak-style": ["error", "unix"]
   },
   "ignorePatterns": [
     "dist",
