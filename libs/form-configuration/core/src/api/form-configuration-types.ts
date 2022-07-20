@@ -115,7 +115,7 @@ export interface FormConfigurationConfiguration {
   /**
    * Additional configuration options to send with fetch request i.e. if some authentication information is required.
    */
-  requestOptionsResolver?: () => Record<string, string>;
+  requestOptionsResolver?: () => RequestInit;
 
   /**
    * Additional converters to use for custom constraints.
