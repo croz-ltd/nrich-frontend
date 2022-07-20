@@ -69,7 +69,6 @@ const resolveNotificationDuration = (notification: Notification, defaultDuration
  * derived from a set of predefined positions available in MUI
  * @param autoClose the duration after which the notification closes expressed in milliseconds
  * (if left undefined, it doesn't close)
- * @param children the children components from the wrapped component
  */
 const Notifications = ({ position = "bottom-right", autoClose }: NotificationsProviderProps) => {
   const { notifications, remove } = useNotifications();

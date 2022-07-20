@@ -6,10 +6,17 @@ The overall project is built on top of the concept of [Yarn workspaces](https://
 
 ### Workspace/module overview
 
+Workspace is divided in `demo` and `libs` subcategories.
+`demo` project is a showcase application for the all nrich frontend modules. Application uses [MUI](https://mui.com/) as primary
+frontend widget library.
+
+`libs` contains implementation of specific modules separated in two categories. First is a `core` module which contains common logic
+and custom hooks for the module. Second are adapters for specific UI component library, currently only `mui`.
+
 The following workspaces/modules are available:
-* `demo` - a demo application using the below mentioned workspaces to showcase different integration features
-* `libs/notification-core` - contains the core utilities for handling common state operations for the nrich notification module
-* `libs/notification-mui` - contains the UI implementation of notifications for the MUI component library
+* [libs/notification/core](libs/notification/core/README.md) - contains the core utilities for handling common state operations for the nrich notification module
+* [libs/notification/mui](libs/notification/mui/README.md) - contains the UI implementation of notifications for the MUI component library
+* `libs/form-configuration/core` - contains the core utilities for using nrich form-configuration module
 
 ### Development of new modules
 
