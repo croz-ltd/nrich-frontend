@@ -16,7 +16,7 @@ and custom hooks for the module. Second are adapters for specific UI component l
 The following workspaces/modules are available:
 * [libs/notification/core](libs/notification/core/README.md) - contains the core utilities for handling common state operations for the nrich notification module
 * [libs/notification/mui](libs/notification/mui/README.md) - contains the UI implementation of notifications for the MUI component library
-* `libs/form-configuration/core` - contains the core utilities for using nrich form-configuration module
+* [libs/form-configuration/core](libs/form-configuration/core/README.md) - contains the core utilities for using nrich form-configuration module
 
 ### Development of new modules
 
