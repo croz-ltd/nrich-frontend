@@ -5,7 +5,7 @@
 `@nrich/notification-core` is a module which serves for showing automatic messages from backend on user interface.
 It's a frontend part of [nrich-notification](https://github.com/croz-ltd/nrich/tree/master/nrich-notification) backend module.
 
-Internally, it 'spies' http calls and scans for sign of nrich notification object, and shows it if it exists.
+Internally, it intercepts http calls and scans for sign of nrich notification object, and shows it if it exists.
 
 ## Setup
 
@@ -43,4 +43,4 @@ export const Notifications = () => {
 }
 ```
 
-If you're using only this module alone, you need to provide your own notification UI. For the prepared implementation in MUI, see [@nrich/notification-mui](../mui/README.md) docs
+If you're using this module alone, you need to provide your own notification UI. For the prepared implementation in MUI, see [@nrich/notification-mui](../mui/README.md) docs
