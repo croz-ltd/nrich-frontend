@@ -22,8 +22,9 @@ import { useFormConfigurationStore } from "../store/form-configuration-store";
 export const fetchFormConfigurations = async ({ url, requestOptionsResolver, additionalValidatorConverters }: FormConfigurationConfiguration): Promise<FormConfiguration[]> => {
   const formConfigurationValidationConverter = new FormConfigurationValidationConverter(additionalValidatorConverters);
   const additionalOptions = requestOptionsResolver?.() || {};
+  const finalUrl = url || "/nrich/form/configuration";
 
-  const response = await fetch(`${url}/fetch-all`, {
+  const response = await fetch(`${finalUrl}/fetch-all`, {
     method: "POST",
     ...additionalOptions,
   });
