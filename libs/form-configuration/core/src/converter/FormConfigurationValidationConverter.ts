@@ -84,7 +84,7 @@ export class FormConfigurationValidationConverter {
         return;
       }
 
-      const validator = property.validatorList.reduce((previousValidator, validatorConfiguration) => this.applyConverter(validatorConfiguration, previousValidator), yupValidation());
+      const validator = property.validatorList.reduce((previousValidator, validatorConfiguration) => this.applyConverter(validatorConfiguration, previousValidator), yupValidation().nullable());
       const [propertyName, restOfPathList] = FormConfigurationValidationConverter.convertPath(property.path);
 
       if (restOfPathList.length > 0) {

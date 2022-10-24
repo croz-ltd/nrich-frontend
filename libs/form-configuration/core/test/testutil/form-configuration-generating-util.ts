@@ -62,6 +62,15 @@ export const createSimpleValidationList = () => [
   },
 ];
 
+export const createSimpleNullableValidationList = () => [
+  {
+    path: "username",
+    propertyType: "java.lang.String",
+    javascriptType: "string",
+    validatorList: [],
+  },
+];
+
 export const createComplexValidationList = () => [
   {
     path: "name",
@@ -167,7 +176,7 @@ export const createCustomValidationList = () => [
   },
 ];
 
-export const mockFormYupConfiguration: FormYupConfiguration = {
+export const mockFormYupConfiguration: FormYupConfiguration & FormConfiguration = {
   formId: "form-configuration.demo-request",
   yupSchema: yup.object().shape({
     username: yup.string().required(),
@@ -288,7 +297,7 @@ export const mockFormYupConfiguration: FormYupConfiguration = {
   ],
 };
 
-export const mockFormYupConfigurations: FormYupConfiguration[] = [
+export const mockFormYupConfigurations: (FormYupConfiguration & FormConfiguration)[] = [
   {
     formId: "form-configuration.demo-request",
     yupSchema: yup.object().shape({
