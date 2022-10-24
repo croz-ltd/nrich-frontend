@@ -17,7 +17,7 @@
 
 import { FormConfigurationValidationConverter } from "../../src/converter/FormConfigurationValidationConverter";
 import {
-  createComplexValidationList, createCustomValidationList, createNestedValidationList, createSimpleValidationList, invalidValidationConfiguration,
+  createComplexValidationList, createCustomValidationList, createNestedValidationList, createSimpleNullableValidationList, createSimpleValidationList, invalidValidationConfiguration,
 } from "../testutil/form-configuration-generating-util";
 
 describe("@nrich/form-configuration-core/FormConfigurationValidationConverter", () => {
@@ -45,6 +45,7 @@ describe("@nrich/form-configuration-core/FormConfigurationValidationConverter", 
     // then
     expect(result).toBeDefined();
     expect(() => result.validateSync({ username: "" })).toThrowError("Username cannot be blank");
+    expect(() => result.validateSync({ username: null })).toThrowError("Username cannot be blank");
     expect(result.isValidSync({ username: "username" })).toBe(true);
   });
 
@@ -114,5 +115,18 @@ describe("@nrich/form-configuration-core/FormConfigurationValidationConverter", 
     expect(result).toBeDefined();
     expect(() => result.validateSync({ title: "other" })).toThrowError("Not in list: mr, mrs, miss");
     expect(result.isValidSync({ title: "mr" })).toBe(true);
+  });
+
+  it("should allow null if backend didn't define NotNull, NotBlank, NotEmpty", () => {
+    // given
+    const converter = new FormConfigurationValidationConverter();
+    const customValidationList = createSimpleNullableValidationList();
+
+    // when
+    const result = converter.convertFormConfigurationToYupSchema(customValidationList);
+
+    // then
+    expect(result).toBeDefined();
+    expect(result.isValidSync({ username: null })).toBe(true);
   });
 });
