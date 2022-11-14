@@ -96,4 +96,13 @@ describe("@nrich/form-configuration-core/use-form-configuration", () => {
     // then
     expect(result.current).toMatchObject(mockFormYupConfigurations[0].yupSchema);
   });
+
+  it("should throw error for unknown formId", () => {
+    // when
+    const formId = "unknown";
+    const { result } = renderHook(() => useYupFormConfiguration(formId));
+
+    // then
+    expect(result.error).toEqual(Error("No form configuration found for given formId: unknown"));
+  });
 });
