@@ -1,7 +1,7 @@
 {
   "name": "@nrich/notification-core",
   "description": "Contains core utilities related to the nrich-notification module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
     "zustand": "^4.1.4"
   },

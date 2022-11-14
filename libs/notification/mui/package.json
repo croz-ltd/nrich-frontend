@@ -1,12 +1,12 @@
 {
   "name": "@nrich/notification-mui",
   "description": "Contains the UI implementation of notifications for the MUI component library",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "peerDependencies": {
     "@mui/material": "^5.0.0",
-    "@nrich/notification-core": "^0.0.1",
+    "@nrich/notification-core": "^0.0.3",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
