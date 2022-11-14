@@ -2802,7 +2802,7 @@ __metadata:
   resolution: "@nrich/notification-mui@workspace:libs/notification/mui"
   peerDependencies:
     "@mui/material": ^5.0.0
-    "@nrich/notification-core": ^0.0.1
+    "@nrich/notification-core": ^0.0.3
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown
