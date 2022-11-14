@@ -3,7 +3,7 @@
   "description": "Contains core utilities related to the nrich-notification module",
   "version": "0.0.2",
   "dependencies": {
-    "zustand": "^4.0.0-rc.1"
+    "zustand": "^4.1.4"
   },
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -12,5 +12,7 @@
     "react-dom": ">=16.8.0"
   },
   "typings": "dist/index.d.ts",
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }
