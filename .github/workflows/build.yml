@@ -44,3 +44,7 @@ jobs:
 
       - name: Publish test code coverage report
         uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: Aggregated test code coverage report
+          files: coverage/coverage-final.json
