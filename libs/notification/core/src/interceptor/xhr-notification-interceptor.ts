@@ -26,7 +26,9 @@ import { useNotificationStore } from "../store/notification-store";
  */
 export const xhrNotificationInterceptor = () => {
   const old = XMLHttpRequest.prototype.open;
+  // eslint-disable-next-line func-names
   XMLHttpRequest.prototype.open = function (...args) {
+    // eslint-disable-next-line func-names
     this.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         const body = JSON.parse(this.responseText);

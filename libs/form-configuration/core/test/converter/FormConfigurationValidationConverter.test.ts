@@ -52,7 +52,7 @@ describe("@nrich/form-configuration-core/FormConfigurationValidationConverter", 
   it("should use custom converter", () => {
     // given
     const additionalConverter = {
-      supports: (_) => true,
+      supports: () => true,
       convert: (configuration, validator) => validator.required("Custom validation error"),
     };
     const converter = new FormConfigurationValidationConverter([additionalConverter]);

@@ -37,7 +37,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Build all modules
-        run: yarn build all
+        run: yarn build
 
       - name: Run tests
         run: yarn test
