@@ -36,11 +36,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Build all modules
+        run: yarn build all
+
       - name: Run tests
         run: yarn test
 
       - name: Publish test code coverage report
         uses: codecov/codecov-action@v3
-
-      - name: Build all modules
-        run: yarn build all
