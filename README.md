@@ -1,3 +1,7 @@
+[![Build](https://github.com/croz-ltd/nrich-demo-frontend/actions/workflows/build.yml/badge.svg)](https://github.com/croz-ltd/nrich-demo-frontend/actions/workflows/build.yml)
+[![codecov](https://codecov.io/github/croz-ltd/nrich-demo-frontend/branch/master/graph/badge.svg?token=3GULYJWSXF)](https://codecov.io/github/croz-ltd/nrich-demo-frontend)
+[![License](https://img.shields.io/github/license/croz-ltd/nrich?color=yellow&logo=apache)](https://github.com/croz-ltd/nrich/blob/master/LICENSE)
+
 # nrich-demo-frontend
 
 React application to showcase features of [nrich](https://github.com/croz-ltd/nrich) libraries.
