@@ -29,7 +29,7 @@
     "fs-extra": "^10.1.0",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
-    "msw": "^0.42.0",
+    "msw": "^0.48.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "rollup": "^2.74.1",
@@ -45,11 +45,12 @@
   "private": true,
   "scripts": {
     "build": "esno scripts/cli/build",
-    "jest": "jest",
+    "test": "jest",
     "lint": "eslint . --ext .ts,.tsx"
   },
   "workspaces": [
     "demo",
     "libs/**/*"
-  ]
+  ],
+  "packageManager": "yarn@3.2.4"
 }
