@@ -1,13 +1,14 @@
 {
-  "extends": "../../../config/tsconfig.common.json",
+  "extends": "@croz/nrich-tsconfig/tsconfig.common.json",
   "compilerOptions": {
     "rootDirs": ["src", "test"],
     "outDir": "dist",
     "baseUrl": ".",
-    "declarationDir": "dist",
+    "declarationDir": "dist"
   },
   "include": [
-    "src"
+    "src",
+    "test"
   ],
   "exclude": [
     "dist"

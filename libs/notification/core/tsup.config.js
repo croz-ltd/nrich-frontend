@@ -1,3 +1,3 @@
-import sharedConfig from '../../../config/tsup/tsup.config.js';
+import sharedConfig from '@croz/nrich-tsup-config';
 
 export default sharedConfig;

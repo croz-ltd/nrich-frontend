@@ -1,7 +1,8 @@
-const sharedConfig = require('../../../config/jest/jest.config.js');
+const sharedConfig = require('@croz/nrich-jest-config');
 
 module.exports = {
   ...sharedConfig,
-  setupFiles: ["../../../config/jest/jest.setup-fetch.js"],
+  setupFiles: ["@croz/nrich-jest-config/jest.setup-fetch.js"],
   coverageDirectory: "../../../coverage/libs/notification/core",
+  collectCoverageFrom: ["./src/**"]
 };

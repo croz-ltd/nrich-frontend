@@ -1,0 +1,9 @@
+{
+  "name": "@croz/nrich-tsup-config",
+  "version": "0.0.0",
+  "peerDependencies": {
+    "tsup": "^6.5.0"
+  },
+  "main": "index.js",
+  "private": true
+}

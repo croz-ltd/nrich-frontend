@@ -6,7 +6,6 @@
       "outputs": ["dist/**"]
     },
     "test": {
-      "dependsOn": ["lint", "build"],
       "outputs": ["coverage/**"]
     },
     "lint": {

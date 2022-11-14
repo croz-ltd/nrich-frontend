@@ -1,6 +1,6 @@
-import { defineConfig } from "tsup";
+const tsup = require("tsup");
 
-export default defineConfig({
+module.exports = tsup.defineConfig({
   entry: ["src/index.ts"],
   sourcemap: true,
   clean: true,

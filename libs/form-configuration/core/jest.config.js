@@ -1,8 +1,10 @@
-const sharedConfig = require('../../../config/jest/jest.config.js');
+const sharedConfig = require('@croz/nrich-jest-config');
 
 module.exports = {
   ...sharedConfig,
-  setupFiles: ["../../../config/jest/jest.setup-fetch.js"],
-  setupFilesAfterEnv: ["../../../config/jest/jest.setup-jest-dom.js"],
+  setupFiles: ["@croz/nrich-jest-config/jest.setup-fetch.js"],
+  setupFilesAfterEnv: ["@croz/nrich-jest-config/jest.setup-jest-dom.js"],
   coverageDirectory: "../../../coverage/libs/form-configuration/core",
+  collectCoverageFrom: ["./src/**"]
+
 };
