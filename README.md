@@ -45,6 +45,6 @@ To automatically apply changes, run `yarn lint --fix`.
 
 #### Test
 
-To run tests, use `yarn jest`.
+To run tests, use `yarn test`.
 
 
