@@ -15,31 +15,34 @@
  *
  */
 
-import {
-  act, render, renderHook, screen, waitFor,
-} from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 
-import { Notification, useNotifications } from "@nrich/notification-core";
+import { useNotifications } from "@nrich/notification-core";
 
 import { Notifications } from "../../src";
 
+jest.mock("@nrich/notification-core", () => ({
+  useNotifications: jest.fn(),
+}));
+
 describe("@nrich/notification-mui/provider/Notifications", () => {
-  it("should render notification without messages ", async () => {
+  it("should render notification without messages", async () => {
     // given
     const notificationDurationMs = 1000;
-    const notification = {
+    let mockNotifications = [{
       title: "Notification title",
       content: "Notification content",
       messageList: [],
       severity: "INFO",
-    };
-    const { result } = renderHook(() => useNotifications());
-    const { add } = result.current;
-
-    act(() => {
-      add(notification as Notification);
+      timestamp: new Date(),
+    }];
+    (useNotifications as jest.Mock).mockReturnValue({
+      notifications: mockNotifications,
+      remove: () => {
+        mockNotifications = [];
+      },
     });
 
     // when
@@ -56,22 +59,23 @@ describe("@nrich/notification-mui/provider/Notifications", () => {
     userEvent.click(screen.getByRole("button"));
 
     // then
-    expect(result.current.notifications).toHaveLength(0);
+    expect(mockNotifications).toHaveLength(0);
   });
 
-  it("should render notification with messages ", async () => {
+  it("should render notification with messages", async () => {
     // given
-    const notification = {
+    let mockNotifications = [{
       title: "Notification title",
       content: "Notification content",
       messageList: ["First message"],
       severity: "WARNING",
-    };
-    const { result } = renderHook(() => useNotifications());
-    const { add } = result.current;
-
-    act(() => {
-      add(notification as Notification);
+      timestamp: new Date(),
+    }];
+    (useNotifications as jest.Mock).mockReturnValue({
+      notifications: mockNotifications,
+      remove: () => {
+        mockNotifications = [];
+      },
     });
 
     // when
@@ -82,25 +86,25 @@ describe("@nrich/notification-mui/provider/Notifications", () => {
     // then
     expect(screen.getAllByRole("alert")[0]).toHaveTextContent("First message");
 
-    await waitFor(() => expect(result.current.notifications).toHaveLength(0));
+    await waitFor(() => expect(mockNotifications).toHaveLength(0));
   });
 
-  it("should render notification with overridden configuration ", async () => {
+  it("should render notification with overridden configuration", async () => {
     // given
     const uxNotificationOptions = { autoClose: 5, position: "bottom-center" } as Record<string, unknown>;
-    const notification = {
+    let mockNotifications = [{
       title: "Notification title",
       content: "Notification content",
       messageList: [],
       severity: "WARNING",
       uxNotificationOptions,
-    };
-
-    const { result } = renderHook(() => useNotifications());
-    const { add } = result.current;
-
-    act(() => {
-      add(notification as Notification);
+      timestamp: new Date(),
+    }];
+    (useNotifications as jest.Mock).mockReturnValue({
+      notifications: mockNotifications,
+      remove: () => {
+        mockNotifications = [];
+      },
     });
 
     // when
@@ -111,25 +115,25 @@ describe("@nrich/notification-mui/provider/Notifications", () => {
     // then
     expect(screen.getAllByRole("presentation")[0]).toHaveClass("MuiSnackbar-root MuiSnackbar-anchorOriginBottomCenter");
 
-    await waitFor(() => expect(result.current.notifications).toHaveLength(0));
+    await waitFor(() => expect(mockNotifications).toHaveLength(0));
   });
 
-  it("should ignore invalid overridden configuration ", async () => {
+  it("should ignore invalid overridden configuration", async () => {
     // given
     const uxNotificationOptions = { autoClose: "invalid", position: "invalid" } as Record<string, unknown>;
-    const notification = {
+    let mockNotifications = [{
       title: "Notification title",
       content: "Notification content",
       messageList: [],
       severity: "INFO",
       uxNotificationOptions,
-    };
-
-    const { result } = renderHook(() => useNotifications());
-    const { add } = result.current;
-
-    act(() => {
-      add(notification as Notification);
+      timestamp: new Date(),
+    }];
+    (useNotifications as jest.Mock).mockReturnValue({
+      notifications: mockNotifications,
+      remove: () => {
+        mockNotifications = [];
+      },
     });
 
     // when
@@ -140,6 +144,6 @@ describe("@nrich/notification-mui/provider/Notifications", () => {
     // then
     expect(screen.getAllByRole("presentation")[0]).toHaveClass("MuiSnackbar-root MuiSnackbar-anchorOriginTopLeft");
 
-    await waitFor(() => expect(result.current.notifications).toHaveLength(0));
+    await waitFor(() => expect(mockNotifications).toHaveLength(0));
   });
 });

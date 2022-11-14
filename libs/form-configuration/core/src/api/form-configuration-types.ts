@@ -110,7 +110,7 @@ export interface FormConfigurationConfiguration {
   /**
    * Url where to fetch configuration from. It represents the part of the path till /fetch-all.
    */
-  url: string;
+  url?: string;
 
   /**
    * Additional configuration options to send with fetch request i.e. if some authentication information is required.

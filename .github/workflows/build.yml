@@ -1,0 +1,46 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '*.md'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '*.md'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        node: [ lts/* ]
+        os: [ ubuntu-latest ]
+
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} - Node ${{ matrix.node }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run tests
+        run: yarn test
+
+      - name: Publish test code coverage report
+        uses: codecov/codecov-action@v3
+
+      - name: Build all modules
+        run: yarn build all

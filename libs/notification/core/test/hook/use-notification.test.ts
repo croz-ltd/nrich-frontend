@@ -27,6 +27,7 @@ const mockNotifications: Notification[] = [
     content: "Action with manual resolving was successful.",
     messageList: [],
     severity: "INFO",
+    timestamp: new Date(),
   },
   {
     title: "Action with notification resolved from request and additional data",
@@ -34,6 +35,7 @@ const mockNotifications: Notification[] = [
     messageList: [],
     severity: "WARNING",
     uxNotificationOptions: {},
+    timestamp: new Date(),
   },
 ];
 
