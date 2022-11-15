@@ -36,7 +36,7 @@ is the name of the UI component library
 
 To build all modules, run `yarn build`.
 
-To build specific module(s), run `yarn workspace foo build`, where `foo` is the workspace name (e.g. `@croz/nrich-notification-core`).
+To build specific module(s), run `yarn build -filter=foo`, where `foo` is the workspace name (e.g. `@croz/nrich-notification-core`).
 This specific command receives a variable number of arguments.
 
 #### Clean
