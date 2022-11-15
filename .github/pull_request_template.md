@@ -5,10 +5,10 @@
 
 ## Basic information
 
-* nrich-demo-frontend version:
+* nrich-frontend version:
   <!-- released version -->
 * Module:
-  <!-- Please, include name(s) of relevant nrich-demo-frontend's module(s). If not related to any specific module, specify "project" instead. -->
+  <!-- Please, include name(s) of relevant nrich-frontend's module(s). If not related to any specific module, specify "project" instead. -->
 
 ## Additional information
 

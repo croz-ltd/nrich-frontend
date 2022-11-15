@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a bug in nrich-demo-frontend
+about: Report a bug in nrich-frontend
 title: ""
 labels: "bug"
 assignees: ""
@@ -16,10 +16,10 @@ assignees: ""
 
 ## Basic information
 
-* nrich-demo-frontend version:
+* nrich-frontend version:
   <!-- released version -->
 * Module:
-  <!-- Please, include name(s) of relevant nrich-demo-frontend's module(s). If not related to any specific module, specify "project" instead. -->
+  <!-- Please, include name(s) of relevant nrich-frontend's module(s). If not related to any specific module, specify "project" instead. -->
 * Link to the complete executable reproducer if available (e.g. GitHub Repo):
 
 ## Additional information

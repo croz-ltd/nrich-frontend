@@ -1,7 +1,7 @@
 {
   "name": "@croz/nrich-form-configuration-core",
   "description": "Contains core utilities related to the nrich-form-configuration module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "CROZ",
   "dependencies": {
     "yup": "^0.32.11",
@@ -25,6 +25,14 @@
   "files": [
     "dist/*"
   ],
+  "keywords": [
+    "croz",
+    "nrich",
+    "nrich-form-configuration",
+    "react",
+    "typescript",
+    "zustand"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "peerDependencies": {
@@ -36,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/croz-ltd/nrich-demo-frontend.git",
+    "url": "https://github.com/croz-ltd/nrich-frontend.git",
     "directory": "libs/form-configuration/core"
   },
   "scripts": {

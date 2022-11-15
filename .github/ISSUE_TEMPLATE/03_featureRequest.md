@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a new feature for nrich-demo-frontend
+about: Suggest a new feature for nrich-frontend
 title: ""
 labels: "feature"
 assignees: ""
@@ -13,10 +13,10 @@ assignees: ""
 
 ## Basic information
 
-* nrich-demo-frontend version:
+* nrich-frontend version:
   <!-- released version -->
 * Module:
-  <!-- Please, include name(s) of relevant nrich-demo-frontend's module(s). If not related to any specific module, specify "project" instead. -->
+  <!-- Please, include name(s) of relevant nrich-frontend's module(s). If not related to any specific module, specify "project" instead. -->
 
 ## Additional information
 
