@@ -4,23 +4,17 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
-      - '*.md'
   pull_request:
-    branches:
-      - master
-    paths-ignore:
-      - '*.md'
 
 jobs:
   build:
     strategy:
       matrix:
-        node: [ lts/* ]
         os: [ ubuntu-latest ]
+        node: [ lts/* ]
 
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} - Node ${{ matrix.node }}
+    name: Build / OS ${{ matrix.os }} - Node ${{ matrix.node }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -39,6 +33,9 @@ jobs:
       - name: Build all modules
         run: yarn build
 
+      - name: Lint files
+        run: yarn lint
+
       - name: Run tests
         run: yarn test
 
@@ -46,5 +43,4 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          name: Aggregated test code coverage report
-          files: coverage/coverage-final.json
+          files: coverage/**/coverage-final.json
