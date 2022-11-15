@@ -3,8 +3,7 @@
     "demo",
     "libs/**/src",
     "libs/**/test",
-    "scripts",
-    "config"
+    "testconfig"
   ],
   "exclude": [
     "node_modules",

@@ -1,5 +1,5 @@
 {
-  "extends": "../../../config/tsconfig.common.json",
+  "extends": "@croz/nrich-tsconfig/tsconfig.common.json",
   "compilerOptions": {
     "rootDirs": ["src", "test"],
     "outDir": "dist",
@@ -8,7 +8,8 @@
     "jsx": "react"
   },
   "include": [
-    "src"
+    "src",
+    "test"
   ],
   "exclude": [
     "dist"

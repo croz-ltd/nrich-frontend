@@ -17,7 +17,7 @@
 
 import React from "react";
 
-import { FormConfigurationProvider } from "@nrich/form-configuration-core";
+import { FormConfigurationProvider } from "@croz/nrich-form-configuration-core";
 
 import { FormConfigurationInner } from "../components/FormConfigurationInner";
 

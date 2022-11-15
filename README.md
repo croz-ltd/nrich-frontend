@@ -34,12 +34,14 @@ is the name of the UI component library
 
 #### Build
 
-To build all modules, run `yarn build all`.
+To build all modules, run `yarn build`.
 
-To build specific module(s), run `yarn build foo bar`, where `foo` and `bar` are the module names (e.g. `@nrich/notification-core`).
+To build specific module(s), run `yarn build -filter=foo`, where `foo` is the workspace name (e.g. `@croz/nrich-notification-core`).
 This specific command receives a variable number of arguments.
 
-For more details, run `yarn build --help`.
+#### Clean
+
+To clean build artifacts, run `yarn clean`.
 
 #### Lint
 

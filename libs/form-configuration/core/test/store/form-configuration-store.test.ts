@@ -18,7 +18,7 @@
 import { useFormConfigurationStore } from "../../src/store/form-configuration-store";
 import { mockFormYupConfiguration, mockFormYupConfigurations } from "../testutil/form-configuration-generating-util";
 
-describe("@nrich/form-configuration-core/form-configuration-store", () => {
+describe("@croz/nrich-form-configuration-core/form-configuration-store", () => {
   it("should set, add and remove form configurations from store", () => {
     // given
     let currentState = useFormConfigurationStore.getState();

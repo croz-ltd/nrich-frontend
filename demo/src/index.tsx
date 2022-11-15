@@ -19,8 +19,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
-import { fetchNotificationInterceptor, xhrNotificationInterceptor } from "@nrich/notification-core";
-import { Notifications } from "@nrich/notification-mui";
+import { fetchNotificationInterceptor, xhrNotificationInterceptor } from "@croz/nrich-notification-core";
+import { Notifications } from "@croz/nrich-notification-mui";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

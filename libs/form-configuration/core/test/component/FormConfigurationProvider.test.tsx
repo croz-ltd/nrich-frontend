@@ -23,7 +23,7 @@ import { act } from "react-dom/test-utils";
 import { FormConfigurationProvider } from "../../src";
 import { useFormConfigurationStore } from "../../src/store/form-configuration-store";
 
-describe("@nrich/form-configuration-core/FormConfigurationProvider", () => {
+describe("@croz/nrich-form-configuration-core/FormConfigurationProvider", () => {
   it("should not render children if loader is not defined and fetch is not executed", () => {
     // given
     useFormConfigurationStore.getState().setFormConfigurationLoaded(false);

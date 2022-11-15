@@ -29,7 +29,7 @@ beforeAll(() => {
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-describe("@nrich/form-configuration-core/fetch-form-configurations", () => {
+describe("@croz/nrich-form-configuration-core/fetch-form-configurations", () => {
   it("should resolve form configurations", async () => {
     // when
     const response = await fetchFormConfigurations({ url: "/test-url", additionalValidatorConverters: mockValidatorConverters });

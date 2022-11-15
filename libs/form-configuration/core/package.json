@@ -1,19 +1,49 @@
 {
-  "name": "@nrich/form-configuration-core",
+  "name": "@croz/nrich-form-configuration-core",
   "description": "Contains core utilities related to the nrich-form-configuration module",
-  "version": "0.0.4",
+  "version": "1.0.0",
+  "author": "CROZ",
   "dependencies": {
     "yup": "^0.32.11",
     "zustand": "^4.1.4"
   },
+  "devDependencies": {
+    "@croz/nrich-jest-config": "*",
+    "@croz/nrich-tsconfig": "*",
+    "@croz/nrich-tsup-config": "*",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/react-hooks": "^8.0.0",
+    "@types/jest": "^28.1.0",
+    "eslint": "^8.2.0",
+    "eslint-config-nrich": "*",
+    "jest": "^28.1.0",
+    "msw": "^0.48.1",
+    "tsup": "^6.5.0",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "files": [
+    "dist/*"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ]
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/croz-ltd/nrich-demo-frontend.git",
+    "directory": "libs/form-configuration/core"
+  },
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf .turbo && rm -rf dist",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "jest"
+  },
+  "types": "dist/index.d.ts"
 }

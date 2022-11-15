@@ -20,7 +20,7 @@ import {
   createComplexValidationList, createCustomValidationList, createNestedValidationList, createSimpleNullableValidationList, createSimpleValidationList, invalidValidationConfiguration,
 } from "../testutil/form-configuration-generating-util";
 
-describe("@nrich/form-configuration-core/FormConfigurationValidationConverter", () => {
+describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConverter", () => {
   it("should not throw exception when receiving invalid configuration", () => {
     // given
     const converter = new FormConfigurationValidationConverter();
@@ -52,7 +52,7 @@ describe("@nrich/form-configuration-core/FormConfigurationValidationConverter", 
   it("should use custom converter", () => {
     // given
     const additionalConverter = {
-      supports: (_) => true,
+      supports: () => true,
       convert: (configuration, validator) => validator.required("Custom validation error"),
     };
     const converter = new FormConfigurationValidationConverter([additionalConverter]);

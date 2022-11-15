@@ -1,0 +1,21 @@
+{
+  "name": "eslint-config-nrich",
+  "version": "0.0.1",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-turbo": "^0.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^26.4.6",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0"
+  },
+  "main": "index.js",
+  "peerDependencies": {
+    "eslint": "^8.2.0"
+  },
+  "private": true
+}

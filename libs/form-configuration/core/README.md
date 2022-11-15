@@ -1,8 +1,8 @@
-# @nrich/form-configuration-core
+# @croz/nrich-form-configuration-core
 
 ## Overview
 
-`@nrich/form-configuration-core` is a modules for generating automatic validations for forms in the application.
+`@croz/nrich-form-configuration-core` is a module for generating automatic validations for forms in the application.
 It's a frontend part of [nrich-form-configuration](https://github.com/croz-ltd/nrich/tree/master/nrich-form-configuration) backend module.
 Together, they allow the user to define validations in a single place (backend).
 
@@ -10,14 +10,14 @@ For validation schemas this lib uses [yup](https://github.com/jquense/yup).
 
 ## Setup
 
-To use this module in your project run `npm install @nrich/form-configuration-core` or `yarn add @nrich/form-configuration-core`
+To use this module in your project run `npm install @croz/nrich-form-configuration-core` or `yarn add @croz/nrich-form-configuration-core`
 
 ## Basic usage
 
 On some upper level of your app, wrap your components in `FormConfigurationProvider`.
 
 ```tsx
-import { FormConfigurationProvider } from "@nrich/form-configuration-core";
+import { FormConfigurationProvider } from "@croz/nrich-form-configuration-core";
 
 const App = () => (
   <FormConfigurationProvider loader="Loading...">
@@ -30,7 +30,7 @@ In your form component, use `useYupFormConfiguration` with your form id defined 
 
 ```tsx
 import React, { useState } from "react";
-import { useYupFormConfiguration } from "@nrich/form-configuration-core";
+import { useYupFormConfiguration } from "@croz/nrich-form-configuration-core";
 import { Form, Formik } from "formik";
 
 
@@ -74,7 +74,7 @@ validation. `convert` will usually use the yup's [Schema.test](https://github.co
 
 ```tsx
 import oib from "oib.js";
-import { FormConfigurationProvider } from "@nrich/form-configuration-core";
+import { FormConfigurationProvider } from "@croz/nrich-form-configuration-core";
 
 const additionalValidatorConverters = [
   {

@@ -1,18 +1,49 @@
 {
-  "name": "@nrich/notification-core",
+  "name": "@croz/nrich-notification-core",
   "description": "Contains core utilities related to the nrich-notification module",
-  "version": "0.0.3",
+  "version": "1.0.0",
+  "author": "CROZ",
   "dependencies": {
     "zustand": "^4.1.4"
   },
+  "devDependencies": {
+    "@croz/nrich-jest-config": "*",
+    "@croz/nrich-tsconfig": "*",
+    "@croz/nrich-tsup-config": "*",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/react-hooks": "^8.0.0",
+    "@types/jest": "^28.1.0",
+    "axios": "^1.1.3",
+    "eslint": "^8.2.0",
+    "eslint-config-nrich": "*",
+    "jest": "^28.1.0",
+    "msw": "^0.48.1",
+    "tsup": "^6.5.0",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "license": "Apache-2.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ]
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/croz-ltd/nrich-demo-frontend.git",
+    "directory": "libs/notification/core"
+  },
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf .turbo && rm -rf dist",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "jest"
+  },
+  "types": "dist/index.d.ts"
 }

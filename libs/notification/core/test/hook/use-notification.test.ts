@@ -39,7 +39,7 @@ const mockNotifications: Notification[] = [
   },
 ];
 
-describe("@nrich/notification-core/use-notification", () => {
+describe("@croz/nrich-notification-core/use-notification", () => {
   beforeAll(() => {
     mockNotifications.forEach((notification) => useNotificationStore.getState().add(notification));
   });

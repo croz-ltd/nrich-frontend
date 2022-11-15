@@ -1,17 +1,47 @@
 {
-  "name": "@nrich/notification-mui",
+  "name": "@croz/nrich-notification-mui",
   "description": "Contains the UI implementation of notifications for the MUI component library",
-  "version": "0.0.3",
+  "version": "1.0.0",
+  "author": "CROZ",
+  "devDependencies": {
+    "@croz/nrich-jest-config": "*",
+    "@croz/nrich-tsconfig": "*",
+    "@croz/nrich-tsup-config": "*",
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^28.1.0",
+    "eslint": "^8.2.0",
+    "eslint-config-nrich": "*",
+    "jest": "^28.1.0",
+    "tsup": "^6.5.0"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "license": "Apache-2.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "peerDependencies": {
+    "@croz/nrich-notification-core": "^1.0.0",
     "@mui/material": "^5.0.0",
-    "@nrich/notification-core": "^0.0.3",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ]
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/croz-ltd/nrich-demo-frontend.git",
+    "directory": "libs/notification/mui"
+  },
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf .turbo && rm -rf dist",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "jest"
+  },
+  "types": "dist/index.d.ts"
 }

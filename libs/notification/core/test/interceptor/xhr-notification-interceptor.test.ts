@@ -31,7 +31,7 @@ beforeAll(() => {
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-describe("@nrich/notification-core/xhr-notification-interceptor", () => {
+describe("@croz/nrich-notification-core/xhr-notification-interceptor", () => {
   it("should resolve notification", async () => {
     // when
     const response = await axios.get("/with-notification");

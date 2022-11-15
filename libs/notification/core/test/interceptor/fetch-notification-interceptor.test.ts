@@ -29,7 +29,7 @@ beforeAll(() => {
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-describe("@nrich/notification-core/fetch-notification-interceptor", () => {
+describe("@croz/nrich-notification-core/fetch-notification-interceptor", () => {
   it("should resolve notification", async () => {
     // when
     const response = await fetch("/with-notification");

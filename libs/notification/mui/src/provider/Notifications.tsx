@@ -21,7 +21,7 @@ import {
   Alert, AlertColor, AlertTitle, Snackbar,
 } from "@mui/material";
 
-import { Notification, useNotifications } from "@nrich/notification-core";
+import { Notification, useNotifications } from "@croz/nrich-notification-core";
 
 export type NotificationPosition = "top-left" | "top-right" | "top-center" | "bottom-left" | "bottom-right" | "bottom-center";
 
