@@ -1,5 +1,5 @@
 {
-  "name": "@nrich/notification-core",
+  "name": "@croz/nrich-notification-core",
   "description": "Contains core utilities related to the nrich-notification module",
   "version": "0.0.3",
   "dependencies": {

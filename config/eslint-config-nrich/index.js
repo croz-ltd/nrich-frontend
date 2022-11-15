@@ -75,7 +75,7 @@ module.exports = {
             position: "before"
           },
           {
-            pattern: "@nrich/**",
+            pattern: "@croz/**",
             group: "internal",
             position: "after"
           },
@@ -87,7 +87,7 @@ module.exports = {
         ],
         pathGroupsExcludedImportTypes: [
           "react.*",
-          "@nrich/**",
+          "@croz/**",
           "@mui/**"
         ],
         groups: [

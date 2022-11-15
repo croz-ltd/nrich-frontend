@@ -14,12 +14,12 @@
     ]
   },
   "dependencies": {
+    "@croz/nrich-form-configuration-core": "*",
+    "@croz/nrich-notification-core": "*",
+    "@croz/nrich-notification-mui": "*",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.8.1",
-    "@nrich/form-configuration-core": "*",
-    "@nrich/notification-core": "*",
-    "@nrich/notification-mui": "*",
     "axios": "^1.1.3",
     "formik": "^2.2.9",
     "react": "^18.1.0",

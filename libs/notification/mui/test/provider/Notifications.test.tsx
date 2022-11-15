@@ -19,15 +19,15 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 
-import { useNotifications } from "@nrich/notification-core";
+import { useNotifications } from "@croz/nrich-notification-core";
 
 import { Notifications } from "../../src";
 
-jest.mock("@nrich/notification-core", () => ({
+jest.mock("@croz/nrich-notification-core", () => ({
   useNotifications: jest.fn(),
 }));
 
-describe("@nrich/notification-mui/provider/Notifications", () => {
+describe("@croz/nrich-notification-mui/provider/Notifications", () => {
   it("should render notification without messages", async () => {
     // given
     const notificationDurationMs = 1000;

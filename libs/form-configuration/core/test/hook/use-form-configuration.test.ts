@@ -22,7 +22,7 @@ import { useFormConfiguration, useYupFormConfiguration } from "../../src";
 import { useFormConfigurationStore } from "../../src/store/form-configuration-store";
 import { mockFormYupConfiguration, mockFormYupConfigurations } from "../testutil/form-configuration-generating-util";
 
-describe("@nrich/form-configuration-core/use-form-configuration", () => {
+describe("@croz/nrich-form-configuration-core/use-form-configuration", () => {
   beforeEach(() => {
     useFormConfigurationStore.getState().set(mockFormYupConfigurations);
   });

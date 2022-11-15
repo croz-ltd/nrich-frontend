@@ -18,7 +18,7 @@
 import { Notification } from "../../src";
 import { useNotificationStore } from "../../src/store/notification-store";
 
-describe("@nrich/notification-core/notification-store", () => {
+describe("@croz/nrich-notification-core/notification-store", () => {
   it("should add and remove notifications from store", () => {
     // given
     let currentState = useNotificationStore.getState();

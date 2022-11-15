@@ -22,7 +22,7 @@ import {
   Button, Grid, MenuItem, Select,
 } from "@mui/material";
 
-import { useFormConfiguration, useYupFormConfiguration } from "@nrich/form-configuration-core";
+import { useFormConfiguration, useYupFormConfiguration } from "@croz/nrich-form-configuration-core";
 
 import {
   createInitialValues, generateForm, LooseObject,

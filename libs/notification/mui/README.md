@@ -1,20 +1,20 @@
-# @nrich/notification-mui
+# @croz/nrich-notification-mui
 
 ## Overview
 
-`@nrich/notification-mui` is a [MUI](https://mui.com/) wrapper for the [@nrich/notification-core](../core/README.md) module.
+`@croz/nrich-notification-mui` is a [MUI](https://mui.com/) wrapper for the [@croz/nrich-notification-core](../core/README.md) module.
 For the display of the notifications a `Snackbar` and `Alert` are used.
 
 ## Setup
 
-To use this module in your project run `npm install @nrich/notification-mui` or `yarn add @nrich/notification-mui`
+To use this module in your project run `npm install @croz/nrich-notification-mui` or `yarn add @croz/nrich-notification-mui`
 
 ## Usage
 
 1. Add `Notifications` component on a part of your app, usually  on `App` or some other higher level component.
 
 ```tsx
-import { Notifications } from "@nrich/notification-mui";
+import { Notifications } from "@croz/nrich-notification-mui";
 
 const App = () => {
   return (
