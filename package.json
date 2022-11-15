@@ -9,9 +9,9 @@
   "private": true,
   "scripts": {
     "build": "turbo run build --filter=!demo",
-    "clean": "turbo run clean --filter=!demo",
+    "clean": "turbo run clean",
     "lint": "turbo run lint",
-    "test": "turbo run test --filter=!demo"
+    "test": "turbo run test --filter=!demo",
   },
   "workspaces": [
     "demo",

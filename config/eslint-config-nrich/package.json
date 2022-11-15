@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-nrich",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
@@ -13,9 +13,9 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0"
   },
+  "main": "index.js",
   "peerDependencies": {
     "eslint": "^8.2.0"
   },
-  "main": "index.js",
   "private": true
 }

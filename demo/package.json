@@ -46,10 +46,10 @@
   "proxy": "http://localhost:8080",
   "scripts": {
     "build": "react-scripts build",
+    "clean": "rm -rf .turbo && rm -rf build",
     "eject": "react-scripts eject",
-    "start": "react-scripts start",
-    "test": "react-scripts test",
     "lint": "eslint . --ext .ts,.tsx",
-    "clean": "rm -rf .turbo && rm -rf build"
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   }
 }
