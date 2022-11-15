@@ -1,6 +1,8 @@
 {
   "name": "demo",
+  "description": "Contains the demo components for nrich frontend modules",
   "version": "0.1.0",
+  "author": "CROZ",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -42,8 +44,14 @@
     "eslint-config-nrich": "*",
     "typescript": "^4.7.2"
   },
+  "license": "Apache-2.0",
   "private": true,
   "proxy": "http://localhost:8080",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/croz-ltd/nrich-demo-frontend.git",
+    "directory": "demo"
+  },
   "scripts": {
     "build": "react-scripts build",
     "clean": "rm -rf .turbo && rm -rf build",

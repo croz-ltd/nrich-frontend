@@ -1,7 +1,8 @@
 {
   "name": "@croz/nrich-notification-core",
   "description": "Contains core utilities related to the nrich-notification module",
-  "version": "0.0.3",
+  "version": "1.0.0",
+  "author": "CROZ",
   "dependencies": {
     "zustand": "^4.1.4"
   },
@@ -23,6 +24,7 @@
   "files": [
     "dist/*"
   ],
+  "license": "Apache-2.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "peerDependencies": {
@@ -31,6 +33,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/croz-ltd/nrich-demo-frontend.git",
+    "directory": "libs/notification/core"
   },
   "scripts": {
     "build": "tsup",

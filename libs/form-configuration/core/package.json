@@ -1,7 +1,8 @@
 {
   "name": "@croz/nrich-form-configuration-core",
   "description": "Contains core utilities related to the nrich-form-configuration module",
-  "version": "0.0.5",
+  "version": "1.0.0",
+  "author": "CROZ",
   "dependencies": {
     "yup": "^0.32.11",
     "zustand": "^4.1.4"
@@ -32,6 +33,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/croz-ltd/nrich-demo-frontend.git",
+    "directory": "libs/form-configuration/core"
   },
   "scripts": {
     "build": "tsup",
