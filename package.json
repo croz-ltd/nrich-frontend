@@ -2,6 +2,7 @@
   "name": "nrich-frontend",
   "author": "CROZ",
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.7",
     "@changesets/cli": "^2.25.2",
     "syncpack": "^8.3.9",
     "turbo": "^1.6.3",
