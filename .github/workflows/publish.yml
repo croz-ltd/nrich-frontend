@@ -1,19 +1,23 @@
-name: Publish
+name: Release
 
 on:
-  release:
-    types: [ created ]
+  push:
+    branches:
+      - master
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  build:
+  release:
     strategy:
       matrix:
-        node: [ lts/* ]
         os: [ ubuntu-latest ]
+        node: [ lts/* ]
         registry-url: [ 'https://registry.npmjs.org' ]
+        registry-scope: [ '@croz' ]
 
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} - Node ${{ matrix.node }}
+    name: Release - ${{ matrix.os }} - Node ${{ matrix.node }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,15 +29,18 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           registry-url: ${{ matrix.registry-url }}
+          scope: ${{ matrix.registry-scope }}
           cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Build all modules
-        run: yarn build all
-
-      - name: Publish to NPM registry
-        run: yarn workspaces foreach --no-private --exclude demo npm publish --tolerate-republish
+      - name: Create Release Pull Request or Publish to NPM registry
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: yarn release
+          version: yarn version-packages
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
