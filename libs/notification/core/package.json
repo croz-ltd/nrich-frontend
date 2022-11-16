@@ -3,6 +3,7 @@
   "description": "Contains core utilities related to the nrich-notification module",
   "version": "1.0.0",
   "author": "CROZ",
+  "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "dependencies": {
     "zustand": "^4.1.4"
   },
@@ -26,6 +27,7 @@
   "files": [
     "dist/*"
   ],
+  "homepage": "https://github.com/croz-ltd/nrich-frontend/tree/master/libs/notification/core#readme",
   "keywords": [
     "croz",
     "nrich",

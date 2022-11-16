@@ -1,6 +1,7 @@
 {
   "name": "nrich-frontend",
   "author": "CROZ",
+  "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.7",
     "@changesets/cli": "^2.25.2",
@@ -8,6 +9,7 @@
     "turbo": "^1.6.3",
     "typescript": "^4.8.4"
   },
+  "homepage": "https://github.com/croz-ltd/nrich-frontend#readme",
   "keywords": [
     "croz",
     "nrich",

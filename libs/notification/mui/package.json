@@ -3,6 +3,7 @@
   "description": "Contains the UI implementation of notifications for the MUI component library",
   "version": "1.0.0",
   "author": "CROZ",
+  "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "devDependencies": {
     "@croz/nrich-jest-config": "*",
     "@croz/nrich-tsconfig": "*",
@@ -25,6 +26,7 @@
   "files": [
     "dist/*"
   ],
+  "homepage": "https://github.com/croz-ltd/nrich-frontend/tree/master/libs/notification/mui#readme",
   "keywords": [
     "croz",
     "nrich",

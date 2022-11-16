@@ -3,6 +3,7 @@
   "description": "Contains core utilities related to the nrich-form-configuration module",
   "version": "1.0.0",
   "author": "CROZ",
+  "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "dependencies": {
     "yup": "^0.32.11",
     "zustand": "^4.1.4"
@@ -27,6 +28,7 @@
   "files": [
     "dist/*"
   ],
+  "homepage": "https://github.com/croz-ltd/nrich-frontend/tree/master/libs/form-configuration/core#readme",
   "keywords": [
     "croz",
     "nrich",
