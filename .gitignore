@@ -109,6 +109,7 @@ fabric.properties
 !.idea/codeStyles
 !.idea/runConfigurations
 /coverage
+/docs
 
 # Turborepo
 .turbo
