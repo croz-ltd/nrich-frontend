@@ -39,6 +39,19 @@ jobs:
       - name: Run tests
         run: yarn test
 
+      - name: Generate HTML documentation from TSDoc
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
+        with:
+          arguments: yarn docs:generate
+
+      - name: Publish generated documentation to GitHub Pages
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs
+          clean: true
+          single-commit: true
+
       - name: Publish test code coverage report
         uses: codecov/codecov-action@v3
         with:
