@@ -19,7 +19,7 @@ import { act } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 
 import { useFormConfiguration, useYupFormConfiguration } from "../../src";
-import { useFormConfigurationStore } from "../../src/store/form-configuration-store";
+import { useFormConfigurationStore } from "../../src/store";
 import { mockFormYupConfiguration, mockFormYupConfigurations } from "../testutil/form-configuration-generating-util";
 
 describe("@croz/nrich-form-configuration-core/use-form-configuration", () => {

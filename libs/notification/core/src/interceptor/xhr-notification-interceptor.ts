@@ -16,7 +16,7 @@
  */
 
 import { isNotificationResponse } from "../api/notification-type-guards";
-import { useNotificationStore } from "../store/notification-store";
+import { useNotificationStore } from "../store";
 
 /**
  * XHR interceptor which listens for the response to be acquired

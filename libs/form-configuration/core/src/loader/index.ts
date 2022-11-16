@@ -15,4 +15,4 @@
  *
  */
 
-export * from "./FormConfigurationProvider";
+export * from "./fetch-form-configurations";

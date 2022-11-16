@@ -18,7 +18,7 @@
 import axios from "axios";
 
 import { xhrNotificationInterceptor } from "../../src";
-import { useNotificationStore } from "../../src/store/notification-store";
+import { useNotificationStore } from "../../src/store";
 import { setupNotificationServer } from "../testutil/setup-notification-server";
 
 const server = setupNotificationServer();
