@@ -1,7 +1,7 @@
 {
   "name": "@croz/nrich-notification-mui",
   "description": "Contains the UI implementation of notifications for the MUI component library",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "author": "CROZ",
   "devDependencies": {
     "@croz/nrich-jest-config": "*",

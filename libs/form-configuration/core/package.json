@@ -1,7 +1,7 @@
 {
   "name": "@croz/nrich-form-configuration-core",
   "description": "Contains core utilities related to the nrich-form-configuration module",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "author": "CROZ",
   "dependencies": {
     "yup": "^0.32.11",
