@@ -26,11 +26,11 @@
     "build": "turbo run build",
     "changeset": "changeset",
     "clean": "turbo run clean",
+    "docs:generate": "typedoc --entryPointStrategy packages 'libs/**'",
     "lint": "turbo run lint",
-    "release": "build && changeset publish",
+    "release": "turbo run build && changeset publish",
     "test": "turbo run test",
-    "version-packages": "changeset version && yarn --mode=\"update-lockfile\"",
-    "docs:generate": "typedoc --entryPointStrategy packages 'libs/**'"
+    "version-packages": "changeset version && yarn --mode=\"update-lockfile\""
   },
   "workspaces": [
     "config/**/*",
