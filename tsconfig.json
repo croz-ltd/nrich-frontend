@@ -2,7 +2,7 @@
   "include": [
     "libs/**/src",
     "libs/**/test",
-    "config/**"
+    "config"
   ],
   "exclude": [
     "node_modules",
