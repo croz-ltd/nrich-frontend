@@ -1,5 +1,6 @@
 [![Build](https://github.com/croz-ltd/nrich-frontend/actions/workflows/build.yml/badge.svg)](https://github.com/croz-ltd/nrich-frontend/actions/workflows/build.yml)
-[![codecov](https://codecov.io/github/croz-ltd/nrich-frontend/branch/master/graph/badge.svg?token=3GULYJWSXF)](https://codecov.io/github/croz-ltd/nrich-frontend)
+[![codecov.io](https://codecov.io/github/croz-ltd/nrich-frontend/coverage.svg?branch=master)](https://codecov.io/github/croz-ltd/nrich-frontend?branch=master)
+[![Documentation](https://img.shields.io/badge/API%20Documentation-nrich--frontend-orange)](https://croz-ltd.github.io/nrich-frontend/)
 [![License](https://img.shields.io/github/license/croz-ltd/nrich?color=yellow&logo=apache)](https://github.com/croz-ltd/nrich/blob/master/LICENSE)
 
 ![npm (scoped)](https://img.shields.io/npm/v/@croz/nrich-form-configuration-core?color=yellowgreen&label=@croz/nrich-form-configuration-core)
