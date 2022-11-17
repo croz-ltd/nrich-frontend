@@ -15,7 +15,7 @@
  *
  */
 
-import { useFormConfigurationStore } from "../../src/store/form-configuration-store";
+import { useFormConfigurationStore } from "../../src/store";
 import { mockFormYupConfiguration, mockFormYupConfigurations } from "../testutil/form-configuration-generating-util";
 
 describe("@croz/nrich-form-configuration-core/form-configuration-store", () => {

@@ -6,5 +6,4 @@ module.exports = {
   setupFilesAfterEnv: ["@croz/nrich-jest-config/jest.setup-jest-dom.js"],
   coverageDirectory: "../../../coverage/libs/form-configuration/core",
   collectCoverageFrom: ["./src/**"]
-
 };

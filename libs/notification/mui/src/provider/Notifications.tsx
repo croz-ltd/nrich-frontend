@@ -23,8 +23,14 @@ import {
 
 import { Notification, useNotifications } from "@croz/nrich-notification-core";
 
+/**
+ * Represents an extended set of possibilities of where to place the notification on the screen based on {@link NotificationOrigin}.
+ */
 export type NotificationPosition = "top-left" | "top-right" | "top-center" | "bottom-left" | "bottom-right" | "bottom-center";
 
+/**
+ * Represents a set of possibilities of where to place the notification on the screen.
+ */
 export type NotificationOrigin = ["top" | "bottom", "left" | "right" | "center"];
 
 export interface NotificationsProviderProps {
@@ -65,12 +71,13 @@ const resolveNotificationDuration = (notification: Notification, defaultDuration
 /**
  * A provider component used to wrap the container in which the notifications are displayed.
  *
- * @param position specifies the notification position on the page,
- * derived from a set of predefined positions available in MUI
- * @param autoClose the duration after which the notification closes expressed in milliseconds
- * (if left undefined, it doesn't close)
+ * @param __namedParameters notification configuration options
+ * @param __namedParameters.position specifies the notification position on the page,
+ * derived from a set of predefined positions available in MUI.
+ * @param __namedParameters.autoClose the duration after which the notification closes expressed in milliseconds
+ * (if left undefined, it doesn't close).
  */
-const Notifications = ({ position = "bottom-right", autoClose }: NotificationsProviderProps) => {
+export const Notifications = ({ position = "bottom-right", autoClose }: NotificationsProviderProps) => {
   const { notifications, remove } = useNotifications();
 
   return (
@@ -111,5 +118,3 @@ const Notifications = ({ position = "bottom-right", autoClose }: NotificationsPr
     </>
   );
 };
-
-export default Notifications;

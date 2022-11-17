@@ -19,7 +19,7 @@ import { act } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 
 import { Notification, useNotifications } from "../../src";
-import { useNotificationStore } from "../../src/store/notification-store";
+import { useNotificationStore } from "../../src/store";
 
 const mockNotifications: Notification[] = [
   {

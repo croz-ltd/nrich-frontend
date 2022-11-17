@@ -15,8 +15,8 @@
  *
  */
 
-import { fetchFormConfigurations } from "../../src/loader/fetch-form-configurations";
-import { useFormConfigurationStore } from "../../src/store/form-configuration-store";
+import { fetchFormConfigurations } from "../../src/loader";
+import { useFormConfigurationStore } from "../../src/store";
 import { mockFormConfigurations, mockValidatorConverters } from "../testutil/form-configuration-generating-util";
 import { setupFormConfigurationServer } from "../testutil/setup-form-configuration-server";
 

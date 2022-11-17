@@ -16,7 +16,7 @@
  */
 
 import { Notification } from "../../src";
-import { useNotificationStore } from "../../src/store/notification-store";
+import { useNotificationStore } from "../../src/store";
 
 describe("@croz/nrich-notification-core/notification-store", () => {
   it("should add and remove notifications from store", () => {

@@ -16,8 +16,8 @@
  */
 
 import { FormConfiguration, FormConfigurationConfiguration, FormYupConfiguration } from "../api";
-import { FormConfigurationValidationConverter } from "../converter/FormConfigurationValidationConverter";
-import { useFormConfigurationStore } from "../store/form-configuration-store";
+import { FormConfigurationValidationConverter } from "../converter";
+import { useFormConfigurationStore } from "../store";
 
 export const fetchFormConfigurations = async ({ url, requestOptionsResolver, additionalValidatorConverters }: FormConfigurationConfiguration): Promise<FormConfiguration[]> => {
   const formConfigurationValidationConverter = new FormConfigurationValidationConverter(additionalValidatorConverters);

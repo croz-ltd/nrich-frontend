@@ -16,16 +16,42 @@
  */
 
 import { FormYupConfiguration } from "../api";
-import { useFormConfigurationStore } from "../store/form-configuration-store";
+import { useFormConfigurationStore } from "../store";
 
-export type UseFormConfiguration = () => {
+export type FormConfigurationOptions = {
+  /**
+   * Array of current state form configurations.
+   */
   formYupConfigurations: FormYupConfiguration[],
+  /**
+   * Flag that indicates weather form configuration is fetched from API.
+   */
   formConfigurationLoaded: boolean;
+  /**
+   * Sets form configurations to state.
+   * Use on initial call to find-all endpoint.
+   * @param formConfigurations formConfigurations to set
+   */
   set: (formConfigurations: FormYupConfiguration[]) => void,
+
+  /**
+   * Adds form configuration to state.
+   * @param formConfiguration formConfiguration to add
+   */
   add: (formConfiguration: FormYupConfiguration) => void,
+  /**
+   * Removes form configuration to state.
+   * @param formConfiguration formConfiguration to add
+   */
   remove: (formConfiguration: FormYupConfiguration) => void
+  /**
+   * Sets form configuration loaded to state.
+   * @param isLoaded loaded flag to set
+   */
   setFormConfigurationLoaded: (formConfigurationLoaded: boolean) => void;
 };
+
+export type UseFormConfiguration = () => FormConfigurationOptions;
 
 /**
  * A hook which simplifies the usage of the form configuration state.
@@ -46,6 +72,15 @@ export const useFormConfiguration: UseFormConfiguration = () => {
   };
 };
 
+/**
+ * A hook which extracts a specific Yup configuration from the form configuration identified by the form id.
+ * Uses the internal {@link useFormConfigurationStore} hook for managing the form configuration state.
+ *
+ * @param formId Registered form id for a specific form configuration.
+ *
+ * @returns Mapped Yup configuration from the form configuration identified by the form id.
+ * @throws If no matching form configuration is found.
+ */
 export const useYupFormConfiguration = (formId: string) => {
   const { formYupConfigurations } = useFormConfiguration();
 
@@ -54,7 +89,6 @@ export const useYupFormConfiguration = (formId: string) => {
   if (!searchedFormConfiguration) {
     throw Error(`No form configuration found for given formId: ${formId}`);
   }
-  else {
-    return searchedFormConfiguration.yupSchema;
-  }
+
+  return searchedFormConfiguration.yupSchema;
 };

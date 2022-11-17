@@ -15,5 +15,5 @@
  *
  */
 
-export { fetchNotificationInterceptor } from "./fetch-notification-interceptor";
-export { xhrNotificationInterceptor } from "./xhr-notification-interceptor";
+export * from "./fetch-notification-interceptor";
+export * from "./xhr-notification-interceptor";

@@ -15,7 +15,7 @@
  *
  */
 
-import { FormConfigurationValidationConverter } from "../../src/converter/FormConfigurationValidationConverter";
+import { FormConfigurationValidationConverter } from "../../src/converter";
 import {
   createComplexValidationList, createCustomValidationList, createNestedValidationList, createSimpleNullableValidationList, createSimpleValidationList, invalidValidationConfiguration,
 } from "../testutil/form-configuration-generating-util";

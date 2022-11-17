@@ -16,10 +16,25 @@
  */
 
 import { Notification } from "../api";
-import { useNotificationStore } from "../store/notification-store";
+import { useNotificationStore } from "../store";
 
-export type UseNotifications = () => { notifications: Notification[], add: (notification: Notification) => void, remove: (notification: Notification) => void };
-
+export type NotificationOptions = {
+  /**
+   * Array of current state notifications.
+   */
+  notifications: Notification[],
+  /**
+   * Adds notification to state.
+   * @param notification notification to add
+   */
+  add: (notification: Notification) => void,
+  /**
+   * Removes notification from state.
+   * @param notification
+   */
+  remove: (notification: Notification) => void
+};
+export type UseNotifications = () => NotificationOptions;
 /**
  * A hook which simplifies the usage of the intercepted notification state.
  * Uses the internal {@link useNotificationStore} hook for managing the notification state.

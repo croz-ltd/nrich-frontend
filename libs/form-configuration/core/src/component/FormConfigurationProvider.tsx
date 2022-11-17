@@ -19,7 +19,7 @@ import React, { useEffect } from "react";
 
 import { FormConfigurationConfiguration } from "../api";
 import { useFormConfiguration } from "../hook";
-import { fetchFormConfigurations } from "../loader/fetch-form-configurations";
+import { fetchFormConfigurations } from "../loader";
 
 export type Props = {
 
@@ -39,7 +39,7 @@ export type Props = {
  * @param children content to show conditionally
  * @param loader custom loader to show until content loads
  */
-const FormConfigurationProvider = ({ children, loader, ...fetchProps }: Props) => {
+export const FormConfigurationProvider = ({ children, loader, ...fetchProps }: Props) => {
   useEffect(() => {
     fetchFormConfigurations({ ...fetchProps });
   }, []);
@@ -48,5 +48,3 @@ const FormConfigurationProvider = ({ children, loader, ...fetchProps }: Props) =
 
   return <div>{formConfigurationLoaded ? children : loader ?? null}</div>;
 };
-
-export default FormConfigurationProvider;

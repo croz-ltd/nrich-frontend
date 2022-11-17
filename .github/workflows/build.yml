@@ -14,7 +14,7 @@ jobs:
         node: [ lts/* ]
 
     runs-on: ${{ matrix.os }}
-    name: Build / OS ${{ matrix.os }} - Node ${{ matrix.node }}
+    name: OS ${{ matrix.os }} - Node ${{ matrix.node }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -38,6 +38,18 @@ jobs:
 
       - name: Run tests
         run: yarn test
+
+      - name: Generate HTML documentation from TSDoc
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
+        run: yarn docs:generate
+
+      - name: Publish generated documentation to GitHub Pages
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs
+          clean: true
+          single-commit: true
 
       - name: Publish test code coverage report
         uses: codecov/codecov-action@v3
