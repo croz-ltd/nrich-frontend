@@ -1,23 +1,36 @@
 {
-  "name": "nrich-demo-frontend",
+  "name": "nrich-frontend",
   "author": "CROZ",
+  "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.7",
+    "@changesets/cli": "^2.25.2",
     "syncpack": "^8.3.9",
     "turbo": "^1.6.3",
     "typescript": "^4.8.4"
   },
+  "homepage": "https://github.com/croz-ltd/nrich-frontend#readme",
+  "keywords": [
+    "croz",
+    "nrich",
+    "react",
+    "typescript",
+    "zustand"
+  ],
   "license": "Apache-2.0",
   "packageManager": "yarn@3.2.4",
   "private": true,
-  "repository": "croz-ltd/nrich-demo-frontend.git",
+  "repository": "croz-ltd/nrich-frontend.git",
   "scripts": {
-    "build": "turbo run build --filter=!demo",
+    "build": "turbo run build",
+    "changeset": "changeset",
     "clean": "turbo run clean",
     "lint": "turbo run lint",
-    "test": "turbo run test --filter=!demo"
+    "release": "build && changeset publish",
+    "test": "turbo run test",
+    "version-packages": "changeset version && yarn --mode=\"update-lockfile\""
   },
   "workspaces": [
-    "demo",
     "config/**/*",
     "libs/**/*"
   ]

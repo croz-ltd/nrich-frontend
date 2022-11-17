@@ -3,6 +3,7 @@
   "description": "Contains core utilities related to the nrich-notification module",
   "version": "1.0.0",
   "author": "CROZ",
+  "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "dependencies": {
     "zustand": "^4.1.4"
   },
@@ -18,11 +19,22 @@
     "eslint-config-nrich": "*",
     "jest": "^28.1.0",
     "msw": "^0.48.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "tsup": "^6.5.0",
     "whatwg-fetch": "^3.6.2"
   },
   "files": [
     "dist/*"
+  ],
+  "homepage": "https://github.com/croz-ltd/nrich-frontend/tree/master/libs/notification/core#readme",
+  "keywords": [
+    "croz",
+    "nrich",
+    "nrich-notification",
+    "react",
+    "typescript",
+    "zustand"
   ],
   "license": "Apache-2.0",
   "main": "dist/index.js",
@@ -36,7 +48,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/croz-ltd/nrich-demo-frontend.git",
+    "url": "https://github.com/croz-ltd/nrich-frontend.git",
     "directory": "libs/notification/core"
   },
   "scripts": {

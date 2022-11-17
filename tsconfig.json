@@ -1,9 +1,8 @@
 {
   "include": [
-    "demo",
     "libs/**/src",
     "libs/**/test",
-    "testconfig"
+    "config/**"
   ],
   "exclude": [
     "node_modules",
