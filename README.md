@@ -9,9 +9,12 @@
 
 # nrich-frontend
 
-React application to showcase features of [nrich](https://github.com/croz-ltd/nrich) libraries.
+React monorepo providing bindings to simplify the integration with [nrich](https://github.com/croz-ltd/nrich) libraries.
 
 The overall project is built on top of the concept of [Yarn workspaces](https://yarnpkg.com/features/workspaces) using [Turborepo](https://turbo.build/repo) as a build management system.
+
+For the demonstration of the integrations provided here, please visit the [nrich-demo-frontend](https://github.com/croz-ltd/nrich-demo-frontend)
+repository.
 
 ### Workspace/module overview
 
