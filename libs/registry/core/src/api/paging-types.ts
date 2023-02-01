@@ -15,7 +15,17 @@
  *
  */
 
-export * from "./paging-types";
-export * from "./registry-types";
-export * from "./search-types";
-export * from "./sorting-types";
+/**
+ * Parameters for pagination when fetching entities from backend.
+ */
+export interface PagingParameter {
+  /**
+   * Page number. Starts from 0.
+   */
+  pageNumber: number;
+
+  /**
+   * Number of entities to fetch.
+   */
+  pageSize: number;
+}

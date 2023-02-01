@@ -15,7 +15,23 @@
  *
  */
 
-export * from "./paging-types";
-export * from "./registry-types";
-export * from "./search-types";
-export * from "./sorting-types";
+/**
+ * Sort direction.
+ */
+export type SortDirection = "ASC" | "DESC";
+
+/**
+ * Combination of property to sort by and sort direction.
+ */
+export interface SortProperty {
+
+  /**
+   * Property to sort by.
+   */
+  property: string;
+
+  /**
+   * Sort direction.
+   */
+  direction: SortDirection;
+}

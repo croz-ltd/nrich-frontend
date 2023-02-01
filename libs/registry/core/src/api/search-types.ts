@@ -15,7 +15,18 @@
  *
  */
 
-export * from "./paging-types";
-export * from "./registry-types";
-export * from "./search-types";
-export * from "./sorting-types";
+/**
+ * Registry entity search parameters.
+ */
+export interface SearchParameter {
+  /**
+   * List of properties to search.
+   */
+  propertyNameList: string[];
+
+  /**
+   * Search query.
+   */
+  query: string;
+
+}
