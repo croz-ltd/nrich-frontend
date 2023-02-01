@@ -35,3 +35,18 @@ export interface SortProperty {
    */
   direction: SortDirection;
 }
+
+/**
+ * Data regarding sorting when fetching entites from backend.
+ */
+export interface SortResponse {
+  /**
+   * Is the result sorted.
+   */
+  sorted: boolean;
+
+  /**
+   * Is the result unsorted.
+   */
+  unsorted: boolean;
+}

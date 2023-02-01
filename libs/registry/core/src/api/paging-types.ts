@@ -29,3 +29,39 @@ export interface PagingParameter {
    */
   pageSize: number;
 }
+
+/**
+ * Response data regarding paging when fething entities from backend.
+ */
+export interface PagingResponse {
+
+  /**
+   * Is this page the first one.
+   */
+  first: boolean;
+
+  /**
+   * Is this page the last one.
+   */
+  last: boolean;
+
+  /**
+   * Is this page empty.
+   */
+  empty: boolean;
+
+  /**
+   * Number of total pages for this search.
+   */
+  totalPages: number;
+
+  /**
+   * Number of total elements over all pages for this search.
+   */
+  totalElements: number;
+
+  /**
+   * Number of elements on current page.
+   */
+  numberOfElements: number;
+}
