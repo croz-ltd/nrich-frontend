@@ -1,0 +1,61 @@
+{
+  "name": "@croz/nrich-registry-core",
+  "description": "Contains core utilities related to the nrich-registry module",
+  "version": "1.1.0",
+  "author": "CROZ",
+  "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
+  "dependencies": {
+    "yup": "^0.32.11",
+    "zustand": "^4.1.4"
+  },
+  "devDependencies": {
+    "@croz/nrich-jest-config": "*",
+    "@croz/nrich-tsconfig": "*",
+    "@croz/nrich-tsup-config": "*",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/react-hooks": "^8.0.0",
+    "@types/jest": "^28.1.0",
+    "eslint": "^8.2.0",
+    "eslint-config-nrich": "*",
+    "jest": "^28.1.0",
+    "msw": "^0.48.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "tsup": "^6.5.0",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "homepage": "https://github.com/croz-ltd/nrich-frontend/tree/master/libs/form-configuration/core#readme",
+  "keywords": [
+    "croz",
+    "nrich",
+    "nrich-registry",
+    "react",
+    "typescript",
+    "zustand"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/croz-ltd/nrich-frontend.git",
+    "directory": "libs/form-configuration/core"
+  },
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf .turbo && rm -rf dist",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "jest"
+  },
+  "types": "dist/index.d.ts"
+}
