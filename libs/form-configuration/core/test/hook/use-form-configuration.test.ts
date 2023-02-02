@@ -15,8 +15,7 @@
  *
  */
 
-import { act } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 
 import { useFormConfiguration, useYupFormConfiguration } from "../../src";
 import { useFormConfigurationStore } from "../../src/store";
