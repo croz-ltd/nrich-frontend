@@ -15,8 +15,7 @@
  *
  */
 
-import { act } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 
 import { useFormConfiguration, useYupFormConfiguration } from "../../src";
 import { useFormConfigurationStore } from "../../src/store";
@@ -103,6 +102,6 @@ describe("@croz/nrich-form-configuration-core/use-form-configuration", () => {
     const { result } = renderHook(() => useYupFormConfiguration(formId));
 
     // then
-    expect(result.error).toEqual(Error("No form configuration found for given formId: unknown"));
+    expect(result.current).toEqual(undefined);
   });
 });
