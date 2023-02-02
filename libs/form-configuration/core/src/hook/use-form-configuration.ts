@@ -78,8 +78,7 @@ export const useFormConfiguration: UseFormConfiguration = () => {
  *
  * @param formId Registered form id for a specific form configuration.
  *
- * @returns Mapped Yup configuration from the form configuration identified by the form id.
- * @throws If no matching form configuration is found.
+ * @returns Mapped Yup configuration from the form configuration identified by the form id, or undefined if no matching form configuration is found.
  */
 export const useYupFormConfiguration = (formId: string) => {
   const { formYupConfigurations } = useFormConfiguration();
@@ -87,7 +86,7 @@ export const useYupFormConfiguration = (formId: string) => {
   const searchedFormConfiguration = formYupConfigurations.find((formYupConfiguration) => formYupConfiguration.formId === formId);
 
   if (!searchedFormConfiguration) {
-    throw Error(`No form configuration found for given formId: ${formId}`);
+    return undefined;
   }
 
   return searchedFormConfiguration.yupSchema;

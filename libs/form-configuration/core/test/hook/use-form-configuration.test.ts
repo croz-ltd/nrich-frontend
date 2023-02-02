@@ -102,6 +102,6 @@ describe("@croz/nrich-form-configuration-core/use-form-configuration", () => {
     const { result } = renderHook(() => useYupFormConfiguration(formId));
 
     // then
-    expect(result.error).toEqual(Error("No form configuration found for given formId: unknown"));
+    expect(result.current).toEqual(undefined);
   });
 });
