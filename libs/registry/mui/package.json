@@ -1,0 +1,62 @@
+{
+  "name": "@croz/nrich-registry-mui",
+  "description": "Contains the UI implementation of registry for the MUI component library",
+  "version": "1.1.0",
+  "author": "CROZ",
+  "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
+  "devDependencies": {
+    "@croz/nrich-jest-config": "*",
+    "@croz/nrich-tsconfig": "*",
+    "@croz/nrich-tsup-config": "*",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.0.0",
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^28.1.0",
+    "eslint": "^8.2.0",
+    "eslint-config-nrich": "*",
+    "jest": "^28.1.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "tsup": "^6.5.0"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "homepage": "https://github.com/croz-ltd/nrich-frontend/tree/master/libs/registry/mui#readme",
+  "keywords": [
+    "croz",
+    "nrich",
+    "nrich-registry",
+    "react",
+    "typescript",
+    "zustand"
+  ],
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "peerDependencies": {
+    "@croz/nrich-registry-core": "^1.0.0",
+    "@mui/material": "^5.0.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/croz-ltd/nrich-frontend.git",
+    "directory": "libs/registry/mui"
+  },
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf .turbo && rm -rf dist",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "jest"
+  },
+  "types": "dist/index.d.ts"
+}
