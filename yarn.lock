@@ -387,6 +387,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.20.6":
+  version: 7.20.13
+  resolution: "@babel/runtime@npm:7.20.13"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 09b7a97a05c80540db6c9e4ddf8c5d2ebb06cae5caf3a87e33c33f27f8c4d49d9c67a2d72f1570e796045288fad569f98a26ceba0c4f5fad2af84b6ad855c4fb
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.18.10, @babel/template@npm:^7.3.3":
   version: 7.18.10
   resolution: "@babel/template@npm:7.18.10"
@@ -690,7 +699,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@croz/nrich-form-configuration-core@workspace:libs/form-configuration/core":
+"@croz/nrich-form-configuration-core@*, @croz/nrich-form-configuration-core@workspace:libs/form-configuration/core":
   version: 0.0.0-use.local
   resolution: "@croz/nrich-form-configuration-core@workspace:libs/form-configuration/core"
   dependencies:
@@ -786,6 +795,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@croz/nrich-registry-core@workspace:libs/registry/core"
   dependencies:
+    "@croz/nrich-form-configuration-core": "*"
     "@croz/nrich-jest-config": "*"
     "@croz/nrich-tsconfig": "*"
     "@croz/nrich-tsup-config": "*"
@@ -801,9 +811,40 @@ __metadata:
     react-dom: ^18.1.0
     tsup: ^6.5.0
     whatwg-fetch: ^3.6.2
-    yup: ^0.32.11
     zustand: ^4.1.4
   peerDependencies:
+    "@croz/nrich-form-configuration-core": "*"
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  languageName: unknown
+  linkType: soft
+
+"@croz/nrich-registry-mui@workspace:libs/registry/mui":
+  version: 0.0.0-use.local
+  resolution: "@croz/nrich-registry-mui@workspace:libs/registry/mui"
+  dependencies:
+    "@croz/nrich-jest-config": "*"
+    "@croz/nrich-tsconfig": "*"
+    "@croz/nrich-tsup-config": "*"
+    "@emotion/react": ^11.9.0
+    "@emotion/styled": ^11.8.1
+    "@mui/icons-material": ^5.0.0
+    "@mui/material": ^5.0.0
+    "@testing-library/dom": ^8.13.0
+    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/react": ^13.4.0
+    "@testing-library/user-event": ^13.5.0
+    "@types/jest": ^28.1.0
+    eslint: ^8.2.0
+    eslint-config-nrich: "*"
+    jest: ^28.1.0
+    react: ^18.1.0
+    react-dom: ^18.1.0
+    tsup: ^6.5.0
+  peerDependencies:
+    "@croz/nrich-registry-core": ^1.0.0
+    "@mui/icons-material": ^5.0.0
+    "@mui/material": ^5.0.0
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown
@@ -1455,6 +1496,22 @@ __metadata:
   version: 5.10.14
   resolution: "@mui/core-downloads-tracker@npm:5.10.14"
   checksum: 16595cbfcb8fb553ed66b95485914d7abcb1eea96181b2388ef5bc517f445d88a794907d2de203834cae0d9a068963125b67d0a7d395806cbe5dbbdc7cd44779
+  languageName: node
+  linkType: hard
+
+"@mui/icons-material@npm:^5.0.0":
+  version: 5.11.0
+  resolution: "@mui/icons-material@npm:5.11.0"
+  dependencies:
+    "@babel/runtime": ^7.20.6
+  peerDependencies:
+    "@mui/material": ^5.0.0
+    "@types/react": ^17.0.0 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 764c1185b3432f0228f3c5217b0e218b10f106fa96d305dfc62c0ef5afd2a7a087b0d664fd0a8171282e195c18d3ee073d5f037901a2bed1a1519a70fbb0501c
   languageName: node
   linkType: hard
 
@@ -7532,7 +7589,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.10":
+"regenerator-runtime@npm:^0.13.10, regenerator-runtime@npm:^0.13.11":
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
