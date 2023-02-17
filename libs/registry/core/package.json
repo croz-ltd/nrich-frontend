@@ -1,14 +1,14 @@
 {
   "name": "@croz/nrich-registry-core",
   "description": "Contains core utilities related to the nrich-registry module",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "author": "CROZ",
   "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "dependencies": {
-    "yup": "^0.32.11",
     "zustand": "^4.1.4"
   },
   "devDependencies": {
+    "@croz/nrich-form-configuration-core": "*",
     "@croz/nrich-jest-config": "*",
     "@croz/nrich-tsconfig": "*",
     "@croz/nrich-tsup-config": "*",
@@ -40,6 +40,7 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "peerDependencies": {
+    "@croz/nrich-form-configuration-core": "*",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },

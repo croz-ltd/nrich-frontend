@@ -15,10 +15,13 @@
  *
  */
 
-export * from "./use-registry-entity";
-export * from "./use-registry-entity-administration";
-export * from "./use-registry-entity-form-configuration";
-export * from "./use-update-effect";
-export * from "./use-registry-filter";
-export * from "./use-registry-form";
-export * from "./use-registry-sort";
+import { useYupFormConfiguration } from "@croz/nrich-form-configuration-core";
+
+import { FormType } from "../api";
+
+/**
+ * Helper hook for fetching validation configuration for given entity
+ * @param classFullName full class name of the entity
+ * @param type type of form
+ */
+export const useRegistryEntityYupFormConfiguration = (classFullName: string, type: FormType) => useYupFormConfiguration(`${classFullName}:::${type}`);
