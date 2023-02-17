@@ -15,8 +15,7 @@
  *
  */
 
-export * from "./paging-types";
-export * from "./registry-types";
-export * from "./search-types";
-export * from "./sorting-types";
-export * from "./form-types";
+/**
+ * Type of form on registry entity administration
+ */
+export type FormType = "create" | "update";

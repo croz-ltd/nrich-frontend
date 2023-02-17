@@ -75,6 +75,7 @@ export const loadEntities = async (request: RegistryRequest): Promise<RegistryRe
   const response = await fetch("/nrich/registry/data/list", {
     method: "POST",
     body: JSON.stringify(request),
+    headers: { "Content-Type": "application/json" },
   });
   const data = await response.json() as RegistryResponse<any>;
   return data;
@@ -91,6 +92,7 @@ export const bulkLoadEntities = async (requests: RegistryRequest[]): Promise<Rec
     body: JSON.stringify({
       registryRequestList: requests,
     }),
+    headers: { "Content-Type": "application/json" },
   });
   const data = await response.json() as Record<string, RegistryResponse<any>>;
   return data;
@@ -109,6 +111,7 @@ export const createEntity = async (classFullName: string, createData: any): Prom
       classFullName,
       jsonEntityData: JSON.stringify(createData),
     }),
+    headers: { "Content-Type": "application/json" },
   });
   const data = await response.json();
   return data;
@@ -129,6 +132,7 @@ export const updateEntity = async (classFullName: string, id: any, updateData: a
       id,
       jsonEntityData: JSON.stringify(updateData),
     }),
+    headers: { "Content-Type": "application/json" },
   });
   const data = await response.json();
   return data;
@@ -143,5 +147,6 @@ export const removeEntity = async (classFullName: string, id: any): Promise<void
   await fetch("/nrich/registry/data/delete", {
     method: "POST",
     body: JSON.stringify({ classFullName, id }),
+    headers: { "Content-Type": "application/json" },
   });
 };
