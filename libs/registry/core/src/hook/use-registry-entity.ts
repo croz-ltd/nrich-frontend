@@ -17,38 +17,77 @@
 
 import React from "react";
 
-import { RegistryEntityConfiguration } from "../api";
+import { RegistryEntityConfiguration, RegistryPropertyConfiguration } from "../api";
 import {
   createEntity, loadEntities, RegistryRequest, RegistryResponse, removeEntity, updateEntity,
 } from "../service";
-import { useRegistryConfigurationStore } from "../store";
+import { useEntityConfiguration } from "./use-entity-configuration";
 
 const INITIAL_PAGE_SIZE = 25;
 
+/**
+ * Request when fetching a list of registry entries, without class specifics
+ */
 export type EntityRegistryRequest = Omit<RegistryRequest, "classFullName">;
 
+/**
+ * Return type of {@link useRegistryEntity}. Contains main data and methods for managing registry entities.
+ */
 export interface UseRegistryEntity {
+  /**
+   * Configuration of wanted entity
+   */
   entityConfiguration: RegistryEntityConfiguration;
+
+  /**
+   * Id property of the entity
+   */
+  entityIdProperty: RegistryPropertyConfiguration;
+
+  /**
+   * Currently fetched data for this entity.
+   */
   data: RegistryResponse<any[]>;
 
+  /**
+   * Method for reloading data explicitly with given request.
+   * @param request search, filter and paging data of this request
+   */
   load: (request: EntityRegistryRequest) => Promise<void>;
 
+  /**
+   * Adds new entity. Should conform to structure from {@link entityConfiguration}.
+   * Automatically re-fetches with request provided to hook.
+   * @param createData data for new entity
+   */
   add: (createData: any) => Promise<any>;
 
+  /**
+   * Edits existing entity. Should conform to structure from {@link entityConfiguration}.
+   * Automatically re-fetches with request provided to hook.
+   * @param id id of the data for editing. When complex ids are used, it should be an object containing all id fields.
+   * @param updateData data for editable entity
+   */
   edit: (id: any, updateData: any) => Promise<any>;
 
+  /**
+   * Deletes existing entity.
+   * Automatically re-fetches with request provided to hook.
+   * @param id id of the data for editing. When complex ids are used, it should be an object containing all id fields.
+   */
   remove: (id: any) => Promise<void>;
 }
 
+/**
+ * Default request for fetching used when other is not provided. Starts on first page with size of 25.
+ */
 export const DEFAULT_INITIAL_REQUEST: EntityRegistryRequest = {
   pageNumber: 0,
   pageSize: INITIAL_PAGE_SIZE,
 };
 
 export const useRegistryEntity = (name: string, initialRequest: EntityRegistryRequest = DEFAULT_INITIAL_REQUEST): UseRegistryEntity => {
-  const entityConfiguration = useRegistryConfigurationStore((state) => state.groupConfigurations
-    .flatMap((groupConfiguration) => groupConfiguration.entityConfigurationList)
-    .find((configuration) => configuration.name === name));
+  const { entityConfiguration, entityIdProperty } = useEntityConfiguration(name);
 
   const [data, setData] = React.useState<RegistryResponse<any[]>>({
     content: [],
@@ -90,6 +129,7 @@ export const useRegistryEntity = (name: string, initialRequest: EntityRegistryRe
 
   return {
     entityConfiguration,
+    entityIdProperty,
     data,
     load,
     add,
