@@ -17,8 +17,7 @@
 
 import React from "react";
 
-import { SortProperty } from "../../dist";
-import { RegistryPropertyConfiguration, SortDirection } from "../api";
+import { RegistryPropertyConfiguration, SortDirection, SortProperty } from "../api";
 
 /**
  * Return value of {@link useRegistrySort} hook. Contains state and sort handler which uses natural flow for sorting (asc -> desc -> none)

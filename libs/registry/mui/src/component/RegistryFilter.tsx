@@ -15,7 +15,7 @@
  *
  */
 
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -75,7 +75,7 @@ export const RegistryFilter = ({ onFilterUpdate }: Props) => {
           multiple
           label="Properties"
           value={searchParameter.propertyNameList}
-          onChange={handleFieldsChange}
+          onChange={(event) => handleFieldsChange(event as ChangeEvent)}
           input={<OutlinedInput />}
         >
           {availableFields.map((field) => (

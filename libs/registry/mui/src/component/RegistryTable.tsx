@@ -29,12 +29,12 @@ import {
   findIdField,
   formatIdName,
   RegistryEntityConfiguration,
-  RegistryEntityContext,
   RegistryPropertyConfiguration,
   RegistryResponse,
   resolveId,
   resolveValue,
   SortProperty,
+  useRegistryEntityContext,
   useRegistrySort,
 } from "@croz/nrich-registry-core";
 
@@ -176,7 +176,7 @@ interface RegistryTableRowProps {
 const RegistryTableRow = ({
   row, onEdit, onRemove,
 }: RegistryTableRowProps) => {
-  const { entityConfiguration, singularAssociationsMap, finalProperties } = React.useContext(RegistryEntityContext);
+  const { entityConfiguration, singularAssociationsMap, finalProperties } = useRegistryEntityContext();
 
   return (
     <TableRow
@@ -239,7 +239,7 @@ interface RegistryTableProps {
 export const RegistryTable = ({
   data, request, onRequestChange, onEdit, onRemove,
 }: RegistryTableProps) => {
-  const { entityConfiguration, finalProperties } = React.useContext(RegistryEntityContext);
+  const { entityConfiguration, finalProperties } = useRegistryEntityContext();
 
   const onPageChange = (event: unknown, newPage: number) => {
     onRequestChange({ ...request, pageNumber: newPage });

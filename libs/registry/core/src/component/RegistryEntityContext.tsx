@@ -15,7 +15,7 @@
  *
  */
 
-import React from "react";
+import React, { useContext } from "react";
 
 import { RegistryEntityConfiguration, RegistryPropertyConfiguration } from "../api";
 import { useRegistryConfigurationStore } from "../store";
@@ -46,6 +46,17 @@ interface RegistryEntityContextType {
  * Helper context used for easier data sharing in registry entity administration components
  */
 export const RegistryEntityContext = React.createContext<RegistryEntityContextType | undefined>(undefined);
+
+/**
+ * Helper hook to get registry entity context. Throws if the user is not inside provider.
+ */
+export const useRegistryEntityContext = (): RegistryEntityContextType => {
+  const context = useContext(RegistryEntityContext);
+  if (!context) {
+    throw new Error("Cannot use RegistryEntityContext without RegistryEntityContextProvider!");
+  }
+  return context;
+};
 
 /**
  * {@link #RegistryEntityContextProvider} props
