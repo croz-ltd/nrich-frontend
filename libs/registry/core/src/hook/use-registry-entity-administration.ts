@@ -171,10 +171,14 @@ export const useRegistryEntityAdministration = (entityName: string): UseRegistry
     }
     setLoading(false);
     setFormType(undefined);
-    setFormData({});
+    setFormData(undefined);
   };
 
-  const closeFormModal = () => setFormModalOpen(false);
+  const closeFormModal = () => {
+    setFormModalOpen(false);
+    setFormType(undefined);
+    setFormData(undefined);
+  };
 
   return {
     entityConfiguration,

@@ -23,6 +23,7 @@ import {
 import * as service from "../../src/service/service";
 import { registryConfigurationMock } from "../testutil/registry-mock";
 import { setupRegistryServer } from "../testutil/setup-registry-server";
+import { sleep } from "../testutil/sleep";
 
 const server = setupRegistryServer();
 
@@ -32,8 +33,6 @@ beforeAll(() => {
 
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
-
-const sleep = (time: number) => new Promise<void>((resolve) => setTimeout(() => resolve(), time));
 
 describe("@croz/nrich-registry-core/use-registry-entity", () => {
   const entityName = "Address";

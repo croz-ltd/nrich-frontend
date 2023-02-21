@@ -17,7 +17,7 @@
 
 import {
   bulkLoadEntities, createEntity, loadEntities, loadRegistryConfiguration, RegistryRequest, removeEntity, updateEntity,
-} from "../../src/service";
+} from "../../src";
 import { registryConfigurationMock } from "../testutil/registry-mock";
 import { setupRegistryServer } from "../testutil/setup-registry-server";
 

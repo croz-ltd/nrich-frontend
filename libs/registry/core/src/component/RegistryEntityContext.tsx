@@ -70,7 +70,7 @@ interface Props {
   /**
    * Children where this context is provided
    */
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode;
 }
 
 /**

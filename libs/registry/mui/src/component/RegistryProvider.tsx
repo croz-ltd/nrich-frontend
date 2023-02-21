@@ -26,7 +26,7 @@ interface Props {
   /**
    * Children where registry configuration is provided
    */
-  children: React.ReactElement | React.ReactElement[]
+  children: React.ReactNode
 }
 
 /**

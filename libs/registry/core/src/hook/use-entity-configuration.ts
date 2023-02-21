@@ -25,6 +25,9 @@ export const useEntityConfiguration = (name: string) => {
   const entityConfiguration = useRegistryConfigurationStore((state) => state.groupConfigurations
     .flatMap((groupConfiguration) => groupConfiguration.entityConfigurationList)
     .find((configuration) => configuration.name === name || configuration.classFullName === name));
+  if (entityConfiguration === undefined) {
+    return undefined;
+  }
 
   const entityIdProperty = entityConfiguration.propertyConfigurationList.find((property) => property.id);
 

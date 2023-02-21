@@ -26,8 +26,8 @@ import { RegistryEntityConfiguration } from "../api";
 export const resolveId = (entityConfiguration, data) => {
   if (entityConfiguration.idClassIdentity) {
     const id = {};
-    entityConfiguration.idClassPropertyNameList.forEach((propertyName) => {
-      id[propertyName] = data[propertyName];
+    entityConfiguration.idClassPropertyNameList.forEach((property) => {
+      id[property.name] = data[property.name];
     });
     return id;
   }
@@ -36,7 +36,7 @@ export const resolveId = (entityConfiguration, data) => {
 };
 
 /**
- * Resolves a value for flat propery from nested data.
+ * Resolves a value for flat property from nested data.
  * @param propertyConfiguration
  * @param data
  */
