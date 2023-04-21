@@ -50,7 +50,7 @@ interface UseRegistryForm {
 }
 
 /**
- * Helper hook used in registry forms. Returnes initial data and configuration to be used in the form.
+ * Helper hook used in registry forms. Returns initial data and configuration to be used in the form.
  * @param initialValues initial values of the form. Row data for update and empty object for create form.
  * @param type type of the form (update or create)
  */

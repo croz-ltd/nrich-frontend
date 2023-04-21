@@ -30,7 +30,7 @@ interface Props {
 }
 
 /**
- * Provider for registry configuration. Until registry is fetch, renders loading screen.
+ * Provider for registry configuration. Until registry is fetched, renders loading screen.
  * @param children Children where registry configuration is provided
  */
 export const RegistryProvider = ({ children }: Props) => {

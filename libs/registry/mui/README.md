@@ -1,36 +1,40 @@
-# @croz/nrich-notification-mui
+# @croz/nrich-registry-mui
 
 ## Overview
 
-`@croz/nrich-notification-mui` is a [MUI](https://mui.com/) wrapper for the [@croz/nrich-notification-core](../core/README.md) module.
-For the display of the notifications a `Snackbar` and `Alert` are used.
+`@croz/nrich-registry-mui` is a [MUI](https://mui.com/) wrapper for the [@croz/nrich-registry-core](../core/README.md) module.
+Module uses generic MUI components to provide basic functionality for registry administration.
 
 ## Setup
 
-To use this module in your project run `npm install @croz/nrich-notification-mui` or `yarn add @croz/nrich-notification-mui`
+To use this module in your project run `npm install @croz/nrich-registry-mui` or `yarn add @croz/nrich-registry-mui`
 
 ## Usage
 
-1. Add `Notifications` component on a part of your app, usually  on `App` or some other higher level component.
+In your app, inside your registry administration, use `RegistryProvider` which loads configurations.
+Be vary that you also need `FormConfigurationProvider` somewhere in the tree so that form validations are loaded.
+Inside the `RegistryProvider` you can use `RegistryEntity` component which encapsulates display with filtering, actions for adding, editing and removing entities.
 
 ```tsx
-import { Notifications } from "@croz/nrich-notification-mui";
-
-const App = () => {
-  return (
-    <div>
-      <Notifications autoClose={3000} position="top-right"/>
-      {/* other components... */}
-    </div>
-  )
-}
+<FormConfigurationProvider>
+  <RegistryProvider>
+    <RegistryEntity entityName="Address"/>
+  </RegistryProvider>
+</FormConfigurationProvider>
 ```
 
-Available props for the `Notifications` component are:
+If you want to customize the display, or use some part from the `RegistryEntity` component, you can also use `RegistryTable`, `RegistryFilter` and `RegistryForm` components together with
+`useRegistryEntityAdministration` hook.
 
-| Prop name | Description                                                                                                                                                                           | Possible values                                                                           | Default value  |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|----------------|
-| autoClose | The duration after which the notification closes <br> expressed in milliseconds. If left undefined, it doesn't close.                                                                 | number in milliseconds, or `undefined`                                                    | `undefined`    |
-| position  | Specifies the notification position on the page, <br> derived from a set of predefined positions available in [MUI](https://mui.com/material-ui/react-snackbar/#positioned-snackbars) | `top-left`, `top-center`, `top-right`, <br>`bottom-left`, `bottom-center`, `bottom-right` | `bottom-right` |
+There is also a `RegistryEntityPicker` component which can be used to pick an entity from a list of available entities.
 
+List of component and which hooks they use internally:
+
+| Component name         | Description                                                       | Used hook                                     |
+|------------------------|-------------------------------------------------------------------|-----------------------------------------------|
+| `RegistryEntity`       | Main component which encapsulates whole entity administration     | `useRegistryEntityAdministration`             |
+| `RegistryTable`        | Table with data, with filtering and sorting                       | `useRegistryEntityContext`, `useRegistrySort` |
+| `RegistryFilter`       | Search input and filter properties                                | `useRegistryFilter`                           |
+| `RegistryForm`         | Form for adding and updating entities                             | `useRegistryEntity`, `useRegistryForm`        |
+| `RegistryEntityPicker` | Component for picking an entity from a list of available entities | `useRegistryConfigurationStore`               |
 
