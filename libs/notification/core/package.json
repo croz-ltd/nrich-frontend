@@ -37,7 +37,7 @@
   ],
   "license": "Apache-2.0",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.mjs",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"

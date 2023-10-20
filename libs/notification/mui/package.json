@@ -37,7 +37,7 @@
   ],
   "license": "Apache-2.0",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.mjs",
   "peerDependencies": {
     "@croz/nrich-notification-core": "^1.0.0",
     "@mui/material": "^5.0.0",
