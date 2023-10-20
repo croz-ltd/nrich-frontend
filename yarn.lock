@@ -838,11 +838,13 @@ __metadata:
     eslint: ^8.2.0
     eslint-config-nrich: "*"
     jest: ^28.1.0
+    msw: ^0.48.1
     react: ^18.1.0
     react-dom: ^18.1.0
     tsup: ^6.5.0
   peerDependencies:
-    "@croz/nrich-registry-core": ^1.0.0
+    "@croz/nrich-form-configuration-core": "*"
+    "@croz/nrich-registry-core": "*"
     "@mui/icons-material": ^5.0.0
     "@mui/material": ^5.0.0
     react: ">=16.8.0"

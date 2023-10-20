@@ -19,9 +19,7 @@ import React from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import {
-  IconButton, Paper, SortDirection as MuiSortDirection, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow,
-} from "@mui/material";
+import { IconButton, Paper, SortDirection as MuiSortDirection, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, } from "@mui/material";
 import TableSortLabel from "@mui/material/TableSortLabel";
 
 import {
@@ -65,7 +63,7 @@ interface RegistryTableHeadProps {
  * @param sortPropertyList current value for sorting configuration
  * @param onSortChange change handler for sorting configuration
  */
-const RegistryTableHeadCell = ({ property, sortPropertyList, onSortChange }: RegistryTableHeadProps) => {
+const RegistryTableHeadCell = ({property, sortPropertyList, onSortChange}: RegistryTableHeadProps) => {
   const {
     sortDirection,
     sortChangeHandler,
@@ -116,28 +114,23 @@ interface PropertyCellProps {
  * @param value value of property
  * @param subEntityMap map with registry entity subentities
  */
-const PropertyCell = ({ propertyConfiguration, value, subEntityMap }: PropertyCellProps) => {
+const PropertyCell = ({propertyConfiguration, value, subEntityMap}: PropertyCellProps) => {
   let stringValue = value;
   if (value === undefined || value === null) {
     stringValue = "-";
-  }
-  else if (propertyConfiguration.javascriptType === "object") {
+  } else if (propertyConfiguration.javascriptType === "object") {
     const configuration = subEntityMap[propertyConfiguration.singularAssociationReferencedClass];
     const idField = findIdField(configuration);
     stringValue = formatIdName(configuration.classFullName, idField.name, value[idField.name]);
-  }
-  else if (propertyConfiguration.javascriptType === "date") {
+  } else if (propertyConfiguration.javascriptType === "date") {
     stringValue = new Date(value).toLocaleDateString();
-  }
-  else if (propertyConfiguration.javascriptType === "number") {
+  } else if (propertyConfiguration.javascriptType === "number") {
     if (propertyConfiguration.decimal) {
       stringValue = Number(value).toFixed(2);
-    }
-    else {
+    } else {
       stringValue = value;
     }
-  }
-  else if (propertyConfiguration.javascriptType === "boolean") {
+  } else if (propertyConfiguration.javascriptType === "boolean") {
     stringValue = value ? "Yes" : "No";
   }
 
@@ -174,20 +167,20 @@ interface RegistryTableRowProps {
  * @param onRemove handler for removing specific row
  */
 const RegistryTableRow = ({
-  row, onEdit, onRemove,
-}: RegistryTableRowProps) => {
-  const { entityConfiguration, singularAssociationsMap, finalProperties } = useRegistryEntityContext();
+                            row, onEdit, onRemove,
+                          }: RegistryTableRowProps) => {
+  const {entityConfiguration, singularAssociationsMap, finalProperties} = useRegistryEntityContext();
 
   return (
     <TableRow
-      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+      sx={{"&:last-child td, &:last-child th": {border: 0}}}
     >
       {finalProperties.map((property) => (
-        <PropertyCell key={property.name} propertyConfiguration={property} value={resolveValue(property, row)} subEntityMap={singularAssociationsMap} />))}
+        <PropertyCell key={property.name} propertyConfiguration={property} value={resolveValue(property, row)} subEntityMap={singularAssociationsMap}/>))}
       {(entityConfiguration.updateable || entityConfiguration.deletable) && (
         <TableCell>
-          {entityConfiguration.updateable && <IconButton onClick={() => onEdit(resolveId(entityConfiguration, row), row)}><EditIcon /></IconButton>}
-          {entityConfiguration.deletable && <IconButton onClick={() => onRemove(resolveId(entityConfiguration, row))}><DeleteIcon /></IconButton>}
+          {entityConfiguration.updateable && <IconButton onClick={() => onEdit(resolveId(entityConfiguration, row), row)}><EditIcon/></IconButton>}
+          {entityConfiguration.deletable && <IconButton onClick={() => onRemove(resolveId(entityConfiguration, row))}><DeleteIcon/></IconButton>}
         </TableCell>
       )}
     </TableRow>
@@ -201,7 +194,7 @@ interface RegistryTableProps {
   /**
    * Row data of entity
    */
-  data: RegistryResponse<any[]>;
+  data: RegistryResponse<any>;
 
   /**
    * Current request used for latest data fetch
@@ -237,36 +230,36 @@ interface RegistryTableProps {
  * @param onRemove handler for removing specific row
  */
 export const RegistryTable = ({
-  data, request, onRequestChange, onEdit, onRemove,
-}: RegistryTableProps) => {
-  const { entityConfiguration, finalProperties } = useRegistryEntityContext();
+                                data, request, onRequestChange, onEdit, onRemove,
+                              }: RegistryTableProps) => {
+  const {entityConfiguration, finalProperties} = useRegistryEntityContext();
 
   const onPageChange = (event: unknown, newPage: number) => {
-    onRequestChange({ ...request, pageNumber: newPage });
+    onRequestChange({...request, pageNumber: newPage});
   };
   const onPageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onRequestChange({ ...request, pageSize: +event.target.value, pageNumber: 0 });
+    onRequestChange({...request, pageSize: +event.target.value, pageNumber: 0});
   };
 
   const onSortChange = (sortPropertyList: SortProperty[]) => {
-    onRequestChange({ ...request, sortPropertyList });
+    onRequestChange({...request, sortPropertyList});
   };
 
   return (
     <Paper>
       <TableContainer>
-        <Table sx={{ minWidth: 650 }} size="small">
+        <Table sx={{minWidth: 650}} size="small">
           <TableHead>
             <TableRow>
               {finalProperties.map((property) => (
-                <RegistryTableHeadCell key={property.name} property={property} sortPropertyList={request.sortPropertyList ?? []} onSortChange={onSortChange} />
+                <RegistryTableHeadCell key={property.name} property={property} sortPropertyList={request.sortPropertyList ?? []} onSortChange={onSortChange}/>
               ))}
-              {(entityConfiguration.updateable || entityConfiguration.deletable) && (<TableCell />)}
+              {(entityConfiguration.updateable || entityConfiguration.deletable) && (<TableCell/>)}
             </TableRow>
           </TableHead>
           <TableBody>
             {/* eslint-disable-next-line react/no-array-index-key */}
-            {(data.content ?? []).map((row, index) => <RegistryTableRow key={index} row={row} onEdit={onEdit} onRemove={onRemove} />)}
+            {(data.content ?? []).map((row, index) => <RegistryTableRow key={index} row={row} onEdit={onEdit} onRemove={onRemove}/>)}
           </TableBody>
         </Table>
       </TableContainer>
