@@ -31,7 +31,7 @@ export interface FormConfiguration {
 
 }
 
-export interface FormYupConfiguration {
+export interface FormYupConfiguration<T extends Record<string, never> = any> {
 
   /**
    * Registered form id for this form configuration.
@@ -41,7 +41,7 @@ export interface FormYupConfiguration {
   /**
    * List of yup ObjectSchema instances holding property configuration for each property defined in the class that form id was mapped to.
    */
-  yupSchema: yup.ObjectSchema<any>;
+  yupSchema: yup.ObjectSchema<T>;
 
 }
 

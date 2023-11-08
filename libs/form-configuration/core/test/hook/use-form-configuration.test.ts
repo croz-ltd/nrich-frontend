@@ -104,4 +104,20 @@ describe("@croz/nrich-form-configuration-core/use-form-configuration", () => {
     // then
     expect(result.current).toEqual(undefined);
   });
+
+  it("should compile and return yup object when used with generic", () => {
+    // given
+    type RegistrationForm = {
+      username: string,
+      password: string,
+      oib: number,
+    };
+
+    // when
+    const { formId } = mockFormYupConfigurations[0];
+    const { result } = renderHook(() => useYupFormConfiguration<RegistrationForm>(formId));
+
+    // then
+    expect(result.current).toMatchObject(mockFormYupConfigurations[0].yupSchema);
+  });
 });

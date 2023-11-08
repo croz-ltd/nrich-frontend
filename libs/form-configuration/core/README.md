@@ -33,10 +33,13 @@ import React, { useState } from "react";
 import { useYupFormConfiguration } from "@croz/nrich-form-configuration-core";
 import { Form, Formik } from "formik";
 
+type CreateForm = {
+  /* fields of the form */
+}
 
 export const SomeFormComponent = () => {
   const [formValues, setFormValues] = useState({});
-  const validationSchema = useYupFormConfiguration('user.create-form');
+  const validationSchema = useYupFormConfiguration<CreateForm>('user.create-form');
 
   return (
     <Formik
@@ -44,12 +47,13 @@ export const SomeFormComponent = () => {
       onSubmit={(values) => setFormValues(values)}
     >
       <Form>
-        { /* Rest of the form */ }
+        { /* Rest of the form */}
       </Form>
     </Formik>
   );
 };
 ```
+
 *NOTE: Formik is used just as an example, you can use any form lib compatible with `yup`.*
 
 ## Details
@@ -63,7 +67,6 @@ export const SomeFormComponent = () => {
 | url                           | Backend form configuration path                                       | no       | `/nrich/form/configuration` |
 | requestOptionsResolver        | Function that creates options for the initial fetch call to backend   | no       | none                        |
 | additionalValidatorConverters | List of `ValidatorConverter`s used to allow custom validations        | no       | none                        |
-
 
 ### Registering and using custom validations
 
