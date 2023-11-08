@@ -1,5 +1,11 @@
 # @croz/nrich-form-configuration-core
 
+## 2.1.0
+
+### Minor Changes
+
+- [#53](https://github.com/croz-ltd/nrich-frontend/pull/53) [`9ae5c75`](https://github.com/croz-ltd/nrich-frontend/commit/9ae5c75c92cc694c1d368f541c3aa229dc0d8141) Thanks [@jtomic-croz](https://github.com/jtomic-croz)! - Added possibility to define generic type when using `useYupFormConfiguration`
+
 ## 2.0.0
 
 ### Major Changes
