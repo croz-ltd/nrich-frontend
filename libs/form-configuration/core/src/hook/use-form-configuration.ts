@@ -15,6 +15,8 @@
  *
  */
 
+import { ObjectSchema } from "yup";
+
 import { FormYupConfiguration } from "../api";
 import { useFormConfigurationStore } from "../store";
 
@@ -80,7 +82,7 @@ export const useFormConfiguration: UseFormConfiguration = () => {
  *
  * @returns Mapped Yup configuration from the form configuration identified by the form id, or undefined if no matching form configuration is found.
  */
-export const useYupFormConfiguration = (formId: string) => {
+export const useYupFormConfiguration = <T extends Record<string, any> = any>(formId: string) => {
   const { formYupConfigurations } = useFormConfiguration();
 
   const searchedFormConfiguration = formYupConfigurations.find((formYupConfiguration) => formYupConfiguration.formId === formId);
@@ -89,5 +91,5 @@ export const useYupFormConfiguration = (formId: string) => {
     return undefined;
   }
 
-  return searchedFormConfiguration.yupSchema;
+  return searchedFormConfiguration.yupSchema as ObjectSchema<T>;
 };
