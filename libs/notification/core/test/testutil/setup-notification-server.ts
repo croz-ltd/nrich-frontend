@@ -35,4 +35,8 @@ export const setupNotificationServer = (): SetupServerApi => setupServer(
   rest.get("/without-notification", (_, response, context) => response(context.json(
     { success: true },
   ))),
+
+  rest.get("/with-plain-text", (_, response, context) => response(context.text(
+    "plain text",
+  ))),
 );
