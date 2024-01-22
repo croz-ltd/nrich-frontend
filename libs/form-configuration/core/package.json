@@ -6,7 +6,7 @@
   "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "dependencies": {
     "yup": "^0.32.11",
-    "zustand": "^4.1.4"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@croz/nrich-jest-config": "*",

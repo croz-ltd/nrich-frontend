@@ -15,7 +15,7 @@
  *
  */
 
-import create from "zustand";
+import { create } from "zustand";
 
 import { Notification } from "../api";
 
