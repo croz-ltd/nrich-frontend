@@ -31,9 +31,14 @@ export const xhrNotificationInterceptor = () => {
     // eslint-disable-next-line func-names
     this.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
-        const body = JSON.parse(this.responseText);
-        if (isNotificationResponse(body)) {
-          useNotificationStore.getState().add(body.notification);
+        try {
+          const body = JSON.parse(this.responseText);
+          if (isNotificationResponse(body)) {
+            useNotificationStore.getState().add(body.notification);
+          }
+        }
+        catch (e) {
+          // ignore non-json responses
         }
       }
     }, false);
