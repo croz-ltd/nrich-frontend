@@ -65,4 +65,19 @@ describe("@croz/nrich-notification-core/xhr-notification-interceptor", () => {
     // then
     expect(notificationState.notifications).toHaveLength(0);
   });
+
+  it("should ignore responses with plain text", async () => {
+    // when
+    const response = await axios.get("/with-plain-text");
+
+    // then
+    expect(response).toBeDefined();
+    expect(response.data).toMatch("plain text");
+
+    // and when
+    const notificationState = useNotificationStore.getState();
+
+    // then
+    expect(notificationState.notifications).toHaveLength(0);
+  });
 });
