@@ -1,5 +1,13 @@
 # @croz/nrich-notification-core
 
+## 1.1.2
+
+### Patch Changes
+
+- [#56](https://github.com/croz-ltd/nrich-frontend/pull/56) [`31689c6`](https://github.com/croz-ltd/nrich-frontend/commit/31689c652bde92ef1a6865e5de9aa4977804412c) Thanks [@dmurat](https://github.com/dmurat)! - Upgrade zustand lib and its import statements to non-deprecated sytax
+
+- [#55](https://github.com/croz-ltd/nrich-frontend/pull/55) [`3298e99`](https://github.com/croz-ltd/nrich-frontend/commit/3298e99e0a9da0e90ab37c3d116e9aaff6c45d83) Thanks [@dmurat](https://github.com/dmurat)! - Update xhrNotificationInterceptor to ignore non-json responses
+
 ## 1.1.1
 
 ### Patch Changes

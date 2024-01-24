@@ -1,5 +1,11 @@
 # @croz/nrich-form-configuration-core
 
+## 2.1.1
+
+### Patch Changes
+
+- [#56](https://github.com/croz-ltd/nrich-frontend/pull/56) [`31689c6`](https://github.com/croz-ltd/nrich-frontend/commit/31689c652bde92ef1a6865e5de9aa4977804412c) Thanks [@dmurat](https://github.com/dmurat)! - Upgrade zustand lib and its import statements to non-deprecated sytax
+
 ## 2.1.0
 
 ### Minor Changes
