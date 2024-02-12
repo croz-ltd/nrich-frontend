@@ -47,7 +47,7 @@ describe("@croz/nrich-registry-core/use-registry-entity-administration", () => {
     // then
     const {
       entityConfiguration, entityIdProperty, data, formData, formModalOpen, closeFormModal, loading, formType, handleEditClick,
-      handleSubmitClick, handleAddClick, handleFilterUpdate, handlePagingUpdate, request, remove,
+      handleSubmitClick, handleAddClick, handleAddFromCopyClick, handleFilterUpdate, handlePreviewClick, handlePagingUpdate, request, remove,
     } = result.current;
 
     // configuration
@@ -66,6 +66,8 @@ describe("@croz/nrich-registry-core/use-registry-entity-administration", () => {
     // actions
     expect(handleEditClick).toBeDefined();
     expect(handleAddClick).toBeDefined();
+    expect(handleAddFromCopyClick).toBeDefined();
+    expect(handlePreviewClick).toBeDefined();
     expect(handleSubmitClick).toBeDefined();
     expect(remove).toBeDefined();
 
@@ -121,6 +123,31 @@ describe("@croz/nrich-registry-core/use-registry-entity-administration", () => {
     expect(result.current.formModalOpen).toEqual(false);
   });
 
+  it("should correctly manage add from copy actions", async () => {
+    // given
+    const { result } = renderHook(() => useRegistryEntityAdministration(entityName));
+    const {
+      handleAddFromCopyClick, closeFormModal,
+    } = result.current;
+    const rowData = registryListMock.content[0];
+
+    // when
+    await act(() => handleAddFromCopyClick(rowData));
+
+    // then
+    expect(result.current.formType).toEqual("create");
+    expect(result.current.formData).toEqual(rowData);
+    expect(result.current.formModalOpen).toEqual(true);
+
+    // and when
+    await act(() => closeFormModal());
+
+    // then
+    expect(result.current.formType).toEqual(undefined);
+    expect(result.current.formData).toEqual(undefined);
+    expect(result.current.formModalOpen).toEqual(false);
+  });
+
   it("should correctly manage edit actions", async () => {
     // given
     const { result } = renderHook(() => useRegistryEntityAdministration(entityName));
@@ -146,6 +173,31 @@ describe("@croz/nrich-registry-core/use-registry-entity-administration", () => {
     expect(result.current.formModalOpen).toEqual(false);
   });
 
+  it("should correctly manage preview actions", async () => {
+    // given
+    const { result } = renderHook(() => useRegistryEntityAdministration(entityName));
+    const {
+      handlePreviewClick, closeFormModal,
+    } = result.current;
+    const rowData = registryListMock.content[0];
+
+    // when
+    await act(() => handlePreviewClick(rowData));
+
+    // then
+    expect(result.current.formType).toEqual("preview");
+    expect(result.current.formData).toEqual(rowData);
+    expect(result.current.formModalOpen).toEqual(true);
+
+    // and when
+    await act(() => closeFormModal());
+
+    // then
+    expect(result.current.formType).toEqual(undefined);
+    expect(result.current.formData).toEqual(undefined);
+    expect(result.current.formModalOpen).toEqual(false);
+  });
+
   it("should correctly manage submit after adding", async () => {
     // given
     const { result } = renderHook(() => useRegistryEntityAdministration(entityName));
@@ -155,6 +207,31 @@ describe("@croz/nrich-registry-core/use-registry-entity-administration", () => {
 
     // when
     await act(() => handleAddClick());
+    await act(() => handleSubmitClick({
+      street: "Street: 2",
+      streetNumber: 3,
+      city: "City: 1",
+      country: {
+        id: 1,
+      },
+    }));
+
+    // then
+    expect(result.current.formType).toEqual(undefined);
+    expect(result.current.formData).toEqual(undefined);
+    expect(result.current.formModalOpen).toEqual(false);
+  });
+
+  it("should correctly manage submit after adding from copy", async () => {
+    // given
+    const { result } = renderHook(() => useRegistryEntityAdministration(entityName));
+    const {
+      handleAddFromCopyClick, handleSubmitClick,
+    } = result.current;
+    const rowData = registryListMock.content[0];
+
+    // when
+    await act(() => handleAddFromCopyClick(rowData));
     await act(() => handleSubmitClick({
       street: "Street: 2",
       streetNumber: 3,

@@ -68,11 +68,23 @@ interface UseRegistryEntityAdministration {
   handleAddClick: () => void;
 
   /**
+   * Handler for adding new entry from copied one. Opens up modal with filled data from copied entry.
+   * @param row data of the entry to be edited
+   */
+  handleAddFromCopyClick: (row: any) => void;
+
+  /**
    * Handler for editing existing entry. Opens up modal with filled data to be edited.
    * @param id id of the entry to be edited
    * @param row data of the entry to be edited
    */
   handleEditClick: (id: any, row: any) => void;
+
+  /**
+   * Handler for entry preview. Opens up modal with filled data from entry.
+   * @param row data of the entry to be previewed
+   */
+  handlePreviewClick: (row: any) => void;
 
   /**
    * Handler for submitting add or edit form. Closes modal and tries to save new data.
@@ -153,9 +165,21 @@ export const useRegistryEntityAdministration = (entityName: string): UseRegistry
     setFormData(undefined);
   };
 
+  const handleAddFromCopyClick = (row: any) => {
+    setFormModalOpen(true);
+    setFormType("create");
+    setFormData(row);
+  };
+
   const handleEditClick = (id: any, row: any) => {
     setFormModalOpen(true);
     setFormType("update");
+    setFormData(row);
+  };
+
+  const handlePreviewClick = (row: any) => {
+    setFormModalOpen(true);
+    setFormType("preview");
     setFormData(row);
   };
 
@@ -188,7 +212,9 @@ export const useRegistryEntityAdministration = (entityName: string): UseRegistry
     handlePagingUpdate,
     handleFilterUpdate,
     handleAddClick,
+    handleAddFromCopyClick,
     handleEditClick,
+    handlePreviewClick,
     handleSubmitClick,
     formType,
     formData,

@@ -18,4 +18,4 @@
 /**
  * Type of form on registry entity administration
  */
-export type FormType = "create" | "update";
+export type FormType = "create" | "update" | "preview";
