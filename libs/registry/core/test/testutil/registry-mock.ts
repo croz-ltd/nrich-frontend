@@ -1212,3 +1212,13 @@ export const registryConfigurationWithClassIdMock = {
   idClassIdentity: true,
   embeddedIdentity: false,
 };
+
+export const registryEntityFormattersMock = {
+  "hr.apis.eup.registry.domain.predmet.model.RokCuvanja": (value: any) => {
+    if (value.keepFor === 99) {
+      return "Trajno";
+    }
+    return `${value.keepFor}`;
+  },
+  "hr.apis.eup.registry.domain.predmet.model.PlanKlasifikacijskeOznake": (value: any) => `${value.classificationCode}`,
+};

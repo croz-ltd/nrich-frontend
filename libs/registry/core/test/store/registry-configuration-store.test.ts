@@ -15,8 +15,8 @@
  *
  */
 
-import { useRegistryConfigurationStore } from "../../src/store";
-import { registryConfigurationMock } from "../testutil/registry-mock";
+import { useRegistryConfigurationStore } from "../../src";
+import { registryConfigurationMock, registryEntityFormattersMock } from "../testutil/registry-mock";
 
 describe("@croz/nrich-registry-core/registry-configuration-store", () => {
   it("should create and update store configuration", () => {
@@ -34,5 +34,18 @@ describe("@croz/nrich-registry-core/registry-configuration-store", () => {
     expect(currentState.groupConfigurations[0].entityConfigurationList.length).toEqual(registryConfigurationMock[0].entityConfigurationList.length);
     expect(currentState.groupConfigurations[1].groupId).toEqual(registryConfigurationMock[1].groupId);
     expect(currentState.groupConfigurations[1].entityConfigurationList.length).toEqual(registryConfigurationMock[1].entityConfigurationList.length);
+  });
+
+  it("should create and update entity formatters", () => {
+    // given
+    let currentState = useRegistryConfigurationStore.getState();
+
+    // when
+    currentState.setEntityFormatters(registryEntityFormattersMock);
+
+    // then
+    currentState = useRegistryConfigurationStore.getState();
+
+    expect(currentState.entityFormatters).toEqual(registryEntityFormattersMock);
   });
 });

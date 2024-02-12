@@ -30,11 +30,25 @@ export interface RegistryConfigurationStore {
    * Load configuration
    */
   load: (groupConfigurations) => void;
+
+  /**
+   * Entity formatters used for rendering complex entity types
+   */
+  entityFormatters: Record<string, (value: any) => string>;
+
+  /**
+   * entity formatters setter
+   */
+  setEntityFormatters: (entityFormatters: Record<string, (value: any) => string>) => void;
 }
 
 export const useRegistryConfigurationStore = create<RegistryConfigurationStore>((set) => ({
   groupConfigurations: [],
   load: (groupConfigurations) => set(() => ({
     groupConfigurations,
+  })),
+  entityFormatters: {},
+  setEntityFormatters: (entityFormatters) => set(() => ({
+    entityFormatters,
   })),
 }));
