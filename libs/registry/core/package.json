@@ -38,7 +38,7 @@
     "zustand"
   ],
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.mjs",
   "peerDependencies": {
     "@croz/nrich-form-configuration-core": "*",
     "react": ">=16.8.0",
