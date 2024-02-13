@@ -21,7 +21,7 @@ import {
   DEFAULT_INITIAL_REQUEST, EntityRegistryRequest, useRegistryConfigurationStore, useRegistryEntity,
 } from "../../src";
 import * as service from "../../src/service/service";
-import { registryConfigurationMock } from "../testutil/registry-mock";
+import { registryConfigurationMock, registryCreateResultMock, registryUpdateResultMock } from "../testutil/registry-mock";
 import { setupRegistryServer } from "../testutil/setup-registry-server";
 import { sleep } from "../testutil/sleep";
 
@@ -125,7 +125,9 @@ describe("@croz/nrich-registry-core/use-registry-entity", () => {
     const { entityConfiguration } = result.current;
 
     // then
-    await act(() => result.current.add(addressCreateRequest));
+    const response = await act(() => result.current.add(addressCreateRequest));
+
+    expect(response).toEqual(registryCreateResultMock);
     expect(spyCreateEntity).toHaveBeenCalledWith(entityConfiguration.classFullName, addressCreateRequest);
     expect(spyLoadEntities).toHaveBeenCalledTimes(2);
   });
@@ -149,7 +151,9 @@ describe("@croz/nrich-registry-core/use-registry-entity", () => {
     const { entityConfiguration } = result.current;
 
     // then
-    await act(() => result.current.edit(id, addressUpdateRequest));
+   const response = await act(() => result.current.edit(id, addressUpdateRequest));
+
+    expect(response).toEqual(registryUpdateResultMock);
     expect(spyUpdateEntity).toHaveBeenCalledWith(entityConfiguration.classFullName, id, addressUpdateRequest);
     expect(spyLoadEntities).toHaveBeenCalledTimes(2);
   });
@@ -165,7 +169,9 @@ describe("@croz/nrich-registry-core/use-registry-entity", () => {
     const { entityConfiguration } = result.current;
 
     // then
-    await act(() => result.current.remove(id));
+    const response = await act(() => result.current.remove(id));
+
+    expect(response.status).toEqual(200);
     expect(spyRemoveEntity).toHaveBeenCalledWith(entityConfiguration.classFullName, id);
     expect(spyLoadEntities).toHaveBeenCalledTimes(2);
   });

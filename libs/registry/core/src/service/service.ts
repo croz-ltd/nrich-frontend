@@ -143,10 +143,12 @@ export const updateEntity = async (classFullName: string, id: any, updateData: a
  * @param classFullName Full Java class name of the registry entity
  * @param id Id of the existing entity
  */
-export const removeEntity = async (classFullName: string, id: any): Promise<void> => {
-  await fetch("/nrich/registry/data/delete", {
+export const removeEntity = async (classFullName: string, id: any): Promise<any> => {
+  const response = await fetch("/nrich/registry/data/delete", {
     method: "POST",
     body: JSON.stringify({ classFullName, id }),
     headers: { "Content-Type": "application/json" },
   });
+
+  return response;
 };

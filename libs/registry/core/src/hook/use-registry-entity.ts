@@ -75,7 +75,7 @@ export interface UseRegistryEntity {
    * Automatically re-fetches with request provided to hook.
    * @param id id of the data for editing. When complex ids are used, it should be an object containing all id fields.
    */
-  remove: (id: any) => Promise<void>;
+  remove: (id: any) => Promise<any>;
 }
 
 /**
@@ -113,18 +113,24 @@ export const useRegistryEntity = (name: string, initialRequest: EntityRegistryRe
   }, []);
 
   const add = async (createData: any) => {
-    await createEntity(entityConfiguration.classFullName, createData);
+    const response = await createEntity(entityConfiguration.classFullName, createData);
     await load(initialRequest);
+
+    return response;
   };
 
   const edit = async (id: any, updateData: any) => {
-    await updateEntity(entityConfiguration.classFullName, id, updateData);
+    const response = await updateEntity(entityConfiguration.classFullName, id, updateData);
     await load(initialRequest);
+
+    return response;
   };
 
   const remove = async (id: any) => {
-    await removeEntity(entityConfiguration.classFullName, id);
+    const response = await removeEntity(entityConfiguration.classFullName, id);
     await load(initialRequest);
+
+    return response;
   };
 
   return {

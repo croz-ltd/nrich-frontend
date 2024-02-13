@@ -90,7 +90,7 @@ interface UseRegistryEntityAdministration {
    * Handler for submitting add or edit form. Closes modal and tries to save new data.
    * @param values data of new/edited entry for saving
    */
-  handleSubmitClick: (values: any) => Promise<void>;
+  handleSubmitClick: (values: any) => Promise<any>;
 
   /**
    * Current form type (create or update). Undefined if no form is currently active.
@@ -122,7 +122,7 @@ interface UseRegistryEntityAdministration {
    * Automatically re-fetches with request provided to hook.
    * @param id id of the data for editing. When complex ids are used, it should be an object containing all id fields.
    */
-  remove: (id: any) => Promise<void>;
+  remove: (id: any) => Promise<any>;
 }
 
 /**
@@ -185,17 +185,21 @@ export const useRegistryEntityAdministration = (entityName: string): UseRegistry
 
   const handleSubmitClick = async (values: any) => {
     const finalValue = restructureSubmitValue(values);
+    let actionResponse: undefined;
+
     setFormModalOpen(false);
     setLoading(true);
     if (formType === "update") {
-      await edit(formData[entityIdProperty.name], finalValue);
+      actionResponse = await edit(formData[entityIdProperty.name], finalValue);
     }
     else {
-      await add(finalValue);
+      actionResponse = await add(finalValue);
     }
     setLoading(false);
     setFormType(undefined);
     setFormData(undefined);
+
+    return actionResponse
   };
 
   const closeFormModal = () => {
