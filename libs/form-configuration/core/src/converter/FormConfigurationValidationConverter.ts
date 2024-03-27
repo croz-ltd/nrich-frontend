@@ -15,6 +15,7 @@
  *
  */
 
+import _mergeWith from "lodash/mergeWith";
 import * as yup from "yup";
 
 import { ConstrainedPropertyClientValidatorConfiguration, ConstrainedPropertyConfiguration, ValidatorConverter } from "../api";
@@ -35,8 +36,7 @@ export class FormConfigurationValidationConverter {
     },
     {
       supports: (configuration) => ["Size", "Length"].includes(configuration.name),
-      convert: (configuration, validator) => validator.min(configuration.argumentMap.min, configuration.errorMessage)
-        .max(configuration.argumentMap.max, configuration.errorMessage),
+      convert: (configuration, validator) => validator.min(configuration.argumentMap.min, configuration.errorMessage).max(configuration.argumentMap.max, configuration.errorMessage),
     },
     {
       supports: (configuration) => ["Pattern"].includes(configuration.name),
@@ -84,14 +84,15 @@ export class FormConfigurationValidationConverter {
         return;
       }
 
-      const validator = property.validatorList.reduce((previousValidator, validatorConfiguration) => this.applyConverter(validatorConfiguration, previousValidator), yupValidation().nullable());
+      const validator = property.validatorList
+        .reduce((previousValidator, validatorConfiguration) => this.applyConverter(validatorConfiguration, previousValidator), yupValidation().default(undefined).nullable());
       const [propertyName, restOfPathList] = FormConfigurationValidationConverter.convertPath(property.path);
 
       if (restOfPathList.length > 0) {
         const currentPathSchema = [...restOfPathList].reverse()
-          .reduce((currentShape, path) => ({ [path]: yup.object().shape(currentShape) }), { [propertyName]: validator });
+          .reduce((currentShape, path) => ({ [path]: yup.object().shape(currentShape).default(undefined).nullable() }), { [propertyName]: validator });
 
-        schema = schema.concat(yup.object().shape(currentPathSchema));
+        schema = this.mergeSchemas(schema, yup.object().shape(currentPathSchema));
       }
       else {
         const currentPropertySchema = yup.object().shape({ [propertyName]: validator });
@@ -101,6 +102,53 @@ export class FormConfigurationValidationConverter {
     });
 
     return schema;
+  }
+
+  // Function to recursively merge two Yup schemas
+  mergeSchemas(schema1: yup.ObjectSchema<any>, schema2: yup.ObjectSchema<any>) {
+    // Recursive helper function to merge two schema objects
+    const mergeObjects = (obj1, obj2) => {
+      const merged = { ...obj1 };
+
+      Object.keys(obj2).forEach((key) => {
+        if (Object.prototype.hasOwnProperty.call(merged, key)) {
+          // If both properties are objects, merge recursively
+          if (obj1[key].type === "object" && obj2[key].type === "object") {
+            merged[key] = this.mergeSchemas(obj1[key], obj2[key]);
+            merged[key].spec = _mergeWith(obj1[key].spec, obj2[key].spec, (field1, field2) => (typeof field1 === "boolean" ? field1 && field2 : field1 ?? field2));
+          }
+          else if (obj1[key].type === "array" && obj2[key].type === "array") {
+            if (obj1[key].innerType.type === "object" && obj2[key].innerType.type === "object") {
+              merged[key] = yup.array().of(this.mergeSchemas(obj1[key].innerType, obj2[key].innerType));
+            }
+            else {
+              merged[key] = yup.array().of(obj2[key].innerType);
+            }
+          }
+          else {
+            merged[key] = obj2[key];
+          }
+        }
+        else {
+          // Otherwise, add the property to the merged object
+          merged[key] = obj2[key];
+        }
+      });
+
+      return merged;
+    };
+
+    // Extract the fields of schema1
+    const fields1 = schema1.fields;
+
+    // Extract the fields of schema2
+    const fields2 = schema2.fields;
+
+    // Merge the fields recursively
+    const mergedFields = mergeObjects(fields1, fields2);
+
+    // Create a new merged schema
+    return yup.object().shape(mergedFields);
   }
 
   private applyConverter(validatorConfiguration: ConstrainedPropertyClientValidatorConfiguration, validator: any): any {
