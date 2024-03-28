@@ -5,7 +5,7 @@
   "author": "CROZ",
   "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "dependencies": {
-    "yup": "^0.32.11",
+    "yup": "^1.2.0",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
