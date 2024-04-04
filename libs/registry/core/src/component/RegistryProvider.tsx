@@ -17,28 +17,34 @@
 
 import React from "react";
 
-import { loadRegistryConfiguration, useRegistryConfigurationStore } from "@croz/nrich-registry-core";
+import { loadRegistryConfiguration } from "../service";
+import { RegistryConfigurationStore, useRegistryConfigurationStore } from "../store";
 
 /**
  * {@link RegistryProvider} properties
  */
-interface Props {
+interface Props extends Partial<RegistryConfigurationStore> {
   /**
    * Children where registry configuration is provided
    */
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 /**
  * Provider for registry configuration. Until registry is fetched, renders loading screen.
  * @param children Children where registry configuration is provided
+ * @param registryConfiguration Registry configuration for baseURL and requestOptionsResolver
+ * @param entityFormatters Formatters for complex object types
  */
-export const RegistryProvider = ({ children }: Props) => {
-  const { load } = useRegistryConfigurationStore();
+export const RegistryProvider = ({ children, registryConfiguration = {}, entityFormatters = {} }: Props) => {
+  const { load, setRegistryConfiguration, setEntityFormatters } = useRegistryConfigurationStore();
   const [loading, setLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     const loadConfiguration = async () => {
+      setRegistryConfiguration({ ...registryConfiguration });
+      setEntityFormatters(entityFormatters);
+
       const configuration = await loadRegistryConfiguration();
       load(configuration);
       setLoading(false);

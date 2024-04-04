@@ -16,3 +16,4 @@
  */
 
 export * from "./RegistryEntityContext";
+export * from "./RegistryProvider";

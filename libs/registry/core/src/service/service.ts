@@ -18,6 +18,7 @@
 import {
   PagingParameter, PagingResponse, RegistryGroupConfiguration, SearchParameter, SortProperty, SortResponse,
 } from "../api";
+import { useRegistryConfigurationStore } from "../store";
 
 /**
  * Request when fetching a list of registry entries.
@@ -59,8 +60,13 @@ export type RegistryResponse<T> = {
  * Fetches whole registry configuration.
  */
 export const loadRegistryConfiguration = async (): Promise<RegistryGroupConfiguration[]> => {
-  const response = await fetch("/nrich/registry/configuration/fetch", {
+  const { registryConfiguration } = useRegistryConfigurationStore.getState();
+  const additionalOptions = registryConfiguration.requestOptionsResolver?.() || {};
+  const finalBaseUrl = registryConfiguration.baseURL || "/nrich/registry";
+
+  const response = await fetch(`${finalBaseUrl}/configuration/fetch`, {
     method: "POST",
+    ...additionalOptions,
   });
   const data = await response.json() as RegistryGroupConfiguration[];
   return data;
@@ -72,10 +78,15 @@ export const loadRegistryConfiguration = async (): Promise<RegistryGroupConfigur
  * @returns List of entity results
  */
 export const loadEntities = async (request: RegistryRequest): Promise<RegistryResponse<any>> => {
-  const response = await fetch("/nrich/registry/data/list", {
+  const { registryConfiguration } = useRegistryConfigurationStore.getState();
+  const additionalOptions = registryConfiguration.requestOptionsResolver?.() || {};
+  const finalBaseUrl = registryConfiguration.baseURL || "/nrich/registry";
+
+  const response = await fetch(`${finalBaseUrl}/data/list`, {
     method: "POST",
     body: JSON.stringify(request),
     headers: { "Content-Type": "application/json" },
+    ...additionalOptions,
   });
   const data = await response.json() as RegistryResponse<any>;
   return data;
@@ -87,12 +98,17 @@ export const loadEntities = async (request: RegistryRequest): Promise<RegistryRe
  * @returns Map of results where key is full class name and value is single entity response list
  */
 export const bulkLoadEntities = async (requests: RegistryRequest[]): Promise<Record<string, RegistryResponse<any>>> => {
-  const response = await fetch("/nrich/registry/data/list-bulk", {
+  const { registryConfiguration } = useRegistryConfigurationStore.getState();
+  const additionalOptions = registryConfiguration.requestOptionsResolver?.() || {};
+  const finalBaseUrl = registryConfiguration.baseURL || "/nrich/registry";
+
+  const response = await fetch(`${finalBaseUrl}/data/list-bulk`, {
     method: "POST",
     body: JSON.stringify({
       registryRequestList: requests,
     }),
     headers: { "Content-Type": "application/json" },
+    ...additionalOptions,
   });
   const data = await response.json() as Record<string, RegistryResponse<any>>;
   return data;
@@ -105,13 +121,18 @@ export const bulkLoadEntities = async (requests: RegistryRequest[]): Promise<Rec
  * @returns Created entity
  */
 export const createEntity = async (classFullName: string, createData: any): Promise<any> => {
-  const response = await fetch("/nrich/registry/data/create", {
+  const { registryConfiguration } = useRegistryConfigurationStore.getState();
+  const additionalOptions = registryConfiguration.requestOptionsResolver?.() || {};
+  const finalBaseUrl = registryConfiguration.baseURL || "/nrich/registry";
+
+  const response = await fetch(`${finalBaseUrl}/data/create`, {
     method: "POST",
     body: JSON.stringify({
       classFullName,
       jsonEntityData: JSON.stringify(createData),
     }),
     headers: { "Content-Type": "application/json" },
+    ...additionalOptions,
   });
   const data = await response.json();
   return data;
@@ -125,7 +146,11 @@ export const createEntity = async (classFullName: string, createData: any): Prom
  * @returns Updated entity
  */
 export const updateEntity = async (classFullName: string, id: any, updateData: any): Promise<any> => {
-  const response = await fetch("/nrich/registry/data/update", {
+  const { registryConfiguration } = useRegistryConfigurationStore.getState();
+  const additionalOptions = registryConfiguration.requestOptionsResolver?.() || {};
+  const finalBaseUrl = registryConfiguration.baseURL || "/nrich/registry";
+
+  const response = await fetch(`${finalBaseUrl}/data/update`, {
     method: "POST",
     body: JSON.stringify({
       classFullName,
@@ -133,6 +158,7 @@ export const updateEntity = async (classFullName: string, id: any, updateData: a
       jsonEntityData: JSON.stringify(updateData),
     }),
     headers: { "Content-Type": "application/json" },
+    ...additionalOptions,
   });
   const data = await response.json();
   return data;
@@ -144,10 +170,15 @@ export const updateEntity = async (classFullName: string, id: any, updateData: a
  * @param id Id of the existing entity
  */
 export const removeEntity = async (classFullName: string, id: any): Promise<any> => {
-  const response = await fetch("/nrich/registry/data/delete", {
+  const { registryConfiguration } = useRegistryConfigurationStore.getState();
+  const additionalOptions = registryConfiguration.requestOptionsResolver?.() || {};
+  const finalBaseUrl = registryConfiguration.baseURL || "/nrich/registry";
+
+  const response = await fetch(`${finalBaseUrl}/data/delete`, {
     method: "POST",
     body: JSON.stringify({ classFullName, id }),
     headers: { "Content-Type": "application/json" },
+    ...additionalOptions,
   });
 
   return response;

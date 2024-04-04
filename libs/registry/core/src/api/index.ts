@@ -16,6 +16,7 @@
  */
 
 export * from "./paging-types";
+export * from "./registry-configuration-types";
 export * from "./registry-types";
 export * from "./search-types";
 export * from "./sorting-types";

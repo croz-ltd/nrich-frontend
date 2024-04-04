@@ -17,7 +17,7 @@
 
 import create from "zustand";
 
-import { RegistryGroupConfiguration } from "../api";
+import { RegistryConfiguration, RegistryGroupConfiguration } from "../api";
 
 export interface RegistryConfigurationStore {
 
@@ -37,9 +37,19 @@ export interface RegistryConfigurationStore {
   entityFormatters: Record<string, (value: any) => string>;
 
   /**
-   * entity formatters setter
+   * Entity formatters setter
    */
   setEntityFormatters: (entityFormatters: Record<string, (value: any) => string>) => void;
+
+  /**
+   * Registry configuration
+   */
+  registryConfiguration: RegistryConfiguration;
+
+  /**
+   * Registry configuration setter
+   */
+  setRegistryConfiguration: (registryConfiguration: RegistryConfiguration) => void;
 }
 
 export const useRegistryConfigurationStore = create<RegistryConfigurationStore>((set) => ({
@@ -50,5 +60,9 @@ export const useRegistryConfigurationStore = create<RegistryConfigurationStore>(
   entityFormatters: {},
   setEntityFormatters: (entityFormatters) => set(() => ({
     entityFormatters,
+  })),
+  registryConfiguration: {},
+  setRegistryConfiguration: (registryConfiguration) => set(() => ({
+    registryConfiguration,
   })),
 }));

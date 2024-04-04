@@ -16,7 +16,6 @@
  */
 
 export * from "./RegistryEntity";
-export * from "./RegistryProvider";
 export * from "./RegistryEntityPicker";
 export * from "./RegistryFilter";
 export * from "./RegistryForm";

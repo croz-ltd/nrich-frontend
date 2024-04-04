@@ -20,18 +20,27 @@ import {
 } from "@testing-library/react";
 import React from "react";
 
-import { useRegistryConfigurationStore } from "@croz/nrich-registry-core";
+import { RegistryProvider, useRegistryConfigurationStore } from "../../src";
+import { setupRegistryServer } from "../testutil/setup-registry-server";
 
-import { RegistryProvider } from "../../src";
-import { setupTest } from "../testutil/setup-test";
+const server = setupRegistryServer();
 
-describe("@croz/nrich-registry-mui/component/RegistryTable", () => {
-  setupTest();
+beforeAll(() => {
+  server.listen();
+});
 
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+describe("@croz/nrich-registry-core/component/RegistryProvider", () => {
+  // @ts-ignore
   it("should render and load configs", async () => {
+    // given
+    const entityFormatters = { "some.test.entity": (value: { id: number }) => `ID: ${value.id}` };
+
     // when
     render(
-      <RegistryProvider>
+      <RegistryProvider entityFormatters={entityFormatters}>
         <p>Test</p>
       </RegistryProvider>,
     );
@@ -47,5 +56,6 @@ describe("@croz/nrich-registry-mui/component/RegistryTable", () => {
 
     // then
     expect(value.result.current.groupConfigurations).toHaveLength(2);
+    expect(value.result.current.entityFormatters).toBeDefined();
   });
 });

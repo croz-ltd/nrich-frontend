@@ -5,7 +5,7 @@
   "author": "CROZ",
   "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
   "dependencies": {
-    "yup": "^0.32.11",
+    "yup": "^1.4.0",
     "zustand": "^4.1.4"
   },
   "devDependencies": {
@@ -37,7 +37,7 @@
     "zustand"
   ],
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.mjs",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
