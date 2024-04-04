@@ -1,5 +1,11 @@
 # @croz/nrich-form-configuration-core
 
+## 3.0.0
+
+### Major Changes
+
+- [#58](https://github.com/croz-ltd/nrich-frontend/pull/58) [`d2fe264`](https://github.com/croz-ltd/nrich-frontend/commit/d2fe264ea846453bda346d218c215f06fc833e78) Thanks [@vojnovicluka](https://github.com/vojnovicluka)! - Upgrade yup to v1.4.0, add custom deep merge function for merging yup schemas
+
 ## 2.1.1
 
 ### Patch Changes
