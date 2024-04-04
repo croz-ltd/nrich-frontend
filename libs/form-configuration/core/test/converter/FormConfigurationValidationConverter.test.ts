@@ -15,6 +15,8 @@
  *
  */
 
+import * as yup from "yup";
+
 import { FormConfigurationValidationConverter } from "../../src/converter";
 import {
   createComplexValidationList, createCustomValidationList, createNestedValidationList, createSimpleNullableValidationList, createSimpleValidationList, invalidValidationConfiguration,
@@ -129,4 +131,143 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConvert
     expect(result).toBeDefined();
     expect(result.isValidSync({ username: null })).toBe(true);
   });
+});
+
+it.each([
+  [
+    {
+      schema1: yup.object().shape({ firstName: yup.string().required() }),
+      schema2: yup.object().shape({ lastName: yup.string() }),
+    },
+    {
+      expectedResult: yup.object().shape({
+        firstName: yup.string().required(),
+        lastName: yup.string(),
+      }),
+    },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ firstName: yup.string().required() }),
+      schema2: yup.object().shape({}),
+    },
+    {
+      expectedResult: yup.object().shape({ firstName: yup.string().required() }),
+    },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ user: yup.object().shape({ username: yup.string(), address: yup.object().shape({ street: yup.string().required() }) }) }),
+      schema2: yup.object().shape({ id: yup.number() }),
+    },
+    {
+      expectedResult: yup.object().shape({ id: yup.number(), user: yup.object().shape({ username: yup.string(), address: yup.object().shape({ street: yup.string().required() }) }) }),
+    },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ user: yup.object().shape({ username: yup.string(), address: yup.object().shape({ street: yup.string().required() }) }) }),
+      schema2: yup.object().shape({ user: yup.object().shape({ address: yup.object().shape({ city: yup.string().required() }) }) }),
+    },
+    {
+      expectedResult: yup.object().shape({
+        user: yup.object().shape({
+          username: yup.string(),
+          address: yup.object().shape({
+            street: yup.string().required(),
+            city: yup.string().required(),
+          }),
+        }),
+      }),
+    },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ user: yup.object().shape({ username: yup.string(), address: yup.object().shape({ street: yup.object().shape({ streetName: yup.string() }) }) }) }),
+      schema2: yup.object().shape({ user: yup.object().shape({ address: yup.object().shape({ city: yup.string().required() }) }) }),
+    },
+    {
+      expectedResult: yup.object().shape({
+        user: yup.object().shape({
+          username: yup.string(),
+          address: yup.object().shape({
+            street: yup.object().shape({
+              streetName: yup.string(),
+            }),
+            city: yup.string().required(),
+          }),
+        }),
+      }),
+    },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ user: yup.object().shape({ username: yup.string() }) }),
+      schema2: yup.object().shape({ user: yup.object().shape({ address: yup.object().shape({ city: yup.string().required() }).default(undefined).nullable() }) }),
+    },
+    {
+      expectedResult: yup.object().shape({
+        user: yup.object().shape({
+          username: yup.string(),
+          address: yup.object().shape({
+            city: yup.string().required(),
+          }).default(undefined).nullable(),
+        }),
+      }),
+    },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ firstName: yup.string().required() }),
+      schema2: yup.object().shape({ firstName: yup.string() }),
+    },
+    { expectedResult: yup.object().shape({ firstName: yup.string() }) },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ todos: yup.array().of(yup.string()) }),
+      schema2: yup.object().shape({ todos: yup.array().of(yup.number()) }),
+    },
+    { expectedResult: yup.object().shape({ todos: yup.array().of(yup.number()) }) },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ todos: yup.array().of(yup.string()) }),
+      schema2: yup.object().shape({ todos: yup.array().of(yup.object().shape({ name: yup.string() })) }),
+    },
+    { expectedResult: yup.object().shape({ todos: yup.array().of(yup.object().shape({ name: yup.string() })) }) },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ todos: yup.array().of(yup.object().shape({ name: yup.string() })) }),
+      schema2: yup.object().shape({ todos: yup.array().of(yup.string()) }),
+    },
+    { expectedResult: yup.object().shape({ todos: yup.array().of(yup.string()) }) },
+  ],
+
+  [
+    {
+      schema1: yup.object().shape({ test: yup.object().shape({ prop: yup.string().required() }).required() }),
+      schema2: yup.object().shape({ test: yup.object().shape({ prop2: yup.string() }).optional() }),
+    },
+    { expectedResult: yup.object().shape({ test: yup.object().shape({ prop: yup.string().required(), prop2: yup.string() }).required() }) },
+  ],
+])("should merge schemas %p correctly, and get result %p", (schemas, expectedResult) => {
+  // given
+  const converter = new FormConfigurationValidationConverter();
+
+  // when
+  const mergedSchema = converter.mergeSchemas(schemas.schema1, schemas.schema2);
+
+  // then
+  expect(mergedSchema.describe()).toEqual(expectedResult.expectedResult.describe());
 });
