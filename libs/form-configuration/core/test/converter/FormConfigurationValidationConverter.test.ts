@@ -271,3 +271,18 @@ it.each([
   // then
   expect(mergedSchema.describe()).toEqual(expectedResult.expectedResult.describe());
 });
+
+it("merge schemas method should merge internalTests from both schema objects", () => {
+  // given
+  const converter = new FormConfigurationValidationConverter();
+  const schema1 = yup.object().shape({ obj1: yup.object().required() });
+  const schema2 = yup.object().shape({ obj1: yup.object() });
+
+  // when
+  const result = converter.mergeSchemas(schema1, schema2);
+
+  // then
+  expect(result.isValidSync({ obj1: undefined })).toBe(false);
+  expect(result.isValidSync({ obj1: null })).toBe(false);
+  expect(result.isValidSync({ obj1: {} })).toBe(true);
+});
