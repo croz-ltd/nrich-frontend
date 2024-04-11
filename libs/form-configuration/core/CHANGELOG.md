@@ -1,5 +1,11 @@
 # @croz/nrich-form-configuration-core
 
+## 3.0.1
+
+### Patch Changes
+
+- [#60](https://github.com/croz-ltd/nrich-frontend/pull/60) [`6ce2e3b`](https://github.com/croz-ltd/nrich-frontend/commit/6ce2e3b0a0a03fa5cfe27948bd6321b911b12af5) Thanks [@vojnovicluka](https://github.com/vojnovicluka)! - An enhancement has been made to the schema merger function to address its previous limitations when using "yup" required() validator function.
+
 ## 3.0.0
 
 ### Major Changes
