@@ -116,6 +116,7 @@ export class FormConfigurationValidationConverter {
           if (obj1[key].type === "object" && obj2[key].type === "object") {
             merged[key] = this.mergeSchemas(obj1[key], obj2[key]);
             merged[key].spec = _mergeWith(obj1[key].spec, obj2[key].spec, (field1, field2) => (typeof field1 === "boolean" ? field1 && field2 : field1 ?? field2));
+            merged[key].internalTests = { ...obj1[key].internalTests, ...obj2[key].internalTests };
           }
           else if (obj1[key].type === "array" && obj2[key].type === "array") {
             if (obj1[key].innerType.type === "object" && obj2[key].innerType.type === "object") {
