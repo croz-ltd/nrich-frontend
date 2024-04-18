@@ -1,5 +1,11 @@
 # @croz/nrich-notification-core
 
+## 1.1.3
+
+### Patch Changes
+
+- [#63](https://github.com/croz-ltd/nrich-frontend/pull/63) [`3e3ba59`](https://github.com/croz-ltd/nrich-frontend/commit/3e3ba590a6a45ce62c89b3f5aea3487024c45f68) Thanks [@lmatejic-CROZ](https://github.com/lmatejic-CROZ)! - Exposed notification API 'add' and 'remove' methods as non-hook function variants.
+
 ## 1.1.2
 
 ### Patch Changes
