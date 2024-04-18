@@ -2,10 +2,10 @@
 
 ## Overview
 
-`@croz/nrich-notification-core` is a module which serves for showing automatic messages from backend on user interface.
-It's a frontend part of [nrich-notification](https://github.com/croz-ltd/nrich/tree/master/nrich-notification) backend module.
+`@croz/nrich-notification-core` is a module that is designed for showing automatic messages from the backend on the user interface.
+It's the frontend part of [nrich-notification](https://github.com/croz-ltd/nrich/tree/master/nrich-notification) backend module.
 
-Internally, it intercepts http calls and scans for sign of nrich notification object, and shows it if it exists.
+Internally, it intercepts http calls and scans for sign of nrich notification object, and shows the notification if it exists.
 
 ## Setup
 
@@ -13,11 +13,11 @@ To use this module in your project run `npm install @croz/nrich-notification-cor
 
 ## Usage
 
-1. On top level of your app, register an appropriate interceptor for notifications.
+1. On the top level of your app, register an appropriate interceptor for notifications.
    - If you use fetch API or a lib that uses fetch internally, use `fetchNotificationInterceptor()`.
-   - If you use a lib that uses `XMLHttpRequest`, eg. `axios`, use `xhrNotificationInterceptor()`.
+   - If you use a lib that uses `XMLHttpRequest`, e.g. `axios`, use `xhrNotificationInterceptor()`.
 
-2. Using  `useNotification()` custom hook you get an object containing `notifications` array and `remove` and `add` methods for working with that array.
+2. Using the `useNotification()` custom hook you get an object containing `notifications` array and `remove` and `add` methods for working with that array. Alternatively, you can use the standalone `removeNotification` and `addNotification` methods if the hook variant is not fit for your use-case.
 
 Example:
 
