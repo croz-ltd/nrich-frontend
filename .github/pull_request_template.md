@@ -5,7 +5,7 @@
 
 ## Basic information
 
-* nrich-frontend version:
+* nrich-frontend module version:
   <!-- released version -->
 * Module:
   <!-- Please, include name(s) of relevant nrich-frontend's module(s). If not related to any specific module, specify "project" instead. -->
