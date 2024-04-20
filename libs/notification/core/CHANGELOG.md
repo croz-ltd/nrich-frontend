@@ -1,5 +1,11 @@
 # @croz/nrich-notification-core
 
+## 1.1.4
+
+### Patch Changes
+
+- [#65](https://github.com/croz-ltd/nrich-frontend/pull/65) [`b4d9314`](https://github.com/croz-ltd/nrich-frontend/commit/b4d931430cfe6ec54a30fd2f659a57106ddf7953) Thanks [@lmatejic-CROZ](https://github.com/lmatejic-CROZ)! - Added missing export, patched the github templates for clarity
+
 ## 1.1.3
 
 ### Patch Changes
