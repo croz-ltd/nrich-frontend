@@ -17,7 +17,7 @@
 
 import { fetchFormConfigurations } from "../../src/loader";
 import { useFormConfigurationStore } from "../../src/store";
-import { mockFormConfigurations, mockValidatorConverters } from "../testutil/form-configuration-generating-util";
+import { mockFormConfigurations, mockFormYupConfigurations, mockValidatorConverters } from "../testutil/form-configuration-generating-util";
 import { setupFormConfigurationServer } from "../testutil/setup-form-configuration-server";
 
 const server = setupFormConfigurationServer();
@@ -45,6 +45,26 @@ describe("@croz/nrich-form-configuration-core/fetch-form-configurations", () => 
     expect(formConfigurationState.formYupConfigurations).toHaveLength(2);
     expect(formConfigurationState.formYupConfigurations[0]).toBeTruthy();
     expect(formConfigurationState.formYupConfigurations[1]).toBeTruthy();
+
+    // cleanup
+    formConfigurationState.set([]);
+  });
+
+  it("should resolve form configurations and add them to store with ignoring duplicates", async () => {
+    // given
+    useFormConfigurationStore.getState().set([mockFormYupConfigurations[0]]);
+
+    // when
+    const response = await fetchFormConfigurations({ url: "/test-url", additionalValidatorConverters: mockValidatorConverters });
+
+    // then
+    expect(response).toHaveLength(2);
+
+    // and when
+    const formConfigurationState = useFormConfigurationStore.getState();
+
+    // then
+    expect(formConfigurationState.formYupConfigurations).toHaveLength(2);
 
     // cleanup
     formConfigurationState.set([]);
