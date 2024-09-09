@@ -1,5 +1,15 @@
 # @croz/nrich-form-configuration-core
 
+## 3.1.0
+
+### Minor Changes
+
+- [#67](https://github.com/croz-ltd/nrich-frontend/pull/67) [`e1bb4ce`](https://github.com/croz-ltd/nrich-frontend/commit/e1bb4ce191f2341bd0fa39724bda0019f860bb89) Thanks [@ipavic-croz](https://github.com/ipavic-croz)! - Add support for merging yup form configurations instead of overriding them in store
+
+### Patch Changes
+
+- [#70](https://github.com/croz-ltd/nrich-frontend/pull/70) [`7d435fd`](https://github.com/croz-ltd/nrich-frontend/commit/7d435fd30478a0e003aa6930a6ffa5c1f28c17fb) Thanks [@ipavic-croz](https://github.com/ipavic-croz)! - Fix lodash uniqBy import
+
 ## 3.0.1
 
 ### Patch Changes
