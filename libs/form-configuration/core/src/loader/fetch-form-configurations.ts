@@ -15,7 +15,7 @@
  *
  */
 
-import _ from "lodash";
+import _uniqBy from "lodash/uniqBy";
 
 import { FormConfiguration, FormConfigurationConfiguration, FormYupConfiguration } from "../api";
 import { FormConfigurationValidationConverter } from "../converter";
@@ -24,7 +24,7 @@ import { useFormConfigurationStore } from "../store";
 const mergeFormYupConfigurationsWithoutDuplicates = (oldFormYupConfiguration: FormYupConfiguration[], newFormYupConfiguration: FormYupConfiguration[]) => {
   const mergedFormYupConfigurations = [...oldFormYupConfiguration, ...newFormYupConfiguration];
 
-  return _.uniqBy(mergedFormYupConfigurations, "formId");
+  return _uniqBy(mergedFormYupConfigurations, "formId");
 };
 
 export const fetchFormConfigurations = async ({ url, requestOptionsResolver, additionalValidatorConverters }: FormConfigurationConfiguration): Promise<FormConfiguration[]> => {
