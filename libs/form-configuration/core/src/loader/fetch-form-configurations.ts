@@ -15,9 +15,17 @@
  *
  */
 
+import _ from "lodash";
+
 import { FormConfiguration, FormConfigurationConfiguration, FormYupConfiguration } from "../api";
 import { FormConfigurationValidationConverter } from "../converter";
 import { useFormConfigurationStore } from "../store";
+
+const mergeFormYupConfigurationsWithoutDuplicates = (oldFormYupConfiguration: FormYupConfiguration[], newFormYupConfiguration: FormYupConfiguration[]) => {
+  const mergedFormYupConfigurations = [...oldFormYupConfiguration, ...newFormYupConfiguration];
+
+  return _.uniqBy(mergedFormYupConfigurations, "formId");
+};
 
 export const fetchFormConfigurations = async ({ url, requestOptionsResolver, additionalValidatorConverters }: FormConfigurationConfiguration): Promise<FormConfiguration[]> => {
   const formConfigurationValidationConverter = new FormConfigurationValidationConverter(additionalValidatorConverters);
@@ -40,7 +48,7 @@ export const fetchFormConfigurations = async ({ url, requestOptionsResolver, add
         yupSchema: formConfigurationValidationConverter.convertFormConfigurationToYupSchema(item.constrainedPropertyConfigurationList),
       });
     });
-    useFormConfigurationStore.getState().set(formYupConfigurations);
+    useFormConfigurationStore.getState().set(mergeFormYupConfigurationsWithoutDuplicates(useFormConfigurationStore.getState().formYupConfigurations, formYupConfigurations));
     useFormConfigurationStore.getState().setFormConfigurationLoaded(true);
   }
 
