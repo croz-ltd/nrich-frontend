@@ -62,6 +62,23 @@ export const createSimpleValidationList = () => [
   },
 ];
 
+export const createMaxSizeInBytesValidationList = () => [
+  {
+    path: "username",
+    propertyType: "java.lang.String",
+    javascriptType: "string",
+    validatorList: [
+      {
+        name: "MaxSizeInBytes",
+        argumentMap: {
+          value: 5,
+        },
+        errorMessage: "Too many diacritics",
+      },
+    ],
+  },
+];
+
 export const createSimpleNullableValidationList = () => [
   {
     path: "username",

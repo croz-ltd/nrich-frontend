@@ -19,7 +19,13 @@ import * as yup from "yup";
 
 import { FormConfigurationValidationConverter } from "../../src/converter";
 import {
-  createComplexValidationList, createCustomValidationList, createNestedValidationList, createSimpleNullableValidationList, createSimpleValidationList, invalidValidationConfiguration,
+  createComplexValidationList,
+  createCustomValidationList,
+  createMaxSizeInBytesValidationList,
+  createNestedValidationList,
+  createSimpleNullableValidationList,
+  createSimpleValidationList,
+  invalidValidationConfiguration,
 } from "../testutil/form-configuration-generating-util";
 
 describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConverter", () => {
@@ -49,6 +55,21 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConvert
     expect(() => result.validateSync({ username: "" })).toThrowError("Username cannot be blank");
     expect(() => result.validateSync({ username: null })).toThrowError("Username cannot be blank");
     expect(result.isValidSync({ username: "username" })).toBe(true);
+  });
+
+  it("should convert max size in bytes configuration to yup schema", () => {
+    // given
+    const converter = new FormConfigurationValidationConverter();
+    const simpleValidationList = createMaxSizeInBytesValidationList();
+
+    // when
+    const result = converter.convertFormConfigurationToYupSchema(simpleValidationList);
+
+    // then
+    expect(result).toBeDefined();
+    expect(() => result.validateSync({ username: "username" })).toThrowError("Too many diacritics");
+    expect(() => result.validateSync({ username: "ččč" })).toThrowError("Too many diacritics");
+    expect(result.isValidSync({ username: "user" })).toBe(true);
   });
 
   it("should use custom converter", () => {
