@@ -51,6 +51,10 @@ export class FormConfigurationValidationConverter {
       convert: (configuration, validator) => validator.test("inList", configuration.errorMessage, (value) => (configuration.argumentMap.value as string[]).includes(value)),
     },
     {
+      supports: (configuration) => ["MaxSizeInBytes"].includes(configuration.name),
+      convert: (configuration, validator) => validator.test("maxSizeInBytes", configuration.errorMessage, (value: string) => new Blob([value]).size <= (configuration.argumentMap.value as number)),
+    },
+    {
       supports: () => true,
       convert: (configuration, validator) => validator[configuration.name.toLowerCase()](configuration.errorMessage),
     },
