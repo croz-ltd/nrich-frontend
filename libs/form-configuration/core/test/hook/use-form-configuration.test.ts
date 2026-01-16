@@ -18,12 +18,12 @@
 import { act, renderHook } from "@testing-library/react";
 
 import { useFormConfiguration, useYupFormConfiguration } from "../../src";
-import { useFormConfigurationStore } from "../../src/store";
+import { useYupFormConfigurationStore } from "../../src/yup/store";
 import { mockFormYupConfiguration, mockFormYupConfigurations } from "../testutil/form-configuration-generating-util";
 
 describe("@croz/nrich-form-configuration-core/use-form-configuration", () => {
   beforeEach(() => {
-    useFormConfigurationStore.getState().set(mockFormYupConfigurations);
+    useYupFormConfigurationStore.getState().set(mockFormYupConfigurations);
   });
 
   it("should resolve form configuration state", () => {

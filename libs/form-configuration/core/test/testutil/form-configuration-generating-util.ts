@@ -16,9 +16,11 @@
  */
 
 import * as yup from "yup";
+import { z } from "zod";
 
-import { FormConfiguration, ValidatorConverter } from "../../dist";
-import { FormYupConfiguration } from "../../src";
+import {
+  FormConfiguration, ValidatorConverter, FormYupConfiguration, FormZodConfiguration,
+} from "../../src";
 
 export const invalidValidationConfiguration = () => [
   {
@@ -106,6 +108,18 @@ export const createComplexValidationList = () => [
       },
     ],
   },
+  {
+    path: "description",
+    propertyType: "java.lang.String",
+    javascriptType: "string",
+    validatorList: [
+      {
+        name: "NotEmpty",
+        argumentMap: {},
+        errorMessage: "Description must not be empty",
+      },
+    ],
+  },
 ];
 
 export const createNestedValidationList = () => [
@@ -175,6 +189,161 @@ export const createCustomValidationList = () => [
     ],
   },
 ];
+
+export const createBooleanValidationList = () => [
+  {
+    path: "active",
+    propertyType: "java.lang.Boolean",
+    javascriptType: "boolean",
+    validatorList: [
+      {
+        name: "NotNull",
+        argumentMap: {},
+        errorMessage: "Active must not be null",
+      },
+    ],
+  },
+];
+
+export const createArrayValidationList = () => [
+  {
+    path: "items",
+    propertyType: "java.util.List",
+    javascriptType: "array",
+    validatorList: [
+      {
+        name: "NotEmpty",
+        argumentMap: {},
+        errorMessage: "Items must not be empty",
+      },
+      {
+        name: "Size",
+        argumentMap: { min: 1, max: 10 },
+        errorMessage: "Items must have between 1 and 10 elements",
+      },
+    ],
+  },
+];
+
+export const createObjectValidationList = () => [
+  {
+    path: "user.address",
+    propertyType: "java.util.Map",
+    javascriptType: "object",
+    validatorList: [
+      {
+        name: "NotNull",
+        argumentMap: {},
+        errorMessage: "Address must not be null",
+      },
+    ],
+  },
+];
+
+export const mockFormZodConfiguration: FormZodConfiguration & FormConfiguration = {
+  formId: "form-configuration.demo-request",
+  zodSchema: z.object({
+    username: z.string().min(1, "Required"),
+    password: z.string().min(1, "Required"),
+    oib: z.number().min(10).max(11),
+  }),
+  constrainedPropertyConfigurationList: [
+    {
+      path: "firstName",
+      propertyType: "java.lang.String",
+      javascriptType: "string",
+      validatorList: [
+        {
+          name: "NotBlank",
+          argumentMap: {},
+          errorMessage: "Cannot be blank",
+        },
+      ],
+    },
+    {
+      path: "phone",
+      propertyType: "java.lang.String",
+      javascriptType: "string",
+      validatorList: [
+        {
+          name: "Size",
+          argumentMap: { min: 5, max: 9 },
+          errorMessage: "Size must be between: 9 and 5",
+        },
+      ],
+    },
+    {
+      path: "startDate",
+      propertyType: "java.time.Instant",
+      javascriptType: "date",
+      validatorList: [
+        {
+          name: "NotNull",
+          argumentMap: {},
+          errorMessage: "Cannot be null",
+        },
+      ],
+    },
+    {
+      path: "hours",
+      propertyType: "java.lang.Integer",
+      javascriptType: "number",
+      validatorList: [
+        {
+          name: "Min",
+          argumentMap: { value: 0 },
+          errorMessage: "Minimum value is: 0",
+        },
+        {
+          name: "Max",
+          argumentMap: { value: 23 },
+          errorMessage: "Maximum value is: 23",
+        },
+      ],
+    },
+    {
+      path: "income",
+      propertyType: "java.math.BigDecimal",
+      javascriptType: "number",
+      validatorList: [
+        {
+          name: "Digits",
+          argumentMap: { integer: 10, fraction: 2 },
+          errorMessage: "Maximum number of digits is: 10 and scale is: 2",
+        },
+        {
+          name: "DecimalMin",
+          argumentMap: { inclusive: true, value: "0.0" },
+          errorMessage: "Income must be greater than zero",
+        },
+      ],
+    },
+    {
+      path: "endDate",
+      propertyType: "java.time.Instant",
+      javascriptType: "date",
+      validatorList: [
+        {
+          name: "NotNull",
+          argumentMap: {},
+          errorMessage: "Cannot be null",
+        },
+      ],
+    },
+    {
+      path: "phonePrefix",
+      propertyType: "java.lang.String",
+      javascriptType: "string",
+      validatorList: [
+        {
+          name: "Size",
+          argumentMap: { min: 3, max: 3 },
+          errorMessage: "Size must be between: 3 and 3",
+        },
+      ],
+    },
+  ],
+};
 
 export const mockFormYupConfiguration: FormYupConfiguration & FormConfiguration = {
   formId: "form-configuration.demo-request",
@@ -296,6 +465,249 @@ export const mockFormYupConfiguration: FormYupConfiguration & FormConfiguration 
     },
   ],
 };
+
+export const mockFormZodConfigurations: (FormZodConfiguration & FormConfiguration)[] = [
+  {
+    formId: "form-configuration.demo-request",
+    zodSchema: z.object({
+      username: z.string().min(1, "Required"),
+      password: z.string().min(1, "Required"),
+      oib: z.number().min(10).max(11),
+    }),
+    constrainedPropertyConfigurationList: [
+      {
+        path: "firstName",
+        propertyType: "java.lang.String",
+        javascriptType: "string",
+        validatorList: [
+          {
+            name: "NotBlank",
+            argumentMap: {},
+            errorMessage: "Cannot be blank",
+          },
+        ],
+      },
+      {
+        path: "phone",
+        propertyType: "java.lang.String",
+        javascriptType: "string",
+        validatorList: [
+          {
+            name: "Size",
+            argumentMap: {
+              min: 5,
+              max: 9,
+            },
+            errorMessage: "Size must be between: 9 and 5",
+          },
+        ],
+      },
+      {
+        path: "startDate",
+        propertyType: "java.time.Instant",
+        javascriptType: "date",
+        validatorList: [
+          {
+            name: "NotNull",
+            argumentMap: {},
+            errorMessage: "Cannot be null",
+          },
+        ],
+      },
+      {
+        path: "hours",
+        propertyType: "java.lang.Integer",
+        javascriptType: "number",
+        validatorList: [
+          {
+            name: "Min",
+            argumentMap: {
+              value: 0,
+            },
+            errorMessage: "Minimum value is: 0",
+          },
+          {
+            name: "Max",
+            argumentMap: {
+              value: 23,
+            },
+            errorMessage: "Maximum value is: 23",
+          },
+        ],
+      },
+      {
+        path: "income",
+        propertyType: "java.math.BigDecimal",
+        javascriptType: "number",
+        validatorList: [
+          {
+            name: "Digits",
+            argumentMap: {
+              integer: 10,
+              fraction: 2,
+            },
+            errorMessage: "Maximum number of digits is: 10 and scale is: 2",
+          },
+          {
+            name: "DecimalMin",
+            argumentMap: {
+              inclusive: true,
+              value: "0.0",
+            },
+            errorMessage: "Income must be greater than zero",
+          },
+        ],
+      },
+      {
+        path: "endDate",
+        propertyType: "java.time.Instant",
+        javascriptType: "date",
+        validatorList: [
+          {
+            name: "NotNull",
+            argumentMap: {},
+            errorMessage: "Cannot be null",
+          },
+        ],
+      },
+      {
+        path: "phonePrefix",
+        propertyType: "java.lang.String",
+        javascriptType: "string",
+        validatorList: [
+          {
+            name: "Size",
+            argumentMap: {
+              min: 3,
+              max: 3,
+            },
+            errorMessage: "Size must be between: 3 and 3",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    formId: "form-configuration.demo-request-copy",
+    zodSchema: z.object({
+      username: z.string().min(1, "Required"),
+      password: z.string().min(1, "Required"),
+      oib: z.number().min(10).max(11),
+    }),
+    constrainedPropertyConfigurationList: [
+      {
+        path: "firstName",
+        propertyType: "java.lang.String",
+        javascriptType: "string",
+        validatorList: [
+          {
+            name: "NotBlank",
+            argumentMap: {},
+            errorMessage: "Cannot be blank",
+          },
+        ],
+      },
+      {
+        path: "phone",
+        propertyType: "java.lang.String",
+        javascriptType: "string",
+        validatorList: [
+          {
+            name: "Size",
+            argumentMap: {
+              min: 5,
+              max: 9,
+            },
+            errorMessage: "Size must be between: 9 and 5",
+          },
+        ],
+      },
+      {
+        path: "startDate",
+        propertyType: "java.time.Instant",
+        javascriptType: "date",
+        validatorList: [
+          {
+            name: "NotNull",
+            argumentMap: {},
+            errorMessage: "Cannot be null",
+          },
+        ],
+      },
+      {
+        path: "hours",
+        propertyType: "java.lang.Integer",
+        javascriptType: "number",
+        validatorList: [
+          {
+            name: "Min",
+            argumentMap: {
+              value: 0,
+            },
+            errorMessage: "Minimum value is: 0",
+          },
+          {
+            name: "Max",
+            argumentMap: {
+              value: 23,
+            },
+            errorMessage: "Maximum value is: 23",
+          },
+        ],
+      },
+      {
+        path: "income",
+        propertyType: "java.math.BigDecimal",
+        javascriptType: "number",
+        validatorList: [
+          {
+            name: "Digits",
+            argumentMap: {
+              integer: 10,
+              fraction: 2,
+            },
+            errorMessage: "Maximum number of digits is: 10 and scale is: 2",
+          },
+          {
+            name: "DecimalMin",
+            argumentMap: {
+              inclusive: true,
+              value: "0.0",
+            },
+            errorMessage: "Income must be greater than zero",
+          },
+        ],
+      },
+      {
+        path: "endDate",
+        propertyType: "java.time.Instant",
+        javascriptType: "date",
+        validatorList: [
+          {
+            name: "NotNull",
+            argumentMap: {},
+            errorMessage: "Cannot be null",
+          },
+        ],
+      },
+      {
+        path: "phonePrefix",
+        propertyType: "java.lang.String",
+        javascriptType: "string",
+        validatorList: [
+          {
+            name: "Size",
+            argumentMap: {
+              min: 3,
+              max: 3,
+            },
+            errorMessage: "Size must be between: 3 and 3",
+          },
+        ],
+      },
+    ],
+  },
+];
 
 export const mockFormYupConfigurations: (FormYupConfiguration & FormConfiguration)[] = [
   {

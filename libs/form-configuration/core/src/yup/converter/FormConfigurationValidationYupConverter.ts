@@ -18,15 +18,15 @@
 import _mergeWith from "lodash/mergeWith";
 import * as yup from "yup";
 
-import { ConstrainedPropertyClientValidatorConfiguration, ConstrainedPropertyConfiguration, ValidatorConverter } from "../api";
+import { ConstrainedPropertyClientValidatorConfiguration, ConstrainedPropertyConfiguration, ValidatorConverter } from "../../shared/api";
 
 /**
  * Converter responsible for conversion between ConstrainedPropertyConfiguration array (that contains validations specified and received from the backend)
- * and Yup's ObjectSchema that can be applied on the frontend. The list of supported conversions is in given in {@link FormConfigurationValidationConverter.DEFAULT_CONVERTER_LIST} but
+ * and Yup's ObjectSchema that can be applied on the frontend. The list of supported conversions is in given in {@link FormConfigurationValidationYupConverter.DEFAULT_CONVERTER_LIST} but
  * users can also provide their own by using {@link ValidatorConverter} interface and supplying them in the constructor.
  * The last validator converter will match any backend constraint and try to map it directly to Yup.
  */
-export class FormConfigurationValidationConverter {
+export class FormConfigurationValidationYupConverter {
   private static PATH_SEPARATOR = ".";
 
   private static DEFAULT_CONVERTER_LIST: ValidatorConverter[] = [
@@ -86,7 +86,7 @@ export class FormConfigurationValidationConverter {
 
       const validator = property.validatorList
         .reduce((previousValidator, validatorConfiguration) => this.applyConverter(validatorConfiguration, previousValidator), yupValidation().default(undefined).nullable());
-      const [propertyName, restOfPathList] = FormConfigurationValidationConverter.convertPath(property.path);
+      const [propertyName, restOfPathList] = FormConfigurationValidationYupConverter.convertPath(property.path);
 
       if (restOfPathList.length > 0) {
         const currentPathSchema = [...restOfPathList].reverse()
@@ -169,7 +169,7 @@ export class FormConfigurationValidationConverter {
   }
 
   private resolveConverter(validatorConfiguration: ConstrainedPropertyClientValidatorConfiguration) {
-    const allConverters = this.additionalConverters.concat(FormConfigurationValidationConverter.DEFAULT_CONVERTER_LIST);
+    const allConverters = this.additionalConverters.concat(FormConfigurationValidationYupConverter.DEFAULT_CONVERTER_LIST);
 
     return allConverters.find((additionalConverter) => additionalConverter.supports(validatorConfiguration));
   }

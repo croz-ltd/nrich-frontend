@@ -2,6 +2,11 @@
   "name": "nrich-frontend",
   "author": "CROZ",
   "bugs": "https://github.com/croz-ltd/nrich-frontend/issues",
+  "resolutions": {
+    "@mswjs/interceptors": "0.17.6",
+    "headers-polyfill": "3.1.2",
+    "whatwg-fetch": "3.6.2"
+  },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.7",
     "@changesets/cli": "^2.25.2",

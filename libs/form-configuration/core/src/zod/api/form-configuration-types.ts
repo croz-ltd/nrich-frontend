@@ -15,6 +15,18 @@
  *
  */
 
-export * from "./shared/api";
-export * from "./yup";
-export * from "./zod";
+import { z } from "zod";
+
+export interface FormZodConfiguration {
+  /**
+   * Registered form id for this form configuration.
+   * This matches the formId defined on the backend.
+   */
+  formId: string;
+
+  /**
+   * Zod schema generated from backend validation configuration.
+   * Used for client-side form validation.
+   */
+  zodSchema: z.ZodObject<any>;
+}

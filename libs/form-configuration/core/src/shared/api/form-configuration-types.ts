@@ -15,8 +15,6 @@
  *
  */
 
-import * as yup from "yup";
-
 export interface FormConfiguration {
 
   /**
@@ -28,20 +26,6 @@ export interface FormConfiguration {
    * List of {@link ConstrainedPropertyConfiguration} instances holding property configuration for each property defined in the class that form id was mapped to.
    */
   constrainedPropertyConfigurationList: ConstrainedPropertyConfiguration[];
-
-}
-
-export interface FormYupConfiguration<T extends Record<string, never> = any> {
-
-  /**
-   * Registered form id for this form configuration.
-   */
-  formId: string;
-
-  /**
-   * List of yup ObjectSchema instances holding property configuration for each property defined in the class that form id was mapped to.
-   */
-  yupSchema: yup.ObjectSchema<T>;
 
 }
 
@@ -99,9 +83,9 @@ export interface ValidatorConverter {
   /**
    * Converts validation configuration to yup validator.
    * @param configuration configuration received from the server
-   * @param validator yup validator
+   * @param schema generic schema
    */
-  convert(configuration: ConstrainedPropertyClientValidatorConfiguration, validator: any): any;
+  convert(configuration: ConstrainedPropertyClientValidatorConfiguration, schema: any): any;
 
 }
 
