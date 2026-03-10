@@ -134,6 +134,7 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationZodConv
     expect(() => schema.parse({ active: false })).not.toThrow();
     expect(() => schema.parse({ active: "not boolean" })).toThrow();
     expect(() => schema.parse({ active: null })).toThrow(/active must not be null/i);
+    expect(() => schema.parse({ active: undefined })).toThrow(/active must not be null/i);
   });
 
   it("should convert array type to zod array schema", () => {

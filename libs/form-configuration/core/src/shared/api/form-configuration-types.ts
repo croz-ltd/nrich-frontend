@@ -81,7 +81,7 @@ export interface ValidatorConverter {
   supports(configuration: ConstrainedPropertyClientValidatorConfiguration): boolean;
 
   /**
-   * Converts validation configuration to yup validator.
+   * Converts validation configuration to validation schema.
    * @param configuration configuration received from the server
    * @param schema generic schema
    */

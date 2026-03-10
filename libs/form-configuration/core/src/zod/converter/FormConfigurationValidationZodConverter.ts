@@ -28,7 +28,7 @@ import {
  * Converter responsible for conversion between ConstrainedPropertyConfiguration array (that contains validations specified and received from the backend)
  * and Zod's schema that can be applied on the frontend. The list of supported conversions is in given in {@link FormConfigurationValidationZodConverter.DEFAULT_CONVERTER_LIST} but
  * users can also provide their own by using {@link ValidatorConverter} interface and supplying them in the constructor.
- * The last validator converter will match any backend constraint and try to map it directly to Yup.
+ * The last validator converter will match any backend constraint and try to map it directly to Zod.
  */
 export class FormConfigurationValidationZodConverter {
   /**
