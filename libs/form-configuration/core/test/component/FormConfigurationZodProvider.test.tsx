@@ -18,7 +18,7 @@
 import { render, renderHook, screen } from "@testing-library/react";
 import React, { act } from "react";
 
-import { FormConfigurationZodProvider } from "../../src";
+import { FormConfigurationZodProvider } from "../../src/zod";
 import { useZodFormConfigurationStore } from "../../src/zod/store";
 
 describe("@croz/nrich-form-configuration-core/FormConfigurationZodProvider", () => {
