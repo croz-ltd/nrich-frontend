@@ -1,5 +1,11 @@
 # @croz/nrich-form-configuration-core
 
+## 3.2.1
+
+### Patch Changes
+
+- [#75](https://github.com/croz-ltd/nrich-frontend/pull/75) [`1fe365d625b6692d1dd166da21b0917f301873be`](https://github.com/croz-ltd/nrich-frontend/commit/1fe365d625b6692d1dd166da21b0917f301873be) Thanks [@rmesin-croz](https://github.com/rmesin-croz)! - zod support - export fix
+
 ## 3.2.0
 
 ### Minor Changes
