@@ -15,9 +15,9 @@
  *
  */
 
-import { fetchFormConfigurations } from "../../src/yup/loader";
-import { useYupFormConfigurationStore } from "../../src/yup/store";
-import { mockFormConfigurations, mockFormYupConfigurations, mockValidatorConverters } from "../testutil/form-configuration-generating-util";
+import { fetchZodFormConfigurations } from "../../src/zod/loader";
+import { useZodFormConfigurationStore } from "../../src/zod/store";
+import { mockFormConfigurations, mockFormZodConfigurations, mockValidatorConverters } from "../testutil/form-configuration-generating-util";
 import { setupFormConfigurationServer } from "../testutil/setup-form-configuration-server";
 
 const server = setupFormConfigurationServer();
@@ -32,19 +32,19 @@ afterAll(() => server.close());
 describe("@croz/nrich-form-configuration-core/fetch-form-configurations", () => {
   it("should resolve form configurations", async () => {
     // when
-    const response = await fetchFormConfigurations({ url: "/test-url", additionalValidatorConverters: mockValidatorConverters });
+    const response = await fetchZodFormConfigurations({ url: "/test-url", additionalValidatorConverters: mockValidatorConverters });
 
     // then
     expect(response).toBeDefined();
     expect(response).toMatchObject(mockFormConfigurations);
 
     // and when
-    const formConfigurationState = useYupFormConfigurationStore.getState();
+    const formConfigurationState = useZodFormConfigurationStore.getState();
 
     // then
-    expect(formConfigurationState.yupFormConfigurations).toHaveLength(2);
-    expect(formConfigurationState.yupFormConfigurations[0]).toBeTruthy();
-    expect(formConfigurationState.yupFormConfigurations[1]).toBeTruthy();
+    expect(formConfigurationState.zodFormConfigurations).toHaveLength(2);
+    expect(formConfigurationState.zodFormConfigurations[0]).toBeTruthy();
+    expect(formConfigurationState.zodFormConfigurations[1]).toBeTruthy();
 
     // cleanup
     formConfigurationState.set([]);
@@ -52,19 +52,19 @@ describe("@croz/nrich-form-configuration-core/fetch-form-configurations", () => 
 
   it("should resolve form configurations and add them to store with ignoring duplicates", async () => {
     // given
-    useYupFormConfigurationStore.getState().set([mockFormYupConfigurations[0]]);
+    useZodFormConfigurationStore.getState().set([mockFormZodConfigurations[0]]);
 
     // when
-    const response = await fetchFormConfigurations({ url: "/test-url", additionalValidatorConverters: mockValidatorConverters });
+    const response = await fetchZodFormConfigurations({ url: "/test-url", additionalValidatorConverters: mockValidatorConverters });
 
     // then
     expect(response).toHaveLength(2);
 
     // and when
-    const formConfigurationState = useYupFormConfigurationStore.getState();
+    const formConfigurationState = useZodFormConfigurationStore.getState();
 
     // then
-    expect(formConfigurationState.yupFormConfigurations).toHaveLength(2);
+    expect(formConfigurationState.zodFormConfigurations).toHaveLength(2);
 
     // cleanup
     formConfigurationState.set([]);

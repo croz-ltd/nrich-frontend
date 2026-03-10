@@ -18,7 +18,7 @@
 import { ObjectSchema } from "yup";
 
 import { FormYupConfiguration } from "../api";
-import { useFormConfigurationStore } from "../store";
+import { useYupFormConfigurationStore } from "../store";
 
 export type FormConfigurationOptions = {
   /**
@@ -26,7 +26,7 @@ export type FormConfigurationOptions = {
    */
   formYupConfigurations: FormYupConfiguration[],
   /**
-   * Flag that indicates weather form configuration is fetched from API.
+   * Flag that indicates whether form configuration is fetched from API.
    */
   formConfigurationLoaded: boolean;
   /**
@@ -57,17 +57,17 @@ export type UseFormConfiguration = () => FormConfigurationOptions;
 
 /**
  * A hook which simplifies the usage of the form configuration state.
- * Uses the internal {@link useFormConfigurationStore} hook for managing the form configuration state.
+ * Uses the internal {@link useYupFormConfigurationStore} hook for managing the form configuration state.
  *
  * @returns An array of options to access and set the form configuration state and remove or add a single form configuration.
  */
 export const useFormConfiguration: UseFormConfiguration = () => {
-  const formYupConfigurations = useFormConfigurationStore((state) => state.formYupConfigurations);
-  const formConfigurationLoaded = useFormConfigurationStore((state) => state.formConfigurationLoaded);
-  const set = useFormConfigurationStore((state) => state.set);
-  const add = useFormConfigurationStore((state) => state.add);
-  const remove = useFormConfigurationStore((state) => state.remove);
-  const setFormConfigurationLoaded = useFormConfigurationStore((state) => state.setFormConfigurationLoaded);
+  const formYupConfigurations = useYupFormConfigurationStore((state) => state.yupFormConfigurations);
+  const formConfigurationLoaded = useYupFormConfigurationStore((state) => state.formConfigurationLoaded);
+  const set = useYupFormConfigurationStore((state) => state.set);
+  const add = useYupFormConfigurationStore((state) => state.add);
+  const remove = useYupFormConfigurationStore((state) => state.remove);
+  const setFormConfigurationLoaded = useYupFormConfigurationStore((state) => state.setFormConfigurationLoaded);
 
   return {
     formYupConfigurations, formConfigurationLoaded, set, add, remove, setFormConfigurationLoaded,
@@ -76,7 +76,7 @@ export const useFormConfiguration: UseFormConfiguration = () => {
 
 /**
  * A hook which extracts a specific Yup configuration from the form configuration identified by the form id.
- * Uses the internal {@link useFormConfigurationStore} hook for managing the form configuration state.
+ * Uses the internal {@link useYupFormConfigurationStore} hook for managing the form configuration state.
  *
  * @param formId Registered form id for a specific form configuration.
  *

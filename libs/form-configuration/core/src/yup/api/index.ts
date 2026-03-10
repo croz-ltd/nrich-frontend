@@ -15,6 +15,4 @@
  *
  */
 
-export * from "./shared/api";
-export * from "./yup";
-export * from "./zod";
+export * from "./form-configuration-types";

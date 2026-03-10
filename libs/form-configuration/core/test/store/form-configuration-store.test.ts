@@ -15,13 +15,13 @@
  *
  */
 
-import { useFormConfigurationStore } from "../../src/store";
+import { useYupFormConfigurationStore } from "../../src/yup/store";
 import { mockFormYupConfiguration, mockFormYupConfigurations } from "../testutil/form-configuration-generating-util";
 
 describe("@croz/nrich-form-configuration-core/form-configuration-store", () => {
   it("should set, add and remove form configurations from store", () => {
     // given
-    let currentState = useFormConfigurationStore.getState();
+    let currentState = useYupFormConfigurationStore.getState();
 
     const formConfiguration = mockFormYupConfiguration;
     const formConfigurationList = mockFormYupConfigurations;
@@ -29,30 +29,30 @@ describe("@croz/nrich-form-configuration-core/form-configuration-store", () => {
     // when
     currentState.set(formConfigurationList);
 
-    currentState = useFormConfigurationStore.getState();
+    currentState = useYupFormConfigurationStore.getState();
 
     // then
-    expect(currentState.formYupConfigurations).toHaveLength(2);
-    expect(currentState.formYupConfigurations[0]).toMatchObject(formConfigurationList[0]);
-    expect(currentState.formYupConfigurations[1]).toMatchObject(formConfigurationList[1]);
+    expect(currentState.yupFormConfigurations).toHaveLength(2);
+    expect(currentState.yupFormConfigurations[0]).toMatchObject(formConfigurationList[0]);
+    expect(currentState.yupFormConfigurations[1]).toMatchObject(formConfigurationList[1]);
 
     // and when
     currentState.add(formConfiguration);
 
-    currentState = useFormConfigurationStore.getState();
+    currentState = useYupFormConfigurationStore.getState();
 
     // then
-    expect(currentState.formYupConfigurations).toHaveLength(3);
-    expect(currentState.formYupConfigurations[2]).toMatchObject(formConfiguration);
+    expect(currentState.yupFormConfigurations).toHaveLength(3);
+    expect(currentState.yupFormConfigurations[2]).toMatchObject(formConfiguration);
 
     // and when
-    currentState.remove(currentState.formYupConfigurations[2]);
+    currentState.remove(currentState.yupFormConfigurations[2]);
 
-    currentState = useFormConfigurationStore.getState();
+    currentState = useYupFormConfigurationStore.getState();
 
     // then
-    expect(currentState.formYupConfigurations).toHaveLength(2);
-    expect(currentState.formYupConfigurations[0]).toMatchObject(formConfigurationList[0]);
-    expect(currentState.formYupConfigurations[1]).toMatchObject(formConfigurationList[1]);
+    expect(currentState.yupFormConfigurations).toHaveLength(2);
+    expect(currentState.yupFormConfigurations[0]).toMatchObject(formConfigurationList[0]);
+    expect(currentState.yupFormConfigurations[1]).toMatchObject(formConfigurationList[1]);
   });
 });

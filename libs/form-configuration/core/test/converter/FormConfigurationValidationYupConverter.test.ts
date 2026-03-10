@@ -17,15 +17,15 @@
 
 import * as yup from "yup";
 
-import { FormConfigurationValidationConverter } from "../../src/converter";
+import { FormConfigurationValidationYupConverter } from "../../src/yup/converter";
 import {
   createComplexValidationList, createCustomValidationList, createNestedValidationList, createSimpleNullableValidationList, createSimpleValidationList, invalidValidationConfiguration,
 } from "../testutil/form-configuration-generating-util";
 
-describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConverter", () => {
+describe("@croz/nrich-form-configuration-core/FormConfigurationValidationYupConverter", () => {
   it("should not throw exception when receiving invalid configuration", () => {
     // given
-    const converter = new FormConfigurationValidationConverter();
+    const converter = new FormConfigurationValidationYupConverter();
     const invalidValidationConfigurationList = invalidValidationConfiguration();
 
     // when
@@ -38,7 +38,7 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConvert
 
   it("should convert simple configuration to yup schema", () => {
     // given
-    const converter = new FormConfigurationValidationConverter();
+    const converter = new FormConfigurationValidationYupConverter();
     const simpleValidationList = createSimpleValidationList();
 
     // when
@@ -57,7 +57,7 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConvert
       supports: () => true,
       convert: (configuration, validator) => validator.required("Custom validation error"),
     };
-    const converter = new FormConfigurationValidationConverter([additionalConverter]);
+    const converter = new FormConfigurationValidationYupConverter([additionalConverter]);
     const simpleValidationList = createSimpleValidationList();
 
     // when
@@ -70,7 +70,7 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConvert
 
   it("should convert complex configuration to yup schema", () => {
     // given
-    const converter = new FormConfigurationValidationConverter();
+    const converter = new FormConfigurationValidationYupConverter();
     const complexValidationList = createComplexValidationList();
 
     // when
@@ -83,8 +83,10 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConvert
     expect(() => result.validateSync({ name: "1234" })).toThrowError("Name must contain only letters");
     expect(() => result.validateSync({ age: 10 })).toThrowError("Minimum age is 21");
     expect(() => result.validateSync({ age: 200 })).toThrowError("Maximum age is 110");
+    expect(() => result.validateSync({ description: "" })).toThrowError("Description must not be empty");
+    expect(() => result.validateSync({ description: null })).toThrowError("Description must not be empty");
 
-    expect(result.isValidSync({ name: "Name", age: 30 })).toBe(true);
+    expect(result.isValidSync({ name: "Name", age: 30, description: "Desc" })).toBe(true);
   });
 
   it.each([
@@ -94,7 +96,7 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConvert
     [{ user: { username: "username", email: "email@test.com", address: { street: "street", city: "" } } }, "City cannot be blank"],
   ])("should validate nested data: %p and return error: %p", (validationData: any, expectedMessage: string) => {
     // given
-    const converter = new FormConfigurationValidationConverter();
+    const converter = new FormConfigurationValidationYupConverter();
     const nestedValidationList = createNestedValidationList();
 
     // when
@@ -107,7 +109,7 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConvert
 
   it("should support custom constraints", () => {
     // given
-    const converter = new FormConfigurationValidationConverter();
+    const converter = new FormConfigurationValidationYupConverter();
     const customValidationList = createCustomValidationList();
 
     // when
@@ -121,7 +123,7 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationValidationConvert
 
   it("should allow null if backend didn't define NotNull, NotBlank, NotEmpty", () => {
     // given
-    const converter = new FormConfigurationValidationConverter();
+    const converter = new FormConfigurationValidationYupConverter();
     const customValidationList = createSimpleNullableValidationList();
 
     // when
@@ -263,7 +265,7 @@ it.each([
   ],
 ])("should merge schemas %p correctly, and get result %p", (schemas, expectedResult) => {
   // given
-  const converter = new FormConfigurationValidationConverter();
+  const converter = new FormConfigurationValidationYupConverter();
 
   // when
   const mergedSchema = converter.mergeSchemas(schemas.schema1, schemas.schema2);
@@ -274,7 +276,7 @@ it.each([
 
 it("merge schemas method should merge internalTests from both schema objects", () => {
   // given
-  const converter = new FormConfigurationValidationConverter();
+  const converter = new FormConfigurationValidationYupConverter();
   const schema1 = yup.object().shape({ obj1: yup.object().required() });
   const schema2 = yup.object().shape({ obj1: yup.object() });
 

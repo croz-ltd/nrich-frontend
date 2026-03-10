@@ -17,16 +17,16 @@
 
 import React, { useEffect } from "react";
 
-import { FormConfigurationConfiguration } from "../api";
-import { useFormConfiguration } from "../hook";
-import { fetchFormConfigurations } from "../loader";
+import { FormConfigurationConfiguration } from "../../shared/api";
+import { useZodFormConfigurationState } from "../hook";
+import { fetchZodFormConfigurations } from "../loader";
 
-export type Props = {
+export type ZodProps = {
 
   /**
    * Content to show conditionally
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
 
   /**
    * Custom loader to show until content loads
@@ -39,12 +39,12 @@ export type Props = {
  * @param children content to show conditionally
  * @param loader custom loader to show until content loads
  */
-export const FormConfigurationProvider = ({ children, loader, ...fetchProps }: Props) => {
+export const FormConfigurationZodProvider = ({ children, loader, ...fetchProps }: ZodProps) => {
   useEffect(() => {
-    fetchFormConfigurations({ ...fetchProps });
+    fetchZodFormConfigurations(fetchProps);
   }, []);
 
-  const { formConfigurationLoaded } = useFormConfiguration();
+  const { formConfigurationLoaded } = useZodFormConfigurationState();
 
   return <div>{formConfigurationLoaded ? children : loader ?? null}</div>;
 };

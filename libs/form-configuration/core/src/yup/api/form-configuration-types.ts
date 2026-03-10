@@ -15,6 +15,18 @@
  *
  */
 
-export * from "./shared/api";
-export * from "./yup";
-export * from "./zod";
+import * as yup from "yup";
+
+export interface FormYupConfiguration<T = any> {
+  /**
+   * Registered form id for this form configuration.
+   * This matches the formId defined on the backend.
+   */
+  formId: string;
+
+  /**
+   * Yup schema generated from backend validation configuration.
+   * Used for client-side form validation.
+   */
+  yupSchema: yup.ObjectSchema<T>;
+}

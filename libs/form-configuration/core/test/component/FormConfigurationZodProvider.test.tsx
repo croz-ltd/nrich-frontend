@@ -18,20 +18,20 @@
 import { render, renderHook, screen } from "@testing-library/react";
 import React, { act } from "react";
 
-import { FormConfigurationProvider } from "../../src";
-import { useYupFormConfigurationStore } from "../../src/yup/store";
+import { FormConfigurationZodProvider } from "../../src";
+import { useZodFormConfigurationStore } from "../../src/zod/store";
 
-describe("@croz/nrich-form-configuration-core/FormConfigurationProvider", () => {
+describe("@croz/nrich-form-configuration-core/FormConfigurationZodProvider", () => {
   it("should not render children if loader is not defined and fetch is not executed", () => {
     // given
-    useYupFormConfigurationStore.getState().setFormConfigurationLoaded(false);
+    useZodFormConfigurationStore.getState().setFormConfigurationLoaded(false);
     const children = "Should not be rendered";
 
     // when
     const { queryByText } = render(
-      <FormConfigurationProvider url="">
+      <FormConfigurationZodProvider url="">
         {children}
-      </FormConfigurationProvider>,
+      </FormConfigurationZodProvider>,
     );
 
     // then
@@ -40,15 +40,15 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationProvider", () => 
 
   it("should render loader if loader is defined and fetch is not executed", () => {
     // given
-    useYupFormConfigurationStore.getState().setFormConfigurationLoaded(false);
+    useZodFormConfigurationStore.getState().setFormConfigurationLoaded(false);
     const children = "Should not be rendered";
     const loader = "Loading...";
 
     // when
     const { queryByText, getByText } = render(
-      <FormConfigurationProvider loader={loader} url="">
+      <FormConfigurationZodProvider loader={loader} url="">
         {children}
-      </FormConfigurationProvider>,
+      </FormConfigurationZodProvider>,
     );
 
     // then
@@ -58,17 +58,17 @@ describe("@croz/nrich-form-configuration-core/FormConfigurationProvider", () => 
 
   it("should render children when fetch is executed", () => {
     // given
-    useYupFormConfigurationStore.getState().setFormConfigurationLoaded(false);
-    const { result } = renderHook(() => useYupFormConfigurationStore());
+    useZodFormConfigurationStore.getState().setFormConfigurationLoaded(false);
+    const { result } = renderHook(() => useZodFormConfigurationStore());
     const { setFormConfigurationLoaded } = result.current;
     const children = "Should not be rendered";
     const loader = "Loading...";
 
     // when
     render(
-      <FormConfigurationProvider loader={loader} url="">
+      <FormConfigurationZodProvider loader={loader} url="">
         {children}
-      </FormConfigurationProvider>,
+      </FormConfigurationZodProvider>,
     );
 
     // then

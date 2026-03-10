@@ -1,3 +1,10 @@
-import sharedConfig from '@croz/nrich-tsup-config';
+const sharedConfig = require('@croz/nrich-tsup-config');
+const tsup = require("tsup");
 
-export default sharedConfig;
+module.exports = tsup.defineConfig({
+  ...sharedConfig,
+  entry: {
+    index: "src/index.ts",
+    "zod/index": "src/zod/index.ts",
+  },
+});

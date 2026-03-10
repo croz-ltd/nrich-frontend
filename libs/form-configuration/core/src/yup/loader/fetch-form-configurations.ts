@@ -17,18 +17,19 @@
 
 import _uniqBy from "lodash/uniqBy";
 
-import { FormConfiguration, FormConfigurationConfiguration, FormYupConfiguration } from "../api";
-import { FormConfigurationValidationConverter } from "../converter";
-import { useFormConfigurationStore } from "../store";
+import { FormConfiguration, FormConfigurationConfiguration } from "../../shared/api";
+import { FormYupConfiguration } from "../api";
+import { FormConfigurationValidationYupConverter } from "../converter";
+import { useYupFormConfigurationStore } from "../store";
 
-const mergeFormYupConfigurationsWithoutDuplicates = (oldFormYupConfiguration: FormYupConfiguration[], newFormYupConfiguration: FormYupConfiguration[]) => {
-  const mergedFormYupConfigurations = [...oldFormYupConfiguration, ...newFormYupConfiguration];
+const mergeYupFormConfigurationsWithoutDuplicates = (oldFormConfiguration: FormYupConfiguration[], newFormConfiguration: FormYupConfiguration[]) => {
+  const mergedYupFormConfigurations = [...oldFormConfiguration, ...newFormConfiguration];
 
-  return _uniqBy(mergedFormYupConfigurations, "formId");
+  return _uniqBy(mergedYupFormConfigurations, "formId");
 };
 
 export const fetchFormConfigurations = async ({ url, requestOptionsResolver, additionalValidatorConverters }: FormConfigurationConfiguration): Promise<FormConfiguration[]> => {
-  const formConfigurationValidationConverter = new FormConfigurationValidationConverter(additionalValidatorConverters);
+  const formConfigurationValidationConverter = new FormConfigurationValidationYupConverter(additionalValidatorConverters);
   const additionalOptions = requestOptionsResolver?.() || {};
   const finalUrl = url || "/nrich/form/configuration";
 
@@ -48,8 +49,8 @@ export const fetchFormConfigurations = async ({ url, requestOptionsResolver, add
         yupSchema: formConfigurationValidationConverter.convertFormConfigurationToYupSchema(item.constrainedPropertyConfigurationList),
       });
     });
-    useFormConfigurationStore.getState().set(mergeFormYupConfigurationsWithoutDuplicates(useFormConfigurationStore.getState().formYupConfigurations, formYupConfigurations));
-    useFormConfigurationStore.getState().setFormConfigurationLoaded(true);
+    useYupFormConfigurationStore.getState().set(mergeYupFormConfigurationsWithoutDuplicates(useYupFormConfigurationStore.getState().yupFormConfigurations, formYupConfigurations));
+    useYupFormConfigurationStore.getState().setFormConfigurationLoaded(true);
   }
 
   return body;

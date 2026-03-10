@@ -6,15 +6,27 @@
 It's a frontend part of [nrich-form-configuration](https://github.com/croz-ltd/nrich/tree/master/nrich-form-configuration) backend module.
 Together, they allow the user to define validations in a single place (backend).
 
-For validation schemas this lib uses [yup](https://github.com/jquense/yup).
+This library supports the use of [yup](https://github.com/jquense/yup) and [zod](https://github.com/colinhacks/zod) validation schemas.
 
 ## Setup
 
 To use this module in your project run `npm install @croz/nrich-form-configuration-core` or `yarn add @croz/nrich-form-configuration-core`
 
+## Validation library support
+This library supports both `yup` and `zod` validation schemas.
+
+- Yup and Zod are optional peer dependencies
+
+- Install only the validation library you plan to use
+
 ## Basic usage
 
-On some upper level of your app, wrap your components in `FormConfigurationProvider`.
+Wrap your application with a form configuration provider to ensure form configuration
+is loaded before rendering any forms.
+
+Choose the provider based on the validation library you want to use.
+
+### Yup provider
 
 ```tsx
 import { FormConfigurationProvider } from "@croz/nrich-form-configuration-core";
@@ -26,20 +38,53 @@ const App = () => (
 );
 ```
 
-In your form component, use `useYupFormConfiguration` with your form id defined on backend.
+### Zod provider
+
+```tsx
+import { FormConfigurationZodProvider } from "@croz/nrich-form-configuration-core/zod";
+
+const App = () => (
+  <FormConfigurationZodProvider loader="Loading...">
+    {/* rest of the app... */}
+  </FormConfigurationZodProvider>
+);
+```
+
+Use the hook corresponding to the chosen validation library and provide
+the form ID defined on the backend.
+
+
+
+#### Yup
+
+```tsx
+import { useYupFormConfiguration } from "@croz/nrich-form-configuration-core";
+```
+
+#### Zod
+
+```tsx
+import { useZodFormConfiguration } from "@croz/nrich-form-configuration-core/zod";
+```
+
+Apart from the hook import, usage is identical for both `yup` and `zod`.
 
 ```tsx
 import React, { useState } from "react";
-import { useYupFormConfiguration } from "@croz/nrich-form-configuration-core";
 import { Form, Formik } from "formik";
+import { useYupFormConfiguration } from "@croz/nrich-form-configuration-core";
+// or import { useZodFormConfiguration } from "@croz/nrich-form-configuration-core/zod";
 
 type CreateForm = {
   /* fields of the form */
-}
+};
 
 export const SomeFormComponent = () => {
   const [formValues, setFormValues] = useState({});
-  const validationSchema = useYupFormConfiguration<CreateForm>('user.create-form');
+
+  const validationSchema =
+    useYupFormConfiguration<CreateForm>("user.create-form");
+  // or: useZodFormConfiguration<CreateForm>("user.create-form")
 
   return (
     <Formik
@@ -47,14 +92,14 @@ export const SomeFormComponent = () => {
       onSubmit={(values) => setFormValues(values)}
     >
       <Form>
-        { /* Rest of the form */}
+        {/* Rest of the form */}
       </Form>
     </Formik>
   );
 };
 ```
 
-*NOTE: Formik is used just as an example, you can use any form lib compatible with `yup`.*
+*NOTE: Formik is used just as an example, you can use any form lib compatible with `yup` and `zod`.*
 
 ## Details
 

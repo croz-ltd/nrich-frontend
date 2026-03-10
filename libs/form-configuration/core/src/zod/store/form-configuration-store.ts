@@ -17,14 +17,14 @@
 
 import { create } from "zustand";
 
-import { FormYupConfiguration } from "../api";
+import { FormZodConfiguration } from "../api";
 
-export interface FormConfigurationState {
+interface FormZodConfigurationState {
 
   /**
    * Array of current state form configurations.
    */
-  formYupConfigurations: FormYupConfiguration[];
+  zodFormConfigurations: FormZodConfiguration[];
 
   /**
    * Flag that indicates weather form configuration is fetched from API.
@@ -36,19 +36,19 @@ export interface FormConfigurationState {
    * Use on initial call to find-all endpoint.
    * @param formConfigurations formConfigurations to set
    */
-  set: (formYupConfigurations: FormYupConfiguration[]) => void;
+  set: (zodFormConfigurations: FormZodConfiguration[]) => void;
 
   /**
    * Adds form configuration to state.
    * @param formConfiguration formConfiguration to add
    */
-  add: (formYupConfiguration: FormYupConfiguration) => void;
+  add: (zodFormConfiguration: FormZodConfiguration) => void;
 
   /**
    * Removes form configuration to state.
    * @param formConfiguration formConfiguration to add
    */
-  remove: (formYupConfiguration: FormYupConfiguration) => void;
+  remove: (zodFormConfiguration: FormZodConfiguration) => void;
 
   /**
    * Sets form configuration loaded to state.
@@ -63,17 +63,17 @@ export interface FormConfigurationState {
  *
  * @returns A hook for managing form configuration state usable in a React environment.
  */
-export const useFormConfigurationStore = create<FormConfigurationState>((set) => ({
-  formYupConfigurations: [],
+export const useZodFormConfigurationStore = create<FormZodConfigurationState>((set) => ({
+  zodFormConfigurations: [],
   formConfigurationLoaded: false,
-  set: ((formYupConfigurations) => set((state) => ({
-    ...state, formYupConfigurations,
+  set: ((zodFormConfigurations) => set((state) => ({
+    ...state, zodFormConfigurations,
   }))),
-  add: (formYupConfiguration) => set((state) => ({
-    formYupConfigurations: [...state.formYupConfigurations, { ...formYupConfiguration }],
+  add: (zodFormConfigurations) => set((state) => ({
+    zodFormConfigurations: [...state.zodFormConfigurations, zodFormConfigurations],
   })),
-  remove: (formYupConfiguration) => set((state) => ({
-    formYupConfigurations: state.formYupConfigurations.filter((currentFormConfiguration) => currentFormConfiguration !== formYupConfiguration),
+  remove: (zodFormConfigurations) => set((state) => ({
+    zodFormConfigurations: state.zodFormConfigurations.filter((c) => c !== zodFormConfigurations),
   })),
-  setFormConfigurationLoaded: (formConfigurationLoaded) => set((state) => ({ ...state, formConfigurationLoaded })),
+  setFormConfigurationLoaded: (formConfigurationLoaded) => set({ formConfigurationLoaded }),
 }));
