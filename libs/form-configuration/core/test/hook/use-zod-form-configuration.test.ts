@@ -17,7 +17,7 @@
 
 import { act, renderHook } from "@testing-library/react";
 
-import { useZodFormConfigurationState, useZodFormConfiguration } from "../../src";
+import { useZodFormConfigurationState, useZodFormConfiguration } from "../../src/zod";
 import { useZodFormConfigurationStore } from "../../src/zod/store";
 import { mockFormZodConfiguration, mockFormZodConfigurations } from "../testutil/form-configuration-generating-util";
 

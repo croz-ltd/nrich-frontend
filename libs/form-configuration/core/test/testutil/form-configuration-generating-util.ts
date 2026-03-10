@@ -18,9 +18,8 @@
 import * as yup from "yup";
 import { z } from "zod";
 
-import {
-  FormConfiguration, ValidatorConverter, FormYupConfiguration, FormZodConfiguration,
-} from "../../src";
+import { FormConfiguration, FormYupConfiguration, ValidatorConverter } from "../../src";
+import { FormZodConfiguration } from "../../src/zod";
 
 export const invalidValidationConfiguration = () => [
   {
